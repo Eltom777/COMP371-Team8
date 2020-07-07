@@ -24,8 +24,9 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
-#include <Objects/Grid.h> //rendered objects
 
+#include <Objects/Grid.h> //rendered objects
+#include <Camera.h>
 
 const char* getVertexShaderSource()
 {
@@ -250,6 +251,10 @@ int main(int argc, char*argv[])
     
     // Compile and link shaders here ...
     int shaderProgram = compileAndLinkShaders();
+
+	// Create Camera Object
+	Camera camera(window);
+
     
     // Define and upload geometry to the GPU here ...
     Grid objGrid;
@@ -266,16 +271,11 @@ int main(int argc, char*argv[])
         glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
             800.0f / 600.0f,     // aspect ratio
             0.01f, 100.0f);      // near and far (near > 0)
-        glm::mat4 View = glm::lookAt(
-            glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
-            glm::vec3(0, 0, 0), // and looks at the origin
-            glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-        );
-        glm::mat4 Model = glm::mat4(1.0f);
-        glm::mat4 mvp = Projection * View * Model; // Remember, matrix multiplication is the other way around
-        GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
-        glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &mvp[0][0]);
+    	
         
+		GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+		glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+    	
         //glPolygonMode(GL_FRONT, GL_LINE);
         glUseProgram(shaderProgram);
         glBindVertexArray(gridVAO);
@@ -284,15 +284,26 @@ int main(int argc, char*argv[])
         glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
         glBindVertexArray(0);
 
+    	// Camera frame timing
+		camera.handleFrameData();
+
+		// Set up Camera
+		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
+			camera.cameraPos + camera.cameraFront, // front
+			camera.cameraUp);  // up
+		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
 
         // End frame
         glfwSwapBuffers(window);
         
         // Detect inputs
         glfwPollEvents();
-        
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
+
+		// Handle inputs
+		camera.handleKeyboardInputs();
+
     }
     
     // Shutdown GLFW

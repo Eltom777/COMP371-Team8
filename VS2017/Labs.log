@@ -1,14 +1,6 @@
 ﻿  main.cpp
-  Grid.cpp
+  Camera.cpp
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(19,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Generating Code...
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4286: symbol '___glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewBufferData' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewGenBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewEnableVertexAttribArray' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewVertexAttribPointer' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-LINK : warning LNK4286: symbol '___glewGenVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'Grid.obj'
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\OpenGL_code\COMP371-Team8\Bin\vc120.pdb'; linking object as if no debug info
-  Labs.vcxproj -> D:\OpenGL_code\COMP371-Team8\VS2017\/../Bin/COMP371-Assignment1-Debug.exe
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(24,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Labs.vcxproj -> C:\Users\keven\git\COMP371-Team8\VS2017\/../Bin/COMP371-Assignment1-Debug.exe

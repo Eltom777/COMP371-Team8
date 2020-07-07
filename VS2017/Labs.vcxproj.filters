@@ -72,9 +72,15 @@
     <ClCompile Include="Objects\Grid.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
