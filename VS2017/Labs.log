@@ -1,0 +1,10 @@
+﻿  Camera.cpp
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(19,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(24,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(116,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(117,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(130,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(131,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(151,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(152,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Labs.vcxproj -> C:\Users\keven\git\COMP371-Team8\VS2017\/../Bin/COMP371-Assignment1-Debug.exe

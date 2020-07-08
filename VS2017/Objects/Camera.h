@@ -16,18 +16,24 @@ public:
 
 	float pan;
 	float tilt;
+	float fov;
 
 	float lastX;
 	float lastY;
 
-	float angle;
 	float lastFrameTime;
 
 	float cameraSpeed;
 	const float cameraPanSpeed = 1.0f;
+	const float mouseSensitivity = 0.1f;
 
 	void handleFrameData();
 	void handleKeyboardInputs();
+	
+	void mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos);
+	void mouseScrollHandler(GLFWwindow* window, double xOffset, double yOffset);
 private:
 	GLFWwindow* window;
+
+	
 };
