@@ -1,6 +1,0 @@
-﻿  main.cpp
-  Camera.cpp
-C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(19,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-C:\Users\keven\git\COMP371-Team8\VS2017\Camera.cpp(24,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Labs.vcxproj -> C:\Users\keven\git\COMP371-Team8\VS2017\/../Bin/COMP371-Assignment1-Debug.exe
