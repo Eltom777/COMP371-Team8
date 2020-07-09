@@ -2,8 +2,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <string>
 #include <vector>
+#include "Grid.h"
 using namespace glm;
 
 
@@ -12,6 +14,9 @@ class Cube
 public:
 	Cube();
 	Cube(const Cube& cube, int i);
+	void setWorldMatrix(mat4 matrix);
+	void concantWorldMatrix(mat4 tmatrix);
+	mat4 getWorldMatrix();
 	~Cube();
 
 	int getIndex() const {
@@ -37,5 +42,7 @@ private:
 	//GLuint cubeVAO;
 	Cube* parent;
 	std::vector<Cube*> children;
+	mat4 worldMatrix;
+	Grid scaleFactor;
 };
 

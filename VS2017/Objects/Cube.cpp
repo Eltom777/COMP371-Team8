@@ -97,6 +97,8 @@ Cube::Cube()
 	this->index = 0;
 	this->parent = nullptr;
 	this->children = vector<Cube*>();
+	worldMatrix = glm::scale(mat4(1.0f), vec3(0.02f, 0.02f, 0.02f)); //TO DO: Normalize using grid object
+	worldMatrix = worldMatrix * glm::translate(mat4(1.0f), vec3(1.0f, 1.0f, 1.0f));
 }
 
 Cube::Cube(const Cube& cube, int i) {
@@ -109,6 +111,7 @@ Cube::Cube(const Cube& cube, int i) {
 		child->parent = this;
 		children[i] = child;
 	}
+	worldMatrix = glm::scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f));
 }
 
 Cube::~Cube() {
@@ -118,6 +121,10 @@ Cube::~Cube() {
 	}
 	children.clear();
 	parent = nullptr;
+}
+
+mat4 Cube::getWorldMatrix() {
+	return worldMatrix;
 }
 
 int Cube::createCubeVAO() {
