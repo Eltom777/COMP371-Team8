@@ -1,130 +1,115 @@
 #include "Cube.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-using glm::vec3;
-//using glm::mat4;
-using std::vector;
-
 const glm::vec3 Cube::vertices[] = {
 
 	// front face
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
 
 	// back face
-	glm::vec3(-0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
 
 	// left face
-	glm::vec3(-0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
 
 	// right face
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
 
 	// bottom face
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f, -0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, -1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
 
 	// top face
-	glm::vec3(-0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f,  0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f),
-	glm::vec3(-0.5f,  0.5f, -0.5f),
-	glm::vec3(1.0f,  1.0f, 1.0f)
+	glm::vec3(-1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, 1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f),
+	glm::vec3(-1.0f, 1.0f, -1.0f),
+	glm::vec3(1.0f, 1.0f, 1.0f)
 };
 
 Cube::Cube()
 {
-	this->index = 0;
-	this->parent = nullptr;
-	this->children = vector<Cube*>();
-	worldMatrix = glm::scale(mat4(1.0f), vec3(0.02f, 0.02f, 0.02f)); //TO DO: Normalize using grid object
-	worldMatrix = worldMatrix * glm::translate(mat4(1.0f), vec3(1.0f, 1.0f, 1.0f));
-}
-
-Cube::Cube(const Cube& cube, int i) {
-	this->index = i;
-	this->parent = nullptr;
-	this->children = vector<Cube*>(cube.children.size());
-	for (int i = 0; i < children.size(); i++)
-	{
-		Cube* child = new Cube(*cube.children[i]);
-		child->parent = this;
-		children[i] = child;
-	}
-	worldMatrix = glm::scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f));
+	worldMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
+	worldMatrix = glm::translate(worldMatrix, vec3(1.0f, 1.0f, 1.0f));
 }
 
 Cube::~Cube() {
-	for (Cube* child : children)
-	{
-		delete child;
-	}
-	children.clear();
-	parent = nullptr;
+
 }
 
 mat4 Cube::getWorldMatrix() {
 	return worldMatrix;
+}
+
+void Cube::setWorldMatrix(mat4 matrix)
+{
+	worldMatrix = matrix;
+}
+
+void Cube::concatWorldMatrix(mat4 tmatrix)
+{
+
 }
 
 int Cube::createCubeVAO() {
@@ -163,21 +148,5 @@ int Cube::createCubeVAO() {
 
 	return vao;
 }
-
-//void Cube::render(glm::mat4 model, int vao) const {
-//
-//	//Render all children
-//	for (Cube* child : children)
-//	{
-//		child->render(/*model,*/ vao);
-//	}
-//
-//}
-
-//glm::mat4 Cube::calculateModelMatrix(glm::mat4 translation, glm::mat4 rotation, glm::mat4 scale) const {
-//
-//	return translation * rotation * scale;
-//
-//}
 
 
