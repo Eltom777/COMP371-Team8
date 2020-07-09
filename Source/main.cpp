@@ -26,8 +26,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <Objects/Grid.h> //rendered objects
-#include <Objects/Camera.h>
 #include <Objects/Cube.h>
+#include <Camera.h>
 
 const char* getVertexShaderSource()
 {
@@ -256,14 +256,15 @@ int main(int argc, char*argv[])
 	// Create Camera Object
 	Camera camera(window);
 
-    // Create Cube Object
-    Cube* objCube = new Cube();
-    int cubeVAO = objCube->createCubeVAO();
-
+    
     // Define and upload geometry to the GPU here ...
     Grid objGrid;
     int gridVAO = objGrid.createGridVAO();
     int axisVAO = objGrid.createAxisVAO();
+
+    Cube objCube;
+    int cubeVAO = objCube.createCubeVAO();
+    glm::mat4 worldMatrix = mat4(1.0f);
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -286,9 +287,14 @@ int main(int argc, char*argv[])
         glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
         glBindVertexArray(axisVAO);
         glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
+        
+        GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
+        glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &objCube.getWorldMatrix()[0][0]); //setting worldmatrix in shader
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
+
+        glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 
     	// Camera frame timing
 		camera.handleFrameData();
