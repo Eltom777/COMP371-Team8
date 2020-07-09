@@ -26,7 +26,7 @@
 
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Cube.h>
-#include <Camera.h>
+#include <Objects/Camera.h>
 
 const char* getVertexShaderSource()
 {
@@ -223,7 +223,7 @@ int main(int argc, char*argv[])
 #endif
 
     // Create Window and rendering context using GLFW, resolution is 800x600
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
     if (window == NULL)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -269,7 +269,7 @@ int main(int argc, char*argv[])
 
         // Set up Perspective View
         glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
-            800.0f / 600.0f,     // aspect ratio
+            1024.0f / 768.0f,     // aspect ratio
             0.01f, 100.0f);      // near and far (near > 0)
     	
         
