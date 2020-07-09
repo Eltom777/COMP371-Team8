@@ -248,7 +248,6 @@ int main(int argc, char*argv[])
     // Black background
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
-    
     // Compile and link shaders here ...
     int shaderProgram = compileAndLinkShaders();
 
@@ -264,6 +263,9 @@ int main(int argc, char*argv[])
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
     {
+		// Enable z-buffer
+		glEnable(GL_DEPTH_TEST);
+
         // Each frame, reset color of each pixel to glClearColor
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
