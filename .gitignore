@@ -3,6 +3,7 @@
 
 #build
 /.vs
+.vs/COMP371-Assignment1/v16
 /Bin
 /Build
 /Build
