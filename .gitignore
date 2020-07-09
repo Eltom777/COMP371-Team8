@@ -1,7 +1,7 @@
+#OpenGl libs
 /ThirdParty
-/.vs
-/.vs/COMP371-Assignment1/v16/.suo
-/.vs/COMP371-Assignment1/v16/Browse.VC.db
+
+#build
 /Bin
 /Build
 /Build
