@@ -2,6 +2,7 @@
 /ThirdParty
 
 #build
+/.vs
 /Bin
 /Build
 /Build
