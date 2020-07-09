@@ -26,7 +26,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <Objects/Grid.h> //rendered objects
-#include <Camera.h>
+#include <Objects/Camera.h>
+#include <Objects/Cube.h>
 
 const char* getVertexShaderSource()
 {
@@ -255,7 +256,10 @@ int main(int argc, char*argv[])
 	// Create Camera Object
 	Camera camera(window);
 
-    
+    // Create Cube Object
+    Cube* objCube = new Cube();
+    int cubeVAO = objCube->createCubeVAO();
+
     // Define and upload geometry to the GPU here ...
     Grid objGrid;
     int gridVAO = objGrid.createGridVAO();
@@ -282,6 +286,8 @@ int main(int argc, char*argv[])
         glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
         glBindVertexArray(axisVAO);
         glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
+        glBindVertexArray(cubeVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
     	// Camera frame timing
