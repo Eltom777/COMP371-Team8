@@ -15,7 +15,7 @@ public:
 	Cube();
 	Cube(const Cube& cube, int i);
 	void setWorldMatrix(mat4 matrix);
-	void concantWorldMatrix(mat4 tmatrix);
+	void concatWorldMatrix(mat4 tmatrix);
 	mat4 getWorldMatrix();
 	~Cube();
 
