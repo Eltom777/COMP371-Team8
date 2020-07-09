@@ -16,7 +16,6 @@
 
 #include <iostream>
 
-
 #define GLEW_STATIC 1   // This allows linking with Static Library on Windows, without DLL
 #include <GL/glew.h>    // Include GLEW - OpenGL Extension Wrangler
 #include <GLFW/glfw3.h> // GLFW provides a cross-platform interface for creating a graphical context,
@@ -52,7 +51,6 @@ const char* getVertexShaderSource()
         "}";
 }
 
-
 const char* getFragmentShaderSource()
 {
     return
@@ -65,13 +63,11 @@ const char* getFragmentShaderSource()
         "}";
 }
 
-
 int compileAndLinkShaders()
 {
     // compile and link shader program
      // return shader program id
      // ------------------------------------
-
 
      // vertex shader
     int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -209,7 +205,6 @@ int createvao()
     return 0;
 }
 
-
 int main(int argc, char*argv[])
 {
     // Initialize GLFW and OpenGL version
@@ -248,7 +243,7 @@ int main(int argc, char*argv[])
 
     // Black background
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
+
     
     // Compile and link shaders here ...
     int shaderProgram = compileAndLinkShaders();
