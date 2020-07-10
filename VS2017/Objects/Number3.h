@@ -1,7 +1,6 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-
 class Number3
 {
 	static const int NUMOFCUBES = 4;

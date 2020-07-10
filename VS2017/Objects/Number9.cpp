@@ -12,7 +12,7 @@ void Number9::setup() { //create number 9
 	components[2].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.04f, 0.06f, 0.0f)) * glm::scale(mat4(1.0f), vec3(5.0f, 2.0f, 2.0f)));
 	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 7.0f, 2.0f)));
 
-	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
+	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f))); // Shift above grid
 }
 
 mat4 Number9::getWorldMatrix() {
@@ -21,13 +21,13 @@ mat4 Number9::getWorldMatrix() {
 
 void Number9::concatWorldMatrix(mat4 mat) {
 	worldMatrix = mat * worldMatrix;
-	for (int i = 0; i < NUMOFCUBES9; i++) {
+	for (int i = 0; i < NUMOFCUBES; i++) {
 		components[i].concatWorldMatrix(mat);
 	}
 }
 
 void Number9::draw(GLuint worldMatrixLocation) {
-	for (int i = 0; i < NUMOFCUBES9; i++) {
+	for (int i = 0; i < NUMOFCUBES; i++) {
 		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &components[i].getWorldMatrix()[0][0]); //setting worldmatrix of each cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
