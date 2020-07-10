@@ -1,6 +1,6 @@
 #include "Cube.h"
 
-// All sides of cube are 1.0f instead of 0.5f
+// All sides of cube are 1.0f
 
 const glm::vec3 Cube::vertices[] = {
 
@@ -89,7 +89,7 @@ const glm::vec3 Cube::vertices[] = {
 	glm::vec3(-1.0f, 1.0f, -1.0f),
 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),
 
-	/**
+	/** white faces
 	// front face
 	glm::vec3(-1.0f, -1.0f, -1.0f),
 	glm::vec3(1.0f, 1.0f, 1.0f),
