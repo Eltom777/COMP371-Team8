@@ -1,7 +1,7 @@
 #include "LetterL.h"
 #include "Number9.h"
 
-class Melina {
+class Melina : public AlphaNumeric {
 public:
 	Melina();
 	~Melina();
