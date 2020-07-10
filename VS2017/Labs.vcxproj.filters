@@ -27,6 +27,9 @@
     <Filter Include="Objects\Students">
       <UniqueIdentifier>{252d7853-af30-4955-99be-d2f619d5bc46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Numbers">
+      <UniqueIdentifier>{0fbfdb31-809c-4a73-ad22-fee8f171b729}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -93,10 +96,16 @@
     <ClCompile Include="Objects\LetterL.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Number9.cpp">
-      <Filter>Objects\Letters</Filter>
-    </ClCompile>
     <ClCompile Include="Melina.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number9.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number3.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Thomas.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,10 +131,16 @@
     <ClInclude Include="Objects\LetterL.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Number9.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
     <ClInclude Include="Melina.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number9.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number3.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Thomas.h">
       <Filter>Objects\Students</Filter>
     </ClInclude>
   </ItemGroup>

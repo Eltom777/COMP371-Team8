@@ -28,8 +28,8 @@
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/LetterL.h>
-#include <Objects/LetterO.h>
 #include <Objects/Number9.h>
+#include <Objects/Thomas.h>
 
 int main(int argc, char*argv[])
 {
@@ -87,6 +87,7 @@ int main(int argc, char*argv[])
 	//LetterO letter;
     LetterL letter;
 	Number9 num9;
+    Thomas Model1;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -119,9 +120,10 @@ int main(int argc, char*argv[])
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
 
-		letter.draw(worldMatrixLocation);
+		//letter.draw(worldMatrixLocation);
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
-        num9.draw(worldMatrixLocation);
+        //num9.draw(worldMatrixLocation);
+        Model1.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
