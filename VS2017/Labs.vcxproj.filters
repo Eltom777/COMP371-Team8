@@ -108,6 +108,15 @@
     <ClCompile Include="Objects\Melina.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\LetterA.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number4.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Sharon.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -120,9 +129,6 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects\LetterO.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\AlphaNumeric.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Shaders.h">
@@ -142,6 +148,18 @@
     </ClInclude>
     <ClInclude Include="Objects\Melina.h">
       <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterA.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number4.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Sharon.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\AlphaNumeric.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
