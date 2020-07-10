@@ -14,14 +14,14 @@
     <ProjectGuid>{277EAE68-9EED-4EFF-BAD3-2A70787A3E8D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Labs</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>COMP371-Assignment1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -123,20 +123,20 @@
     <ClCompile Include="Objects\Grid.cpp" />
     <ClCompile Include="Objects\LetterL.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
+    <ClCompile Include="Objects\Melina.cpp" />
     <ClCompile Include="Objects\Number3.cpp" />
     <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
-    <ClCompile Include="Melina.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Melina.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
     <ClInclude Include="Objects\LetterL.h" />
     <ClInclude Include="Objects\LetterO.h" />
+    <ClInclude Include="Objects\Melina.h" />
     <ClInclude Include="Objects\Number3.h" />
     <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />

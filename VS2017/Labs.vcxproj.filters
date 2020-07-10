@@ -96,9 +96,6 @@
     <ClCompile Include="Objects\LetterL.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Melina.cpp">
-      <Filter>Objects\Students</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Number9.cpp">
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
@@ -106,6 +103,9 @@
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Thomas.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Melina.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,9 +131,6 @@
     <ClInclude Include="Objects\LetterL.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
-    <ClInclude Include="Melina.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Number9.h">
       <Filter>Objects\Numbers</Filter>
     </ClInclude>
@@ -141,6 +138,9 @@
       <Filter>Objects\Numbers</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Thomas.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Melina.h">
       <Filter>Objects\Students</Filter>
     </ClInclude>
   </ItemGroup>

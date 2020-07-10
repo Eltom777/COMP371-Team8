@@ -30,6 +30,7 @@
 #include <Objects/LetterL.h>
 #include <Objects/Number9.h>
 #include <Objects/Thomas.h>
+#include <Objects/Melina.h>
 
 int main(int argc, char*argv[])
 {
@@ -88,12 +89,13 @@ int main(int argc, char*argv[])
     LetterL letter;
 	Number9 num9;
     Thomas Model1;
-    
+	Melina Model2;
+
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
     {
 		// Enable z-buffer
-		//glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 
         // Each frame, reset color of each pixel to glClearColor
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -124,6 +126,7 @@ int main(int argc, char*argv[])
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
         //num9.draw(worldMatrixLocation);
         Model1.draw(worldMatrixLocation);
+		Model2.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
