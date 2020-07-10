@@ -5,11 +5,12 @@ Number9::Number9() {
 	setup();
 }
 
-void Number9::setup() { //create letter O
-	components[0].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 6.0f, 2.0f)));
-	components[1].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.06f, -0.04f, 0.0f)) * glm::scale(mat4(1.0f), vec3(4.0f, 2.0f, 2.0f)));
-	components[2].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.06f, -0.04f, 0.0f)) * glm::scale(mat4(1.0f), vec3(4.0f, 2.0f, 2.0f)));
-	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.06f, -0.04f, 0.0f)) * glm::scale(mat4(1.0f), vec3(4.0f, 2.0f, 2.0f)));
+void Number9::setup() { //create number 9
+	//hardcoded values
+	components[0].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.1f, 0.07f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 4.0f, 2.0f)));
+	components[1].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.06f, 0.03f, 0.0f)) * glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f)));
+	components[2].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.06f, 0.12f, 0.0f)) * glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f)));
+	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.04f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 10.0f, 2.0f)));
 
 	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
 }

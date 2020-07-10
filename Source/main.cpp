@@ -29,6 +29,7 @@
 #include <Objects/Camera.h>
 #include <Objects/LetterL.h>
 #include <Objects/LetterO.h>
+#include <Objects/Number9.h>
 
 int main(int argc, char*argv[])
 {
@@ -85,7 +86,7 @@ int main(int argc, char*argv[])
 	
 	//LetterO letter;
     LetterL letter;
-	//Num9 num;
+	Number9 num9;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -104,6 +105,7 @@ int main(int argc, char*argv[])
         
 		GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 		glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+		
     	
         //glPolygonMode(GL_FRONT, GL_LINE);
 		// Draw grid and axis
@@ -116,8 +118,10 @@ int main(int argc, char*argv[])
 		// Draw letters
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
+
+		letter.draw(worldMatrixLocation);
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
-        letter.draw(worldMatrixLocation);
+        num9.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down

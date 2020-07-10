@@ -35,7 +35,7 @@ void Camera::handleKeyboardInputs()
 	// Home button
 	if (glfwGetKey(this->window, GLFW_KEY_0) == GLFW_PRESS)
 	{
-		this->cameraPos = glm::vec3(0.0f, 0.5f, 3.0f);
+		this->cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 	}
 
 	// forward, backward, left and right

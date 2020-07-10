@@ -123,17 +123,17 @@
     <ClCompile Include="Objects\Grid.cpp" />
     <ClCompile Include="Objects\LetterL.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
+    <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
-    <ClCompile Include="Number9.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Number9.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
     <ClInclude Include="Objects\LetterL.h" />
     <ClInclude Include="Objects\LetterO.h" />
+    <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

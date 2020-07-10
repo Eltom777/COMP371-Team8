@@ -90,7 +90,7 @@
     <ClCompile Include="Objects\LetterL.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Number9.cpp">
+    <ClCompile Include="Objects\Number9.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +116,7 @@
     <ClInclude Include="Objects\LetterL.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
-    <ClInclude Include="Number9.h">
+    <ClInclude Include="Objects\Number9.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
   </ItemGroup>
