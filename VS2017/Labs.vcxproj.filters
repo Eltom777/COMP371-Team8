@@ -21,6 +21,9 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{e8f5e372-cdcf-48b0-a985-42edb0775f17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Letters">
+      <UniqueIdentifier>{5a945c90-ac6f-4e45-a1ab-d53ea6e47c27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -79,6 +82,9 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Objects\LetterO.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Shaders.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +99,12 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects\LetterO.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\AlphaNumeric.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Shaders.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -122,12 +122,15 @@
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
+    <ClCompile Include="Objects\Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
     <ClInclude Include="Objects\LetterO.h" />
+    <ClInclude Include="Objects\Shaders.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
