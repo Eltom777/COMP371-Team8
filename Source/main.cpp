@@ -28,6 +28,7 @@
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/LetterL.h>
+#include <Objects/LetterO.h>
 
 int main(int argc, char*argv[])
 {
@@ -82,7 +83,9 @@ int main(int argc, char*argv[])
     int cubeVAO = objCube.createCubeVAO();
     glm::mat4 worldMatrix = mat4(1.0f);
 	
-    LetterL letter;
+	//LetterO letter;
+    //LetterL letter;
+	//Num9 num;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -114,7 +117,7 @@ int main(int argc, char*argv[])
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
-        letter.draw(worldMatrixLocation);
+        //num9.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
