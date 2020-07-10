@@ -60,7 +60,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,11 +121,13 @@
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
+    <ClCompile Include="Objects\LetterO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
+    <ClInclude Include="Objects\LetterO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

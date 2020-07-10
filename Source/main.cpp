@@ -25,8 +25,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <Objects/Grid.h> //rendered objects
-#include <Objects/Cube.h>
 #include <Objects/Camera.h>
+#include <Objects/LetterO.h>
 
 const char* getVertexShaderSource()
 {
@@ -260,6 +260,8 @@ int main(int argc, char*argv[])
     Cube objCube;
     int cubeVAO = objCube.createCubeVAO();
     glm::mat4 worldMatrix = mat4(1.0f);
+
+    LetterO letter;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -284,9 +286,9 @@ int main(int argc, char*argv[])
         glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
         
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
-        glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &objCube.getWorldMatrix()[0][0]); //setting worldmatrix in shader
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
+        letter.drawLetter(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
@@ -296,7 +298,7 @@ int main(int argc, char*argv[])
 
 		// Set up Camera
 		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
-			camera.cameraPos + camera.cameraFront, // front
+            vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
 			camera.cameraUp);  // up
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);

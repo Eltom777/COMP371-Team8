@@ -93,7 +93,7 @@ const glm::vec3 Cube::vertices[] = {
 Cube::Cube()
 {
 	worldMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
-	worldMatrix = glm::translate(worldMatrix, vec3(1.0f, 1.0f, 1.0f));
+	worldMatrix = translate(mat4(1.0f), vec3(0.03f, 0.01f, 0.01f)) * worldMatrix ;
 }
 
 Cube::~Cube() {
@@ -111,7 +111,10 @@ void Cube::setWorldMatrix(mat4 matrix)
 
 void Cube::concatWorldMatrix(mat4 tmatrix)
 {
-
+	vec3 translationComponent = vec3(worldMatrix[3][0], worldMatrix[3][1], worldMatrix[3][2]);
+	worldMatrix = translate(mat4(1.0), translationComponent * -1.0f) * worldMatrix; //place back to origin
+	worldMatrix = tmatrix * worldMatrix; //apply transformation
+	worldMatrix = translate(mat4(1.0), translationComponent) * worldMatrix; //send back to spot + any added translation by tmatrix
 }
 
 int Cube::createCubeVAO() {
