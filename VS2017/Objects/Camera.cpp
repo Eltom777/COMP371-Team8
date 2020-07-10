@@ -63,7 +63,8 @@ void Camera::handleKeyboardInputs()
 	// Up and down
 	if (glfwGetKey(this->window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		this->cameraPos -= glm::normalize(glm::cross(this->cameraFront, this->cameraX)) * this->cameraSpeed;
+		//this->cameraPos -= glm::normalize(glm::cross(this->cameraFront, this->cameraX)) * this->cameraSpeed;
+		//this->cameraPos += this->cameraUp;
 	}
 
 	if (glfwGetKey(this->window, GLFW_KEY_S) == GLFW_PRESS)

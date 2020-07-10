@@ -125,8 +125,10 @@
     <ClCompile Include="Objects\LetterO.cpp" />
     <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
+    <ClCompile Include="Melina.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Melina.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
