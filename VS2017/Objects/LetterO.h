@@ -1,10 +1,11 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-static const int NUMOFCUBES = 4;
 
 class LetterO : public AlphaNumeric
 {
+	static const int NUMOFCUBES = 4;
+
 	public:
 		LetterO();
 		~LetterO();
