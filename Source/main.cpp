@@ -81,12 +81,15 @@ int main(int argc, char*argv[])
     Cube objCube;
     int cubeVAO = objCube.createCubeVAO();
     glm::mat4 worldMatrix = mat4(1.0f);
-
+	
     LetterL letter;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
     {
+		// Enable z-buffer
+		//glEnable(GL_DEPTH_TEST);
+
         // Each frame, reset color of each pixel to glClearColor
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

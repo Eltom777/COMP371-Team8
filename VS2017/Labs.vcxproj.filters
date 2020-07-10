@@ -87,7 +87,7 @@
     <ClCompile Include="Objects\Shaders.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="LetterL.cpp">
+    <ClCompile Include="Objects\LetterL.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,7 +110,7 @@
     <ClInclude Include="Objects\Shaders.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="LetterL.h">
+    <ClInclude Include="Objects\LetterL.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
   </ItemGroup>

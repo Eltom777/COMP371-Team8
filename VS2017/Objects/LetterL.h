@@ -1,7 +1,7 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-static const int NUMOFCUBES = 4;
+static const int NUMOFCUBES = 2;
 
 class LetterL : public AlphaNumeric
 {
