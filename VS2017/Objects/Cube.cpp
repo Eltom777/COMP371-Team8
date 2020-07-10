@@ -93,7 +93,7 @@ const glm::vec3 Cube::vertices[] = {
 Cube::Cube()
 {
 	worldMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
-	worldMatrix = translate(mat4(1.0f), vec3(0.03f, 0.01f, 0.01f)) * worldMatrix ;
+	//worldMatrix = translate(mat4(1.0f), vec3(0.03f, 0.01f, 0.01f)) * worldMatrix ;
 }
 
 Cube::~Cube() {

@@ -1,7 +1,7 @@
 #pragma once
 #include "Cube.h"
 
-static const int NUMOFCUBES = 1;
+static const int NUMOFCUBES = 4;
 
 class LetterO
 {

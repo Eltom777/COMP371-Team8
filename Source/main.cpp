@@ -287,7 +287,7 @@ int main(int argc, char*argv[])
         
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
-        letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
+        //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
         letter.drawLetter(worldMatrixLocation);
         glBindVertexArray(0);
 
