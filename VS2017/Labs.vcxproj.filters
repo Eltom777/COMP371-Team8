@@ -87,6 +87,9 @@
     <ClCompile Include="Objects\Shaders.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="LetterL.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Objects\Shaders.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="LetterL.h">
+      <Filter>Objects\Letters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

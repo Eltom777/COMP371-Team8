@@ -27,13 +27,12 @@
 #include <Shaders.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
-#include <Objects/LetterO.h>
+#include <Objects/LetterL.h>
 
 int main(int argc, char*argv[])
 {
     // Initialize GLFW and OpenGL version
     glfwInit();
-    //Grid objGrid;
 
 #if defined(PLATFORM_OSX)	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
@@ -83,7 +82,7 @@ int main(int argc, char*argv[])
     int cubeVAO = objCube.createCubeVAO();
     glm::mat4 worldMatrix = mat4(1.0f);
 
-    LetterO letter;
+    LetterL letter;
     
     // Entering Main Loop
     while(!glfwWindowShouldClose(window))
@@ -101,12 +100,14 @@ int main(int argc, char*argv[])
 		glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
     	
         //glPolygonMode(GL_FRONT, GL_LINE);
+		// Draw grid and axis
         glUseProgram(shaderProgram);
         glBindVertexArray(gridVAO);
         glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
         glBindVertexArray(axisVAO);
         glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
         
+		// Draw letters
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));

@@ -14,14 +14,14 @@
     <ProjectGuid>{277EAE68-9EED-4EFF-BAD3-2A70787A3E8D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Labs</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>COMP371-Assignment1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -60,7 +60,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="LetterL.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Objects\Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LetterL.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
