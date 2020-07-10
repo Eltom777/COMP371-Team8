@@ -1,5 +1,4 @@
 #include "Cube.h"
-#include <glm/gtc/matrix_transform.hpp>
 
 // All sides of cube are 1.0f instead of 0.5f
 
