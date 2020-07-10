@@ -1,7 +1,7 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-static const int NUMOFCUBES = 4;
+static const int NUMOFCUBES9 = 4;
 
 class Number9 : public AlphaNumeric
 {
@@ -14,7 +14,7 @@ public:
 	void draw(GLuint worldMatrixLocation);
 
 private:
-	Cube components[NUMOFCUBES];
+	Cube components[NUMOFCUBES9];
 	mat4 worldMatrix;
 };
 

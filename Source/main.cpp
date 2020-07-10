@@ -84,7 +84,7 @@ int main(int argc, char*argv[])
     glm::mat4 worldMatrix = mat4(1.0f);
 	
 	//LetterO letter;
-    //LetterL letter;
+    LetterL letter;
 	//Num9 num;
     
     // Entering Main Loop
@@ -117,7 +117,7 @@ int main(int argc, char*argv[])
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
         glBindVertexArray(cubeVAO);
         //letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)));
-        //num9.draw(worldMatrixLocation);
+        letter.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
