@@ -1,10 +1,10 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-static const int NUMOFCUBESL = 2;
-
 class LetterL : public AlphaNumeric
 {
+	static const int NUMOFCUBES = 2;
+
 public:
 	LetterL();
 	~LetterL();
@@ -14,7 +14,7 @@ public:
 	void draw(GLuint worldMatrixLocation);
 
 private:
-	Cube components[NUMOFCUBESL];
+	Cube components[NUMOFCUBES];
 	mat4 worldMatrix;
 };
 

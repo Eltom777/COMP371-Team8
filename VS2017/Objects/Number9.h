@@ -1,10 +1,10 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-static const int NUMOFCUBES9 = 4;
-
 class Number9 : public AlphaNumeric
 {
+	static const int NUMOFCUBES = 4;
+
 public:
 	Number9();
 	~Number9();
@@ -14,7 +14,7 @@ public:
 	void draw(GLuint worldMatrixLocation);
 
 private:
-	Cube components[NUMOFCUBES9];
+	Cube components[NUMOFCUBES];
 	mat4 worldMatrix;
 };
 
