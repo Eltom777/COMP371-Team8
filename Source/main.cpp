@@ -132,18 +132,24 @@ int main(int argc, char* argv[])
 
 		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 
+		// Model Render Mode
+		if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+
 		// Camera frame timing
 		camera.handleFrameData();
 
 		// Set up Camera
 		// ******* COMMENTED FOR TESTING ********
-		/**
 		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
 			vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
 			camera.cameraUp);  // up
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-		*/
 
 		// Transformations of Models
 		// Translating left

@@ -25,8 +25,8 @@
 
 * RENDERING MODE:
 
-	Points:    
-	Lines:       
-	Triangles:
+	Points:       P
+	Lines:        I
+	Triangles:    O
 
 * CAMERA:
