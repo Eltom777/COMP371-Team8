@@ -92,52 +92,230 @@ int main(int argc, char* argv[])
     Sharon Model3;
     Anissa Model4;
 
+	int currentModel = -1;	// which model we are currently looking at (0, 1, 2, 3, 4). 
+							// if -1, then we are not looking at any models.
+
     // Entering Main Loop
-    while (!glfwWindowShouldClose(window))
-    {
+	while (!glfwWindowShouldClose(window))
+	{
 
-        // Enable z-buffer
-        glEnable(GL_DEPTH_TEST);
+		// Enable z-buffer
+		glEnable(GL_DEPTH_TEST);
 
-        // Each frame, reset color of each pixel to glClearColor
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// Each frame, reset color of each pixel to glClearColor
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Set up Perspective View
-        glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
-            1024.0f / 768.0f,     // aspect ratio
-            0.01f, 100.0f);      // near and far (near > 0)
+		// Set up Perspective View
+		glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
+			1024.0f / 768.0f,     // aspect ratio
+			0.01f, 100.0f);      // near and far (near > 0)
 
-        GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
-        glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+		GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+		glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
 
-        //glPolygonMode(GL_FRONT, GL_LINE);
-        // Draw grid and axis
-        glUseProgram(shaderProgram);
-        glBindVertexArray(gridVAO);
-        glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
-        glBindVertexArray(axisVAO);
-        glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
+		//glPolygonMode(GL_FRONT, GL_LINE);
+		// Draw grid and axis
+		glUseProgram(shaderProgram);
+		glBindVertexArray(gridVAO);
+		glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
+		glBindVertexArray(axisVAO);
+		glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
 
-        // Draw letters
-        GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
-        glBindVertexArray(cubeVAO);
-        Model1.draw(worldMatrixLocation);
-        Model2.draw(worldMatrixLocation);
-        Model3.draw(worldMatrixLocation);
-        Model4.draw(worldMatrixLocation);
-        glBindVertexArray(0);
+		// Draw AlphaNumeric models
+		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
+		glBindVertexArray(cubeVAO);
+		Model1.draw(worldMatrixLocation);
+		Model2.draw(worldMatrixLocation);
+		Model3.draw(worldMatrixLocation);
+		Model4.draw(worldMatrixLocation);
+		glBindVertexArray(0);
 
-        glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
+		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 
-        // Camera frame timing
-        camera.handleFrameData();
+		// Camera frame timing
+		camera.handleFrameData();
 
-        // Set up Camera
-        glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
-            vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
-            camera.cameraUp);  // up
-        GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-        glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		// Set up Camera
+		// ******* COMMENTED FOR TESTING ********
+		/**
+		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
+			vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
+			camera.cameraUp);  // up
+		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		*/
+
+		// Transformations of Models
+		// Translating left
+		if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+		{
+			switch (currentModel)
+			{
+			case 1:
+				Model1.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+				break;
+			case 2:
+				Model2.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+				break;
+			case 3:
+				Model3.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+				break;
+			case 4:
+				Model4.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+				break;
+			case 5:
+				//Model5.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			default:
+				break;
+			}
+		}
+
+		// Translating right
+		if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+		{
+			switch (currentModel)
+			{
+			case 1:
+				Model1.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			case 2:
+				Model2.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			case 3:
+				Model3.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			case 4:
+				Model4.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			case 5:
+				//Model5.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+				break;
+			default:
+				break;
+			}
+		}
+		
+		// Translating up
+		if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+		{
+			switch (currentModel)
+			{
+			case 1:
+				Model1.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+				break;
+			case 2:
+				Model2.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+				break;
+			case 3:
+				Model3.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+				break;
+			case 4:
+				Model4.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+				break;
+			case 5:
+				//Model5.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+				break;
+			default:
+				break;
+			}
+		}
+
+		// Translating down
+		if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
+		{
+			switch (currentModel)
+			{
+			case 1:
+				Model1.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+				break;
+			case 2:
+				Model2.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+				break;
+			case 3:
+				Model3.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+				break;
+			case 4:
+				Model4.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+				break;
+			case 5:
+				//Model5.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+				break;
+			default:
+				break;
+			}
+		}
+
+
+			//***** CURRENTLY WE HAVE TO HOLD THE KEY DOWN BECAUSE WE ARE SETTING UP THE CAMERA IN THE WHILE LOOP (RESET) *****
+		// Change camera view to model view 
+		// Thomas Model
+		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+		{
+			glm::mat4 modelMatrix = Model1.getWorldMatrix();
+
+			glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+
+			glm::mat4 viewMatrix = glm::lookAt( glm::vec3(-0.75f, 0.01f, 0.0f), // position
+												translationComponent, // front camera.cameraPos + camera.cameraFront
+												camera.cameraUp);  // up
+
+			GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+			glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+			currentModel = 1;
+		}
+
+		// Melina Model
+		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		{
+			glm::mat4 modelMatrix = Model2.getWorldMatrix();
+
+			glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+
+			glm::mat4 viewMatrix = glm::lookAt( glm::vec3(0.75f, 0.01f, 0.0f), // position
+												translationComponent, // front camera.cameraPos + camera.cameraFront
+												camera.cameraUp);  // up
+
+			GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+			glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+			currentModel = 2;
+		}
+
+		// Sharon Model
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+		{
+			glm::mat4 modelMatrix = Model3.getWorldMatrix();
+
+			glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+
+			glm::mat4 viewMatrix = glm::lookAt( glm::vec3(-0.75f, 0.01f, 1.5f), // position
+												translationComponent, // front camera.cameraPos + camera.cameraFront
+												camera.cameraUp);  // up
+
+			GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+			glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+			currentModel = 3;
+		}
+
+		// Anissa Model
+		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		{
+			glm::mat4 modelMatrix = Model4.getWorldMatrix();
+
+			glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+
+			glm::mat4 viewMatrix = glm::lookAt( glm::vec3(0.75f, 0.01f, 1.5f), // position
+												translationComponent, // front camera.cameraPos + camera.cameraFront
+												camera.cameraUp);  // up
+
+			GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+			glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+			currentModel = 4;
+		}
 
         // End frame
         glfwSwapBuffers(window);
