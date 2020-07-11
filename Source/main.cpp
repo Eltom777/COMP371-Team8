@@ -49,6 +49,7 @@ int main(int argc, char* argv[])
 #endif
 
     // Create Window and rendering context using GLFW, resolution is 1024x768
+
     GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
     if (window == NULL)
     {
@@ -68,7 +69,7 @@ int main(int argc, char* argv[])
 
     // Black background
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
+  
     // Compile and link shaders here ...
     Shaders shaders;
     int shaderProgram = shaders.compileAndLinkShaders();
@@ -94,6 +95,7 @@ int main(int argc, char* argv[])
     // Entering Main Loop
     while (!glfwWindowShouldClose(window))
     {
+
         // Enable z-buffer
         glEnable(GL_DEPTH_TEST);
 
