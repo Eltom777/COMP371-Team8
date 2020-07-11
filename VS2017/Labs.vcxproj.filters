@@ -117,6 +117,12 @@
     <ClCompile Include="Objects\Sharon.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\LetterI.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Anissa.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -159,6 +165,12 @@
       <Filter>Objects\Students</Filter>
     </ClInclude>
     <ClInclude Include="Objects\AlphaNumeric.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterI.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Anissa.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

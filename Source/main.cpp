@@ -30,6 +30,7 @@
 #include <Objects/Thomas.h>
 #include <Objects/Melina.h>
 #include <Objects/Sharon.h>
+#include <Objects/Anissa.h>
 
 int main(int argc, char* argv[])
 {
@@ -88,6 +89,7 @@ int main(int argc, char* argv[])
     Thomas Model1;
     Melina Model2;
     Sharon Model3;
+    Anissa Model4;
 
     // Entering Main Loop
     while (!glfwWindowShouldClose(window))
@@ -120,6 +122,7 @@ int main(int argc, char* argv[])
         Model1.draw(worldMatrixLocation);
         Model2.draw(worldMatrixLocation);
         Model3.draw(worldMatrixLocation);
+        Model4.draw(worldMatrixLocation);
         glBindVertexArray(0);
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
