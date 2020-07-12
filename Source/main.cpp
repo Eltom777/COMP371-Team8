@@ -149,13 +149,6 @@ int main(int argc, char* argv[])
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
-        // Set up Camera
-        glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
-            vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
-            camera.cameraUp);  // up
-        GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-        glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
         // End frame
         glfwSwapBuffers(window);
 
