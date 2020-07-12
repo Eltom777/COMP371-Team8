@@ -32,6 +32,11 @@
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
 
+Camera* camera_ptr;
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+
+
 int main(int argc, char* argv[])
 {
     // Initialize GLFW and OpenGL version
@@ -57,7 +62,10 @@ int main(int argc, char* argv[])
         glfwTerminate();
         return -1;
     }
+	
     glfwMakeContextCurrent(window);
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
     // Initialize GLEW
     glewExperimental = true; // Needed for core profile
@@ -74,8 +82,10 @@ int main(int argc, char* argv[])
     Shaders shaders;
     int shaderProgram = shaders.compileAndLinkShaders();
 
-    // Create Camera Object
-    Camera camera(window);
+	// Create Camera Object
+	Camera camera(window);
+	camera_ptr = &camera;
+	
 
     // Define and upload geometry to the GPU here ...
     Grid objGrid;
@@ -103,7 +113,7 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Set up Perspective View
-        glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
+        glm::mat4 Projection = glm::perspective(glm::radians(camera.fov),  // field of view in degrees
             1024.0f / 768.0f,     // aspect ratio
             0.01f, 100.0f);      // near and far (near > 0)
 
@@ -131,13 +141,13 @@ int main(int argc, char* argv[])
 
         // Camera frame timing
         camera.handleFrameData();
-
-        // Set up Camera
-        glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
-            vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
-            camera.cameraUp);  // up
-        GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-        glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+        
+		// Set up Camera
+		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
+			camera.cameraDirection, // front -- camera.cameraPos + camera.cameraFront
+			camera.cameraUp);  // up
+		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
         // End frame
         glfwSwapBuffers(window);
@@ -151,6 +161,16 @@ int main(int argc, char* argv[])
 
     // Shutdown GLFW
     glfwTerminate();
+    
+	return 0;
+}
 
-    return 0;
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	camera_ptr->mouseCallbackHandler(window, xpos, ypos);
+}
+
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
 }
