@@ -9,7 +9,7 @@ Camera::Camera(GLFWwindow* window)
 	this->cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	this->cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	this->cameraX = glm::vec3(1.0f, 0.0f, 0.0f);
-	this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
+	this->cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	
 	this->pan = -90.0f;
@@ -141,7 +141,19 @@ void Camera::handleKeyboardInputs()
 	// Reset the camera to it's initial position
 	if (glfwGetKey(this->window, GLFW_KEY_H) == GLFW_PRESS)
 	{
-		this->cameraPos -= this->cameraSpeed * this->cameraFront;
+		this->cameraPos = glm::vec3(0.0f, 0.5f, 3.0f);
+		this->cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		this->cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
+
+		this->pan = -90.0f;
+		this->tilt = -9.48f;
+		this->fov = 45.0f;
+
+		this->lastX = 512.0f;
+		this->lastY = 384.0f;
+
+		this->xzPosition = 90.0f;
+		this->yzPosition = 9.48f;
 	}
 
 	// 5 degrees left and right
