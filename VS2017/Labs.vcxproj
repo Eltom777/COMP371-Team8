@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017\Objects;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\keven\git\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017\Objects;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,7 +83,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\keven\git\COMP371-Team8\VS2017;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glew-2.1.0/include;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\keven\git\COMP371-Team8\VS2017\Objects</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\keven\git\COMP371-Team8\VS2017;C:\Users\keven\git\COMP371-Team8\VS2017;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glew-2.1.0/include;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\keven\git\COMP371-Team8\VS2017\Objects</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

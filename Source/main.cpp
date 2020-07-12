@@ -19,7 +19,7 @@
 #define GLEW_STATIC 1   // This allows linking with Static Library on Windows, without DLL
 #include <GL/glew.h>    // Include GLEW - OpenGL Extension Wrangler
 #include <GLFW/glfw3.h> // GLFW provides a cross-platform interface for creating a graphical context,
-                        // initializing OpenGL and binding inputs
+						// initializing OpenGL and binding inputs
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
@@ -35,6 +35,9 @@
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
 static int currentModel = -1;
+Camera* camera_ptr;
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 
 void initialize() {
 	glfwInit();
@@ -90,7 +93,7 @@ void renderMode(GLFWwindow* window) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // points
 }
 
-void translateLeft(GLFWwindow* window, Thomas *Model1, Melina *Model2, Sharon *Model3, Anissa *Model4) {
+void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
 	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -275,50 +278,53 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 
 int main(int argc, char* argv[])
 {
-    // Initialize GLFW and OpenGL version
-    initialize();
+	// Initialize GLFW and OpenGL version
+	initialize();
 
-    // Create Window and rendering context using GLFW, resolution is 1024x768
-    GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
+	// Create Window and rendering context using GLFW, resolution is 1024x768
+	GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
+	if (window == NULL)
+	{
+		std::cerr << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+	glfwMakeContextCurrent(window);
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
-    // Initialize GLEW
-    glewExperimental = true; // Needed for core profile
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to create GLEW" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
+	// Initialize GLEW
+	glewExperimental = true; // Needed for core profile
+	if (glewInit() != GLEW_OK) {
+		std::cerr << "Failed to create GLEW" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
 
-    // Black background
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  
-    // Compile and link shaders here ...
-    Shaders shaders;
+	// Black background
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	// Compile and link shaders here ...
+	Shaders shaders;
 	int shaderProgram = shaders.compileAndLinkShaders();
 
-    // Create Camera Object
-    Camera* camera = new Camera(window);
+	// Create Camera Object
+
+	camera_ptr = new Camera(window);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
-    // Models
-    Thomas* Model1 = new Thomas();
-    Melina* Model2 = new Melina();
-    Sharon* Model3 = new Sharon();
-    Anissa* Model4 = new Anissa();
+	// Models
+	Thomas* Model1 = new Thomas();
+	Melina* Model2 = new Melina();
+	Sharon* Model3 = new Sharon();
+	Anissa* Model4 = new Anissa();
 	// Keven* Model5 = new Keven();
 
-    // Entering Main Loop
+	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
 		// Enable z-buffer
@@ -342,26 +348,26 @@ int main(int argc, char* argv[])
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); 
+		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]);
 
 		// Model Render Mode
 		renderMode(window);
 
 		// Camera frame timing
-		camera->handleFrameData();
+		camera_ptr->handleFrameData();
 
 		// Set up Camera
 		// ******* COMMENTED FOR TESTING ********
-		setUpCamera(camera, shaderProgram);
+		setUpCamera(camera_ptr, shaderProgram);
 
 		// Transformations of Models
 
 		// Translating left
 		translateLeft(window, Model1, Model2, Model3, Model4);
-	
+
 		// Translating right
 		translateRight(window, Model1, Model2, Model3, Model4);
-		
+
 		// Translating up
 		translateUp(window, Model1, Model2, Model3, Model4);
 
@@ -370,20 +376,30 @@ int main(int argc, char* argv[])
 
 		//***** CURRENTLY WE HAVE TO HOLD THE KEY DOWN BECAUSE WE ARE SETTING UP THE CAMERA IN THE WHILE LOOP (RESET) *****
 		// Change camera view to model view 
-		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera);
+		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr);
 
-        // End frame
-        glfwSwapBuffers(window);
+		// End frame
+		glfwSwapBuffers(window);
 
-        // Detect inputs
-        glfwPollEvents();
+		// Detect inputs
+		glfwPollEvents();
 
-        // Handle inputs
-        camera->handleKeyboardInputs();
-    }
+		// Handle inputs
+		camera_ptr->handleKeyboardInputs();
+	}
 
-    // Shutdown GLFW
-    glfwTerminate();
+	// Shutdown GLFW
+	glfwTerminate();
 
-    return 0;
+	return 0;
 }
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	camera_ptr->mouseCallbackHandler(window, xpos, ypos);
+}
+
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
+} 	}
