@@ -139,17 +139,15 @@ int main(int argc, char* argv[])
 
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]); //*Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 
-<<<<<<< HEAD
         // Camera frame timing
         camera.handleFrameData();
-=======
+        
 		// Set up Camera
 		glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
 			camera.cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 			camera.cameraUp);  // up
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
->>>>>>> added most changes to world orientation, edge case to be fixed
 
         // Set up Camera
         glm::mat4 viewMatrix = glm::lookAt(camera.cameraPos, // position
