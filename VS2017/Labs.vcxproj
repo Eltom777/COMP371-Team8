@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="LetterK.cpp" />
     <ClCompile Include="Objects\Anissa.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LetterK.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Anissa.h" />
     <ClInclude Include="Objects\Camera.h" />

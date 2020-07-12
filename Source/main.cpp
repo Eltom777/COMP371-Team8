@@ -157,6 +157,12 @@ int main(int argc, char* argv[])
 
         // Handle inputs
         camera.handleKeyboardInputs();
+
+    	// Reset the world
+		if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+		{
+			camera.resetCamera();
+		}
     }
 
     // Shutdown GLFW

@@ -123,6 +123,9 @@
     <ClCompile Include="Objects\LetterI.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
+    <ClCompile Include="LetterK.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -171,6 +174,9 @@
       <Filter>Objects\Students</Filter>
     </ClInclude>
     <ClInclude Include="Objects\LetterI.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="LetterK.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
   </ItemGroup>

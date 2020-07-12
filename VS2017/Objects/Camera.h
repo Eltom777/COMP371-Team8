@@ -36,6 +36,7 @@ public:
 
 	void handleFrameData();
 	void handleKeyboardInputs();
+	void resetCamera();
 	
 	void mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos);
 	void mouseScrollHandler(GLFWwindow* window, double xOffset, double yOffset);

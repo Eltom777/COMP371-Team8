@@ -32,6 +32,24 @@ void Camera::handleFrameData()
 	this->cameraSpeed = 2.5f * this->dt;
 }
 
+void Camera::resetCamera()
+{
+	this->cameraPos = glm::vec3(0.0f, 0.5f, 3.0f);
+	this->cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
+	
+	this->pan = -90.0f;
+	this->tilt = -9.48f;
+	this->fov = 45.0f;
+
+	this->lastX = 512.0f;
+	this->lastY = 384.0f;
+
+	this->xzPosition = 90.0f;
+	this->yzPosition = 9.48f;
+}
+
+
 void Camera::handleKeyboardInputs()
 {
 	// Close the window
