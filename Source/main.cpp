@@ -1,5 +1,5 @@
 //
-// COMP 371 Assignment Framework
+// Uses the COMP 371 Assignment Framework
 //
 // Created by Nicolas Bergeron on 20/06/2019.
 //
@@ -7,10 +7,7 @@
 // - https://learnopengl.com/Getting-started/Hello-Window
 // - https://learnopengl.com/Getting-started/Hello-Triangle
 //
-//
-//Modified by:
-//
-// Liam-Thomas Flynn on 09/07/2020
+// Modified by Team 8 for Assignment 1 due 12/07/2020.
 //
 //
 
@@ -64,9 +61,9 @@ int* createCubeGridVAO(Cube objCube, Grid objGrid) {
 	return VAO;
 }
 
-void setUpProjection(int shaderProgram) {
+void setUpProjection(int shaderProgram, Camera* camera) {
 	// Set up Perspective View
-	glm::mat4 Projection = glm::perspective(glm::radians(45.0f),  // field of view in degrees
+	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
@@ -94,7 +91,7 @@ void renderMode(GLFWwindow* window) {
 }
 
 void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
-	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
@@ -120,7 +117,7 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 }
 
 void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
-	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
@@ -146,7 +143,7 @@ void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* 
 }
 
 void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
-	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
@@ -172,7 +169,7 @@ void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 }
 
 void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
-	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
@@ -270,7 +267,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 
 void setUpCamera(Camera* camera, int shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
-		vec3(0.0f, 0.0f, 0.0f), // front camera.cameraPos + camera.cameraFront
+		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
 	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
@@ -334,7 +331,7 @@ int main(int argc, char* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Set up Perspective View
-		setUpProjection(shaderProgram);
+		setUpProjection(shaderProgram, camera_ptr);
 
 		// Render grid and axis and cube
 		renderGridAxisCube(shaderProgram, VAO, objGrid);
@@ -402,4 +399,4 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
-} 	}
+} 	

@@ -12,13 +12,13 @@
 
 * MODEL TRANSFORMATIONS:
 	
-	Shift left:   6
-	Shift right:  7
-	Shift up:     8
-	Shift down:   9
+	Shift left:   A
+	Shift right:  D
+	Shift up:     W
+	Shift down:   S
 
-	Scale up:    
-	Scale down:  
+	Scale up:     U
+	Scale down:   J
 
 	Rotate right: 
 	Rotate left:  
@@ -30,3 +30,15 @@
 	Triangles:    T
 
 * CAMERA:
+	
+	Rx:			  Left arrow
+	R-x:	 	  Right arrow
+	Ry:			  Up arrow
+	R-y:	 	  Down arrow
+	
+	Pan:		  Right mouse button + movement in x direction
+	Tilt:		  Middle mouse button + movement in y direction
+	
+	Zoom in:	  Left mouse button + mouse movement down OR mouse scroll up
+	Zoom out:	  Left mouse button + mouse movement up OR mouse scroll down
+	
