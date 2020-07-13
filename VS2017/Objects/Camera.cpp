@@ -67,6 +67,7 @@ void Camera::handleKeyboardInputs()
 		glm::vec3 zeroVector(0, 0 ,0);
 		float radius = glm::distance<3, float, glm::qualifier::highp>(this->cameraPos, zeroVector);
 
+		// for debugging purposes
 		std::cout << "xzPosition: " << this->xzPosition << std::endl;
 		std::cout << "pan: " << this->pan << std::endl;
 		
@@ -85,6 +86,7 @@ void Camera::handleKeyboardInputs()
 		glm::vec3 zeroVector(0, 0, 0);
 		float radius = glm::distance<3, float, glm::qualifier::highp>(this->cameraPos, zeroVector);
 
+		// for debugging purposes
 		std::cout << "xzPosition: " << this->xzPosition << std::endl;
 		std::cout << "pan: " << this->pan << std::endl;
 
@@ -116,6 +118,7 @@ void Camera::handleKeyboardInputs()
 		glm::vec3 zeroVector(0, 0, 0);
 		float radius = glm::distance<3, float, glm::qualifier::highp>(this->cameraPos, zeroVector);
 
+		// for debugging purposes
 		std::cout << "yzPosition: " << this->yzPosition << std::endl;
 		std::cout << "tilt: " << this->tilt << std::endl;
 
@@ -147,6 +150,7 @@ void Camera::handleKeyboardInputs()
 		glm::vec3 zeroVector(0, 0, 0);
 		float radius = glm::distance<3, float, glm::qualifier::highp>(this->cameraPos, zeroVector);
 
+		// for debugging purposes
 		std::cout << "yzPosition: " << this->yzPosition << std::endl;
 		std::cout << "tilt: " << this->tilt << std::endl;
 

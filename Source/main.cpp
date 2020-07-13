@@ -217,19 +217,19 @@ void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mode
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -256,6 +256,61 @@ void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 			break;
 		case 5:
 			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+/*
+Methods for scaling. Passing all models for switch statements.
+Scaling in increments of 0.005f.
+*/
+void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		default:
 			break;
@@ -346,7 +401,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 1.5f), // position
+		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.01f, 1.0f), // position
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
@@ -470,6 +525,12 @@ int main(int argc, char* argv[])
 		
 		// Rotating Right
 		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+
+		// Scale Up
+		scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+
+		// Scale Down
+		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.

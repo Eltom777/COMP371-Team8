@@ -20,8 +20,8 @@
 	Scale up:     U
 	Scale down:   J
 
-	Rotate right: 
-	Rotate left:  
+	Rotate right: Minus (-)
+	Rotate left:  Equal (=)
 
 * RENDERING MODE:
 
