@@ -123,6 +123,15 @@
     <ClCompile Include="Objects\LetterI.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\LetterV.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Keven.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number0.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -172,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="Objects\LetterI.h">
       <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterV.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Keven.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number0.h">
+      <Filter>Objects\Numbers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

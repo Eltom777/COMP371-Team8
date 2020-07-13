@@ -28,6 +28,7 @@
 #include <Objects/Melina.h>
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
+#include <Objects/Keven.h>
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
@@ -90,7 +91,7 @@ void renderMode(GLFWwindow* window) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // points
 }
 
-void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
+void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -108,7 +109,7 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			//Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -116,7 +117,7 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 	}
 }
 
-void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
+void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -134,7 +135,7 @@ void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* 
 			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			//Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -142,7 +143,7 @@ void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* 
 	}
 }
 
-void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
+void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -160,7 +161,7 @@ void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -168,7 +169,7 @@ void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 	}
 }
 
-void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4) {
+void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -186,7 +187,7 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -194,7 +195,7 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 	}
 }
 
-void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Camera* camera) {
+void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Camera* camera, Keven* Model5) {
 
 	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 
@@ -263,6 +264,23 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 
 		currentModel = 4;
 	}
+  
+  // Keven Model
+	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+	{
+		glm::mat4 modelMatrix = Model5->getWorldMatrix();
+
+		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+
+		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 1.5f), // position
+			translationComponent, // front camera.cameraPos + camera.cameraFront
+			camera->cameraUp);  // up
+
+		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+		currentModel = 5;
+	}
 }
 
 void setUpCamera(Camera* camera, int shaderProgram) {
@@ -306,7 +324,6 @@ int main(int argc, char* argv[])
 	int shaderProgram = shaders.compileAndLinkShaders();
 
 	// Create Camera Object
-
 	camera_ptr = new Camera(window);
 
 	// Define and upload geometry to the GPU here ...
@@ -319,7 +336,7 @@ int main(int argc, char* argv[])
 	Melina* Model2 = new Melina();
 	Sharon* Model3 = new Sharon();
 	Anissa* Model4 = new Anissa();
-	// Keven* Model5 = new Keven();
+	Keven* Model5 = new Keven();
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -342,6 +359,7 @@ int main(int argc, char* argv[])
 		Model2->draw(worldMatrixLocation);
 		Model3->draw(worldMatrixLocation);
 		Model4->draw(worldMatrixLocation);
+    Model5->draw(worldMatrixLocation);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
@@ -352,7 +370,7 @@ int main(int argc, char* argv[])
 
 		// Camera frame timing
 		camera_ptr->handleFrameData();
-
+    
 		// Set up Camera
 		// ******* COMMENTED FOR TESTING ********
 		setUpCamera(camera_ptr, shaderProgram);
@@ -360,20 +378,20 @@ int main(int argc, char* argv[])
 		// Transformations of Models
 
 		// Translating left
-		translateLeft(window, Model1, Model2, Model3, Model4);
+		translateLeft(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating right
-		translateRight(window, Model1, Model2, Model3, Model4);
+		translateRight(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating up
-		translateUp(window, Model1, Model2, Model3, Model4);
+		translateUp(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating down
-		translateDown(window, Model1, Model2, Model3, Model4);
+		translateDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		//***** CURRENTLY WE HAVE TO HOLD THE KEY DOWN BECAUSE WE ARE SETTING UP THE CAMERA IN THE WHILE LOOP (RESET) *****
 		// Change camera view to model view 
-		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr);
+		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
 
 		// End frame
 		glfwSwapBuffers(window);
@@ -384,7 +402,7 @@ int main(int argc, char* argv[])
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
 	}
-
+  
 	// Shutdown GLFW
 	glfwTerminate();
 
