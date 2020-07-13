@@ -82,15 +82,21 @@ void renderGridAxisCube(int shaderProgram, int* VAO, Grid objGrid) {
 	glBindVertexArray(VAO[0]);
 }
 
+/*
+Method for changing the render mode of all the models.
+*/
 void renderMode(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // triangles
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // all triangles filled in
 	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // lines
 	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // points
 }
 
+/*
+Methods for translating models. Passing all models for the switch statements.
+*/
 void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
@@ -109,7 +115,7 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -195,6 +201,64 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 	}
 }
 
+/*
+Methods for rotating models.
+*/
+void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+/*
+Method for focusing on a single model at a time.
+*/
 void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Camera* camera, Keven* Model5) {
 
 	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
@@ -291,6 +355,9 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
+/*
+Main method.
+*/
 int main(int argc, char* argv[])
 {
 	// Initialize GLFW and OpenGL version
@@ -359,7 +426,7 @@ int main(int argc, char* argv[])
 		Model2->draw(worldMatrixLocation);
 		Model3->draw(worldMatrixLocation);
 		Model4->draw(worldMatrixLocation);
-    Model5->draw(worldMatrixLocation);
+		Model5->draw(worldMatrixLocation);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
@@ -389,8 +456,16 @@ int main(int argc, char* argv[])
 		// Translating down
 		translateDown(window, Model1, Model2, Model3, Model4, Model5);
 
-		//***** CURRENTLY WE HAVE TO HOLD THE KEY DOWN BECAUSE WE ARE SETTING UP THE CAMERA IN THE WHILE LOOP (RESET) *****
+		// Rotating Left
+		rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		
+		// Rotating Right
+		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+
 		// Change camera view to model view 
+		/*
+		Currently, key needs to be held down because camera is set up in the while loop.
+		*/
 		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
 
 		// End frame
