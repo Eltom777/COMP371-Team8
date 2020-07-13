@@ -6,12 +6,14 @@ Number3::Number3() {
 }
 
 void Number3::setup() { //create number3
+	// hardcoded relative positions
 	components[0].concatWorldMatrix(glm::scale(mat4(1.0f), vec3(2.0f, 7.0f, 2.0f))); //glm::translate(mat4(1.0f), vec3(0.05f, 0.0f, 0.0f))  *
 	components[1].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, 0.05f, 0.0f)) * glm::scale(mat4(1.0f), vec3(3.0f, 2.0f, 2.0f)));
 	components[2].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, 0.0f, 0.0f)) * glm::scale(mat4(1.0f), vec3(3.0f, 2.0f, 2.0f)));
 	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, -0.05f, 0.0f)) * glm::scale(mat4(1.0f), vec3(3.0f, 2.0f, 2.0f)));
 
-	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f))); // Shift above grid
+	// set letter slightly above grid
+	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
 }
 
 mat4 Number3::getWorldMatrix() {

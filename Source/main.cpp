@@ -34,7 +34,8 @@
 // if -1, then we are not looking at any models
 static int currentModel = -1;
 Camera* camera_ptr;
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+//Function interfaces for camera response to mouse input.
+void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 
 void initialize() {
@@ -52,7 +53,11 @@ void initialize() {
 #endif
 }
 
+/*
+Returns an array of VAOs for cubes, grids, and axes. 
+*/
 int* createCubeGridVAO(Cube objCube, Grid objGrid) {
+	// create VAOs
 	int cubeVAO = objCube.createCubeVAO();
 	int gridVAO = objGrid.createGridVAO();
 	int axisVAO = objGrid.createAxisVAO();
@@ -89,13 +94,14 @@ void renderMode(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // all triangles filled in
 	else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // lines
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // triangle edges only
 	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // points
+		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // triangle vertices only
 }
 
 /*
 Methods for translating models. Passing all models for the switch statements.
+Translations in increments of 0.005f
 */
 void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -202,7 +208,8 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 }
 
 /*
-Methods for rotating models.
+Methods for rotating models. Passing all models for the switch statements.
+Rotations in increments of 0.5f radians.
 */
 void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
@@ -210,19 +217,19 @@ void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mode
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -257,7 +264,65 @@ void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 }
 
 /*
+Methods for scaling. Passing all models for switch statements.
+Scaling in increments of 0.005f.
+*/
+void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+	{
+		switch (currentModel)
+		{
+		case 1:
+			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 2:
+			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 3:
+			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 4:
+			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		case 5:
+			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+/*
 Method for focusing on a single model at a time.
+Numbers pressed are associated with corresponding model.
+Sets camera's focus to number associated with chosen model.
+Sets currentModel to number associated with chosen model.
 */
 void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Camera* camera, Keven* Model5) {
 
@@ -336,7 +401,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 1.5f), // position
+		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.01f, 1.0f), // position
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
@@ -439,7 +504,6 @@ int main(int argc, char* argv[])
 		camera_ptr->handleFrameData();
     
 		// Set up Camera
-		// ******* COMMENTED FOR TESTING ********
 		setUpCamera(camera_ptr, shaderProgram);
 
 		// Transformations of Models
@@ -462,10 +526,14 @@ int main(int argc, char* argv[])
 		// Rotating Right
 		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
 
+		// Scale Up
+		scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+
+		// Scale Down
+		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
+
 		// Change camera view to model view 
-		/*
-		Currently, key needs to be held down because camera is set up in the while loop.
-		*/
+		// ** Currently, key needs to be held down because camera is set up in the while loop.
 		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
 
 		// End frame
@@ -484,6 +552,10 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+/*
+Adaptors based on the interfaces at the top.
+Handle camera responses to mouse actions.
+*/
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	camera_ptr->mouseCallbackHandler(window, xpos, ypos);
