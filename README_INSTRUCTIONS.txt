@@ -31,9 +31,9 @@
 
 * CAMERA:
 	
-	Rx:			  Left arrow
+	Rx:		  Left arrow
 	R-x:	 	  Right arrow
-	Ry:			  Up arrow
+	Ry:		  Up arrow
 	R-y:	 	  Down arrow
 	
 	Pan:		  Right mouse button + movement in x direction
