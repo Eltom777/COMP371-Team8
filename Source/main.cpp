@@ -378,20 +378,20 @@ int main(int argc, char* argv[])
 		// Transformations of Models
 
 		// Translating left
-		translateLeft(window, Model1, Model2, Model3, Model4);
+		translateLeft(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating right
-		translateRight(window, Model1, Model2, Model3, Model4);
+		translateRight(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating up
-		translateUp(window, Model1, Model2, Model3, Model4);
+		translateUp(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Translating down
-		translateDown(window, Model1, Model2, Model3, Model4);
+		translateDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		//***** CURRENTLY WE HAVE TO HOLD THE KEY DOWN BECAUSE WE ARE SETTING UP THE CAMERA IN THE WHILE LOOP (RESET) *****
 		// Change camera view to model view 
-		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr);
+		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
 
 		// End frame
 		glfwSwapBuffers(window);
