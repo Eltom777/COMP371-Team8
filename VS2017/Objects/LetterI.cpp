@@ -6,6 +6,7 @@ LetterI::LetterI() {
 }
 
 void LetterI::setup() { // create letter I
+	// hardcoded relative positions
 	components[0].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, -0.05f, 0.0f)) 
 		* glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f))); // bottom
 	components[1].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, 0.0f, 0.0f))
@@ -13,6 +14,7 @@ void LetterI::setup() { // create letter I
 	components[2].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.05f, 0.05f, 0.0f))
 		* glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f))); // top
 
+	// set letter slightly above grid
 	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)));
 }
 

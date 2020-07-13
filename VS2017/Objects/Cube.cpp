@@ -89,97 +89,11 @@ const glm::vec3 Cube::vertices[] = {
 	glm::vec3(-1.0f, 1.0f, -1.0f),
 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),
 
-	/** white faces
-	// front face
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-
-	// back face
-	glm::vec3(-1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-
-	// left face
-	glm::vec3(-1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-
-	// right face
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-
-	// bottom face
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, -1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-
-	// top face
-	glm::vec3(-1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, 1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f),
-	glm::vec3(-1.0f, 1.0f, -1.0f),
-	glm::vec3(1.0f, 1.0f, 1.0f)
-	*/
 };
 
 Cube::Cube()
 {
 	worldMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
-	//worldMatrix = translate(mat4(1.0f), vec3(0.03f, 0.01f, 0.01f)) * worldMatrix ;
 }
 
 Cube::~Cube() {

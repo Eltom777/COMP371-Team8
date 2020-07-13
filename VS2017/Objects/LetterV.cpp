@@ -5,7 +5,8 @@ LetterV::LetterV() {
 	setup();
 }
 
-void LetterV::setup() { //create letter O
+void LetterV::setup() { //create letter V
+	// hardcoded relative positions
 	// base of V
 	components[0].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.05f, -0.05f, 0.0f)) * glm::scale(mat4(1.0f), vec3(3.0f, 2.0f, 2.0f)));
 	// first row
@@ -15,7 +16,7 @@ void LetterV::setup() { //create letter O
 	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.03f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 4.0f, 2.0f)));
 	components[4].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.095f, 0.03f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 4.0f, 2.0f)));
 	
-
+	// set letter slightly above grid
 	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
 }
 

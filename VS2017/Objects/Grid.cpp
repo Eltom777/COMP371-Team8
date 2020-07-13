@@ -33,7 +33,6 @@ void Grid::generateGrid() {
 		counter += offset;
 	}
 
-	//offset = static_cast<float>(1) / static_cast <float>(ROWS);
 	counter = 0;
 	//generate rows
 	for (int i = numOfColumns; i < SIZEOFARRAY; i = i + 4) {
