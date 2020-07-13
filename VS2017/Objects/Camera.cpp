@@ -56,9 +56,8 @@ void Camera::handleKeyboardInputs()
 	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(this->window, true);
 
-
 	// World rotation
-	if (glfwGetKey(this->window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
 		this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
 		// rotate left
@@ -76,7 +75,7 @@ void Camera::handleKeyboardInputs()
 		this->cameraPos.z = (sin(glm::radians(this->xzPosition))) * cos(glm::radians(this->yzPosition)) * this->distanceFromWorldOrigin;
 	}
 
-	if (glfwGetKey(this->window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
 		this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
 		// rotate right
@@ -94,7 +93,7 @@ void Camera::handleKeyboardInputs()
 		this->cameraPos.z = (sin(glm::radians(this->xzPosition))) * cos(glm::radians(this->yzPosition)) * this->distanceFromWorldOrigin;
 	}
 
-	if (glfwGetKey(this->window, GLFW_KEY_UP) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
 		this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
 		// rotate up
@@ -102,7 +101,7 @@ void Camera::handleKeyboardInputs()
 			if (this->yzPosition > 89.0f) {
 				this->yzPosition = 89.0f;
 			}
-			if (this->yzPosition < -89.0f) {
+			else if (this->yzPosition < -89.0f) {
 				this->yzPosition = -89.0f;
 			}
 		
@@ -110,7 +109,7 @@ void Camera::handleKeyboardInputs()
 			if (this->tilt > 89.0f) {
 				this->tilt = 89.0f;
 			}
-			if (this->tilt < -89.0f) {
+			else if (this->tilt < -89.0f) {
 				this->tilt = -89.0f;
 			}
 
@@ -125,7 +124,7 @@ void Camera::handleKeyboardInputs()
 		this->cameraPos.z = (sin(glm::radians(this->xzPosition))) * cos(glm::radians(this->yzPosition)) * this->distanceFromWorldOrigin;
 	}
 
-	if (glfwGetKey(this->window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
 		this->cameraDirection = glm::vec3(0.0f, 0.0f, .0f);
 		// rotate down
@@ -133,7 +132,7 @@ void Camera::handleKeyboardInputs()
 			if (this->yzPosition > 89.0f) {
 				this->yzPosition = 89.0f;
 			}
-			if (this->yzPosition < -89.0f) {
+			else if (this->yzPosition < -89.0f) {
 				this->yzPosition = -89.0f;
 			}
 		
@@ -141,7 +140,7 @@ void Camera::handleKeyboardInputs()
 			if (this->tilt > 89.0f) {
 				this->tilt = 89.0f;
 			}
-			if (this->tilt < -89.0f) {
+			else if (this->tilt < -89.0f) {
 				this->tilt = -89.0f;
 			}
 
@@ -157,7 +156,7 @@ void Camera::handleKeyboardInputs()
 	}
 
 	// Reset the camera to it's initial position
-	if (glfwGetKey(this->window, GLFW_KEY_H) == GLFW_PRESS)
+	else if (glfwGetKey(this->window, GLFW_KEY_H) == GLFW_PRESS)
 	{
 		this->cameraPos = glm::vec3(0.0f, 0.5f, 3.0f);
 		this->cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -174,108 +173,108 @@ void Camera::handleKeyboardInputs()
 		this->yzPosition = 9.48f;
 	}
 
-	// 5 degrees left and right
-	if (glfwGetKey(this->window, GLFW_KEY_J) == GLFW_PRESS)
-	{
-		this->pan -= this->cameraPanSpeed;
-		this->xzPosition -= this->cameraPanSpeed;
-		glm::vec3 front;
-		front.x = cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		front.y = sin(glm::radians(this->tilt));
-		front.z = sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		
-		this->cameraFront = glm::normalize(front);
-		this->cameraDirection = this-> cameraPos + this->cameraFront;
+	//// 5 degrees left and right
+	//if (glfwGetKey(this->window, GLFW_KEY_J) == GLFW_PRESS)
+	//{
+	//	this->pan -= this->cameraPanSpeed;
+	//	this->xzPosition -= this->cameraPanSpeed;
+	//	glm::vec3 front;
+	//	front.x = cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	front.y = sin(glm::radians(this->tilt));
+	//	front.z = sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	
+	//	this->cameraFront = glm::normalize(front);
+	//	this->cameraDirection = this-> cameraPos + this->cameraFront;
 
-		std::cout << "pan: " << this->pan << std::endl;
-		std::cout << "xzPosition: " << this->xzPosition << std::endl;
-	}
+	//	std::cout << "pan: " << this->pan << std::endl;
+	//	std::cout << "xzPosition: " << this->xzPosition << std::endl;
+	//}
 
-	if (glfwGetKey(this->window, GLFW_KEY_L) == GLFW_PRESS)
-	{
-		this->pan += this->cameraPanSpeed;
-		this->xzPosition += this->cameraPanSpeed;
+	//if (glfwGetKey(this->window, GLFW_KEY_L) == GLFW_PRESS)
+	//{
+	//	this->pan += this->cameraPanSpeed;
+	//	this->xzPosition += this->cameraPanSpeed;
 
-		glm::vec3 front;
-		front.x = cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		front.y = sin(glm::radians(this->tilt));
-		front.z = sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		this->cameraFront = glm::normalize(front);
-		this->cameraDirection = this->cameraPos + this->cameraFront;
+	//	glm::vec3 front;
+	//	front.x = cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	front.y = sin(glm::radians(this->tilt));
+	//	front.z = sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	this->cameraFront = glm::normalize(front);
+	//	this->cameraDirection = this->cameraPos + this->cameraFront;
 
 
-		std::cout << "pan: " << this->pan << std::endl;
-		std::cout << "xzPosition: " << this->xzPosition << std::endl;
-	}
+	//	std::cout << "pan: " << this->pan << std::endl;
+	//	std::cout << "xzPosition: " << this->xzPosition << std::endl;
+	//}
 
-	// 5 degrees top and down
-	if (glfwGetKey(this->window, GLFW_KEY_I) == GLFW_PRESS)
-	{
-		this->tilt += this->cameraPanSpeed;
-			if (this->tilt > 89.0f) {
-				this->tilt = 89.0f;
-				this->yzPosition = -89.0f;
-			}
-			if (this->tilt < -89.0f) {
-				this->tilt = -89.0f;
-				this->yzPosition = 89.0f;
-			}
-		
-		this->yzPosition -= this->cameraPanSpeed;
-			if (this->yzPosition > 89.0f) {
-				this->yzPosition = 89.0f;
-				this->tilt = -89.0f;
-			}
-			if (this->yzPosition < -89.0f) {
-				this->yzPosition = -89.0f;
-				this->tilt = 89.0f;
-			}
-		glm::vec3 front;
-		front.x = -cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		front.y = -sin(glm::radians(this->tilt));
-		front.z = -sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		this->cameraFront = glm::normalize(front);
-		this->cameraDirection = this->cameraPos - this->cameraFront;
+	//// 5 degrees top and down
+	//if (glfwGetKey(this->window, GLFW_KEY_I) == GLFW_PRESS)
+	//{
+	//	this->tilt += this->cameraPanSpeed;
+	//		if (this->tilt > 89.0f) {
+	//			this->tilt = 89.0f;
+	//			this->yzPosition = -89.0f;
+	//		}
+	//		if (this->tilt < -89.0f) {
+	//			this->tilt = -89.0f;
+	//			this->yzPosition = 89.0f;
+	//		}
+	//	
+	//	this->yzPosition -= this->cameraPanSpeed;
+	//		if (this->yzPosition > 89.0f) {
+	//			this->yzPosition = 89.0f;
+	//			this->tilt = -89.0f;
+	//		}
+	//		if (this->yzPosition < -89.0f) {
+	//			this->yzPosition = -89.0f;
+	//			this->tilt = 89.0f;
+	//		}
+	//	glm::vec3 front;
+	//	front.x = -cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	front.y = -sin(glm::radians(this->tilt));
+	//	front.z = -sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	this->cameraFront = glm::normalize(front);
+	//	this->cameraDirection = this->cameraPos - this->cameraFront;
 
-		std::cout << "tilt: " << this->tilt << std::endl;
-		std::cout << "yzPosition: " << this->yzPosition << std::endl;
-	}
+	//	std::cout << "tilt: " << this->tilt << std::endl;
+	//	std::cout << "yzPosition: " << this->yzPosition << std::endl;
+	//}
 
-	if (glfwGetKey(this->window, GLFW_KEY_K) == GLFW_PRESS)
-	{
-		this->tilt -= this->cameraPanSpeed;
-			if (this->tilt > 89.0f) {
-				this->tilt = 89.0f;
-				this->yzPosition = -89.0f;
-				
-			}
-			if (this->tilt < -89.0f) {
-				this->tilt = -89.0f;
-				this->yzPosition = 89.0f;
-			}
-		
-		this->yzPosition += this->cameraPanSpeed;
-			if (this->yzPosition > 89.0f) {
-				this->yzPosition = 89.0f;
-				this->tilt = -89.0f;
+	//if (glfwGetKey(this->window, GLFW_KEY_K) == GLFW_PRESS)
+	//{
+	//	this->tilt -= this->cameraPanSpeed;
+	//		if (this->tilt > 89.0f) {
+	//			this->tilt = 89.0f;
+	//			this->yzPosition = -89.0f;
+	//			
+	//		}
+	//		if (this->tilt < -89.0f) {
+	//			this->tilt = -89.0f;
+	//			this->yzPosition = 89.0f;
+	//		}
+	//	
+	//	this->yzPosition += this->cameraPanSpeed;
+	//		if (this->yzPosition > 89.0f) {
+	//			this->yzPosition = 89.0f;
+	//			this->tilt = -89.0f;
 
-			}
-			if (this->yzPosition < -89.0f) {
-				this->yzPosition = -89.0f;
-				this->tilt = 89.0f;
+	//		}
+	//		if (this->yzPosition < -89.0f) {
+	//			this->yzPosition = -89.0f;
+	//			this->tilt = 89.0f;
 
-			}
-		
-		glm::vec3 front;
-		front.x = -cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		front.y = -sin(glm::radians(this->tilt));
-		front.z = -sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
-		this->cameraFront = glm::normalize(front);
-		this->cameraDirection = this->cameraPos - this->cameraFront;
+	//		}
+	//	
+	//	glm::vec3 front;
+	//	front.x = -cos(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	front.y = -sin(glm::radians(this->tilt));
+	//	front.z = -sin(glm::radians(this->pan)) * cos(glm::radians(this->tilt));
+	//	this->cameraFront = glm::normalize(front);
+	//	this->cameraDirection = this->cameraPos - this->cameraFront;
 
-		std::cout << "tilt: " << this->tilt << std::endl;
-		std::cout << "yzPosition: " << this->yzPosition << std::endl;
-	}
+	//	std::cout << "tilt: " << this->tilt << std::endl;
+	//	std::cout << "yzPosition: " << this->yzPosition << std::endl;
+	//}
 }
 
 void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
@@ -297,7 +296,7 @@ void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
 		this->cameraDirection = this->cameraPos + this->cameraFront;
 	}
 	// Handle mouse camera tilting
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE))
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE))
 	{
 		float yoffset = ypos - this->lastY;
 		this->lastY = ypos;
@@ -306,7 +305,7 @@ void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
 			if (this->tilt > 89.0f) {
 				this->tilt = 89.0f;
 			}
-			if (this->tilt < -89.0f) {
+			else if (this->tilt < -89.0f) {
 				this->tilt = -89.0f;
 			}
 		this->yzPosition -= yoffset;
@@ -314,7 +313,7 @@ void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
 				this->yzPosition = 89.0f;
 				this->tilt = -89.0f;
 			}
-			if (this->yzPosition < -89.0f) {
+			else if (this->yzPosition < -89.0f) {
 				this->yzPosition = -89.0f;
 				this->tilt = 89.0f;
 			}
@@ -328,7 +327,7 @@ void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
 		this->cameraDirection = this->cameraPos - this->cameraFront;
 	}
 	// Handle mouse zooming
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT))
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT))
 	{
 		float yoffset = ypos - this->lastY;
 		this->lastY = ypos;
@@ -340,13 +339,12 @@ void Camera::mouseCallbackHandler(GLFWwindow* window, double xpos, double ypos)
 		{
 			fov = 1.0f;
 		}
-		if (fov > 45.0f)
+		else if (fov > 45.0f)
 		{
 			fov = 45.0f;
 		}
 	}
 }
-
 
 void Camera::mouseScrollHandler(GLFWwindow* window, double xOffset, double yOffset)
 {
@@ -355,7 +353,7 @@ void Camera::mouseScrollHandler(GLFWwindow* window, double xOffset, double yOffs
 	{
 		fov = 1.0f;
 	}
-	if (fov > 45.0f)
+	else if (fov > 45.0f)
 	{
 		fov = 45.0f;
 	}
