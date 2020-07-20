@@ -1,35 +1,35 @@
 #include "Keven.h"
 
 Keven::Keven() {
-	worldMatrix = mat4(1.0f);
+	modelMatrix = mat4(1.0f);
 	setup();
 }
 
 void Keven::setup() {
 	// set positions of number and letter relative to the center of the model
-	number.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.1f, 0.0f, 0.0f)));
-	letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
+	number.concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.1f, 0.0f, 0.0f)));
+	letter.concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
 
 	// place model in predetermined position on grid
-	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, -0.05f))); // Translate to top left corner
+	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, -0.05f))); // Translate to top left corner
 }
 
-mat4 Keven::getWorldMatrix() {
-	// get matrix of model (position & transformations) in world space 
-	return worldMatrix;
+mat4 Keven::getModelMatrix() {
+	// get matrix of model (position & transformations) in model space 
+	return modelMatrix;
 }
 
-void Keven::concatWorldMatrix(mat4 mat) {
+void Keven::concatModelMatrix(mat4 mat) {
 	// apply tranformation to all components of model
-	worldMatrix = mat * worldMatrix;
-	letter.concatWorldMatrix(mat);
-	number.concatWorldMatrix(mat);
+	modelMatrix = mat * modelMatrix;
+	letter.concatModelMatrix(mat);
+	number.concatModelMatrix(mat);
 }
 
-void Keven::draw(GLuint worldMatrixLocation) {
+void Keven::draw(GLuint modelMatrixLocation) {
 	// draw all components of model
-	letter.draw(worldMatrixLocation);
-	number.draw(worldMatrixLocation);
+	letter.draw(modelMatrixLocation);
+	number.draw(modelMatrixLocation);
 }
 
 Keven::~Keven() {

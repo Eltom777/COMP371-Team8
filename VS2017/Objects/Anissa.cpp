@@ -1,35 +1,35 @@
 #include "Anissa.h"
 
 Anissa::Anissa() {
-	worldMatrix = mat4(1.0f);
+	modelMatrix = mat4(1.0f);
 	setup();
 }
 
 void Anissa::setup() {
 	// set positions of number and letter relative to the center of the model
-	letter.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
-	number.concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.01f, 0.005f, 0.0f)));
+	letter.concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
+	number.concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.01f, 0.005f, 0.0f)));
 
 	// place model in predetermined position on grid
-	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.75f, 0.01f, 0.75)));
+	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.75f, 0.01f, 0.75)));
 }
 
-mat4 Anissa::getWorldMatrix() {
-	// get matrix of model (position & transformations) in world space 
-	return worldMatrix;
+mat4 Anissa::getModelMatrix() {
+	// get matrix of model (position & transformations) in model space 
+	return modelMatrix;
 }
 
-void Anissa::concatWorldMatrix(mat4 mat) {
+void Anissa::concatModelMatrix(mat4 mat) {
 	// apply tranformation to all components of model
-	worldMatrix = mat * worldMatrix;
-	letter.concatWorldMatrix(mat);
-	number.concatWorldMatrix(mat);
+	modelMatrix = mat * modelMatrix;
+	letter.concatModelMatrix(mat);
+	number.concatModelMatrix(mat);
 }
 
-void Anissa::draw(GLuint worldMatrixLocation) {
+void Anissa::draw(GLuint modelMatrixLocation) {
 	// draw all components of model
-	letter.draw(worldMatrixLocation);
-	number.draw(worldMatrixLocation);
+	letter.draw(modelMatrixLocation);
+	number.draw(modelMatrixLocation);
 }
 
 Anissa::~Anissa() {

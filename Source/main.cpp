@@ -109,19 +109,19 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -135,19 +135,19 @@ void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* 
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -161,19 +161,19 @@ void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -187,19 +187,19 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -217,19 +217,19 @@ void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mode
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -243,19 +243,19 @@ void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
+			Model2->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -273,19 +273,19 @@ void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3,
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model1->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model2->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model3->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model4->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model5->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		default:
 			break;
@@ -298,19 +298,19 @@ void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model1->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 2:
-			Model2->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model2->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 3:
-			Model3->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model3->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 4:
-			Model4->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model4->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 5:
-			Model5->concatWorldMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model5->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		default:
 			break;
@@ -330,7 +330,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 	{
-		glm::mat4 modelMatrix = Model1->getWorldMatrix();
+		glm::mat4 modelMatrix = Model1->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
@@ -347,7 +347,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 	// Melina Model
 	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 	{
-		glm::mat4 modelMatrix = Model2->getWorldMatrix();
+		glm::mat4 modelMatrix = Model2->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
@@ -364,7 +364,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 	// Sharon Model
 	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 	{
-		glm::mat4 modelMatrix = Model3->getWorldMatrix();
+		glm::mat4 modelMatrix = Model3->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
@@ -380,7 +380,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
 	// Anissa Model
 	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 	{
-		glm::mat4 modelMatrix = Model4->getWorldMatrix();
+		glm::mat4 modelMatrix = Model4->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
@@ -397,7 +397,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* 
   // Keven Model
 	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
-		glm::mat4 modelMatrix = Model5->getWorldMatrix();
+		glm::mat4 modelMatrix = Model5->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 

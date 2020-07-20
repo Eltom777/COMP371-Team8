@@ -9,12 +9,12 @@ public:
 	LetterL();
 	~LetterL();
 	void setup();
-	void concatWorldMatrix(mat4 mat);
-	mat4 getWorldMatrix();
+	void concatModelMatrix(mat4 mat);
+	mat4 getModelMatrix();
 	void draw(GLuint worldMatrixLocation);
 
 private:
 	Cube components[NUMOFCUBES];
-	mat4 worldMatrix;
+	mat4 modelMatrix;
 };
 
