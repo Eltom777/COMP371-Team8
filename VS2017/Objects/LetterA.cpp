@@ -1,7 +1,7 @@
 #include "LetterA.h"
 
 LetterA::LetterA() {
-	worldMatrix = mat4(1.0f);
+	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -13,15 +13,15 @@ void LetterA::setup() { //create letter A
 	components[3].concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)) * glm::scale(mat4(1.0f), vec3(3.0f, 1.0f, 2.0f))); // bottom edge
 
 	// set letter slightly above grid
-	concatWorldMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f))); // Shift above grid
+	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f))); // Shift above grid
 }
 
-mat4 LetterA::getWorldMatrix() {
-	return worldMatrix;
+mat4 LetterA::getModelMatrix() {
+	return modelMatrix;
 }
 
-void LetterA::concatWorldMatrix(mat4 mat) {
-	worldMatrix = mat * worldMatrix;
+void LetterA::concatModelMatrix(mat4 mat) {
+	modelMatrix = mat * modelMatrix;
 	for (int i = 0; i < NUMOFCUBES; i++) {
 		components[i].concatWorldMatrix(mat);
 	}
