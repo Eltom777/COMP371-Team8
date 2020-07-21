@@ -1,16 +1,12 @@
 #include "LetterO.h"
 #include "Number3.h"
+#include "Student.h"
 
-class Thomas : public AlphaNumeric {
+class Thomas : public Student {
 public :
 	Thomas();
 	~Thomas();
 	void setup();
-	void concatModelMatrix(mat4 mat);
-	mat4 getModelMatrix();
 	void draw(GLuint modelMatrixLocation);
-private :
-	LetterO letter;
-	Number3 number;
-	mat4 modelMatrix;
+	//int getVAO();
 };

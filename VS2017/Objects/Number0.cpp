@@ -1,7 +1,6 @@
 #include "Number0.h"
 
 Number0::Number0() {
-	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -20,17 +19,13 @@ void Number0::setup() {
 	components[4].concatModelMatrix(glm::rotate(mat4(1.0f), 45.0f, rotationAxis));
 
 	// set letter slightly above grid
-	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)));
+	glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f));
 }
 
-mat4 Number0::getModelMatrix() {
-	return modelMatrix;
-}
-
-void Number0::concatModelMatrix(mat4 mat) {
-	modelMatrix = mat * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].concatModelMatrix(mat);
+void Number0::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (Cube component : components) {
+		component.setModelMatrix(modelMatrix);
 	}
 }
 

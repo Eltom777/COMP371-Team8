@@ -9,11 +9,9 @@ public:
 	Number0();
 	~Number0();
 	void setup();
-	void concatModelMatrix(mat4 mat);
-	mat4 getModelMatrix();
+	void updateModelMatrix();
 	void draw(GLuint modelMatrixLocation);
 private:
 	Cube components[NUMOFCUBES];
-	mat4 modelMatrix;
 };
 

@@ -1,7 +1,6 @@
 #include "LetterI.h"
 
 LetterI::LetterI() {
-	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -15,17 +14,13 @@ void LetterI::setup() { // create letter I
 		* glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f))); // top
 
 	// set letter slightly above grid
-	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)));
+	glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f));
 }
 
-mat4 LetterI::getModelMatrix() {
-	return modelMatrix;
-}
-
-void LetterI::concatModelMatrix(mat4 mat) {
-	modelMatrix = mat * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].concatModelMatrix(mat);
+void LetterI::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (Cube component : components) {
+		component.setModelMatrix(modelMatrix);
 	}
 }
 

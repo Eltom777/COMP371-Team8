@@ -9,11 +9,10 @@ public:
 	LetterV();
 	~LetterV();
 	void setup();
-	void concatModelMatrix(mat4 mat);
-	mat4 getModelMatrix();
-	void draw(GLuint modelMatrixLocation);
+	void updateModelMatrix();
+	void draw(GLuint worldMatrixLocation);
+	//int getVAO();
 
 private:
 	Cube components[NUMOFCUBES];
-	mat4 modelMatrix;
 };

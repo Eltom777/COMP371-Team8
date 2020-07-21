@@ -1,7 +1,6 @@
 #include "LetterL.h"
 
 LetterL::LetterL() {
-	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -11,17 +10,13 @@ void LetterL::setup() { //create letter O
 	components[1].concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.05f, -0.05f, 0.0f)) * glm::scale(mat4(1.0f), vec3(4.0f, 2.0f, 2.0f)));
 
 	// set letter slightly above grid
-	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
+	glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f));
 }
 
-mat4 LetterL::getModelMatrix() {
-	return modelMatrix;
-}
-
-void LetterL::concatModelMatrix(mat4 mat) {
-	modelMatrix = mat * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].concatModelMatrix(mat);
+void LetterL::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (Cube component : components) {
+		component.setModelMatrix(modelMatrix);
 	}
 }
 

@@ -1,7 +1,6 @@
 #include "Number4.h"
 
 Number4::Number4() {
-	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -12,17 +11,13 @@ void Number4::setup() { //create number 4
 	components[2].concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f)) * glm::scale(mat4(1.0f), vec3(2.0f, 7.0f, 2.0f))); // right edge
 
 	// set letter slightly above grid
-	concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
+	glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f));
 }
 
-mat4 Number4::getModelMatrix() {
-	return modelMatrix;
-}
-
-void Number4::concatModelMatrix(mat4 mat) {
-	modelMatrix = mat * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].concatModelMatrix(mat);
+void Number4::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (Cube component : components) {
+		component.setModelMatrix(modelMatrix);
 	}
 }
 

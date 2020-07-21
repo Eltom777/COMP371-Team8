@@ -24,6 +24,7 @@
 #include <Objects/Shaders.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
+
 #include <Objects/Thomas.h>
 #include <Objects/Melina.h>
 #include <Objects/Sharon.h>
@@ -37,6 +38,13 @@ Camera* camera_ptr;
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+
+// Models
+Thomas* Model1 = new Thomas();
+Melina* Model2 = new Melina();
+Sharon* Model3 = new Sharon();
+Anissa* Model4 = new Anissa();
+Keven* Model5 = new Keven();
 
 void initialize() {
 	glfwInit();
@@ -99,29 +107,56 @@ void renderMode(GLFWwindow* window) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT); // triangle vertices only
 }
 
+void selectModel(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+	{
+		currentModel = 1; // Thomas
+	}
+
+	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+	{
+		currentModel = 2; // Melina
+	}
+
+	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+	{
+		currentModel = 3; // Sharon
+	}
+
+	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+	{
+		currentModel = 4; // Anissa
+	}
+
+	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+	{
+		currentModel = 5; // Keven
+	}
+}
+
 /*
 Methods for translating models. Passing all models for the switch statements.
 Translations in increments of 0.005f
 */
-void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void translateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model1->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model2->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model3->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model4->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			Model5->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -129,25 +164,25 @@ void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 	}
 }
 
-void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void translateRight(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model1->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model2->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model3->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model4->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+			Model5->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
 			break;
 		default:
 			break;
@@ -155,25 +190,25 @@ void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* 
 	}
 }
 
-void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void translateUp(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -181,25 +216,25 @@ void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 	}
 }
 
-void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void translateDown(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -211,25 +246,25 @@ void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* M
 Methods for rotating models. Passing all models for the switch statements.
 Rotations in increments of 0.5f radians.
 */
-void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void rotateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -237,25 +272,25 @@ void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mode
 	}
 }
 
-void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void rotateRight(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -267,50 +302,50 @@ void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Mod
 Methods for scaling. Passing all models for switch statements.
 Scaling in increments of 0.005f.
 */
-void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void scaleUp(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model1->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model2->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model3->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model4->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+			Model5->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
 			break;
 		default:
 			break;
 		}
 	}
 }
-void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void scaleDown(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model1->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 2:
-			Model2->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model2->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 3:
-			Model3->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model3->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 4:
-			Model4->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model4->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		case 5:
-			Model5->concatModelMatrix(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+			Model5->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
 			break;
 		default:
 			break;
@@ -318,99 +353,99 @@ void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model
 	}
 }
 
-/*
-Method for focusing on a single model at a time.
-Numbers pressed are associated with corresponding model.
-Sets camera's focus to number associated with chosen model.
-Sets currentModel to number associated with chosen model.
-*/
-void cameraFocus(GLFWwindow* window, int shaderProgram, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Camera* camera, Keven* Model5) {
-
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-	{
-		glm::mat4 modelMatrix = Model1->getModelMatrix();
-
-		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 0.0f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
-
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
-		currentModel = 1;
-	}
-
-	// Melina Model
-	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-	{
-		glm::mat4 modelMatrix = Model2->getModelMatrix();
-
-		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 0.0f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
-
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
-		currentModel = 2;
-	}
-
-	// Sharon Model
-	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-	{
-		glm::mat4 modelMatrix = Model3->getModelMatrix();
-
-		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 1.5f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
-
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
-		currentModel = 3;
-	}
-
-	// Anissa Model
-	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
-	{
-		glm::mat4 modelMatrix = Model4->getModelMatrix();
-
-		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 1.5f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
-
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
-		currentModel = 4;
-	}
-  
-  // Keven Model
-	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
-	{
-		glm::mat4 modelMatrix = Model5->getModelMatrix();
-
-		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-
-		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.01f, 1.0f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
-
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-
-		currentModel = 5;
-	}
-}
+///*
+//Method for focusing on a single model at a time.
+//Numbers pressed are associated with corresponding model.
+//Sets camera's focus to number associated with chosen model.
+//Sets currentModel to number associated with chosen model.
+//*/
+//void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
+//
+//	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+//
+//	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+//	{
+//		glm::mat4 modelMatrix = Model1->getModelMatrix();
+//
+//		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//
+//		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 0.0f), // position
+//			translationComponent, // front camera.cameraPos + camera.cameraFront
+//			camera->cameraUp);  // up
+//
+//		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+//		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+//
+//		currentModel = 1;
+//	}
+//
+//	// Melina Model
+//	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+//	{
+//		glm::mat4 modelMatrix = Model2->getModelMatrix();
+//
+//		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//
+//		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 0.0f), // position
+//			translationComponent, // front camera.cameraPos + camera.cameraFront
+//			camera->cameraUp);  // up
+//
+//		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+//		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+//
+//		currentModel = 2;
+//	}
+//
+//	// Sharon Model
+//	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+//	{
+//		glm::mat4 modelMatrix = Model3->getModelMatrix();
+//
+//		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//
+//		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 1.5f), // position
+//			translationComponent, // front camera.cameraPos + camera.cameraFront
+//			camera->cameraUp);  // up
+//
+//		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+//
+//		currentModel = 3;
+//	}
+//
+//	// Anissa Model
+//	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+//	{
+//		glm::mat4 modelMatrix = Model4->getModelMatrix();
+//
+//		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//
+//		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.75f, 0.01f, 1.5f), // position
+//			translationComponent, // front camera.cameraPos + camera.cameraFront
+//			camera->cameraUp);  // up
+//
+//		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+//		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+//
+//		currentModel = 4;
+//	}
+//  
+//  // Keven Model
+//	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+//	{
+//		glm::mat4 modelMatrix = Model5->getModelMatrix();
+//
+//		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
+//
+//		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.01f, 1.0f), // position
+//			translationComponent, // front camera.cameraPos + camera.cameraFront
+//			camera->cameraUp);  // up
+//
+//		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+//		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+//
+//		currentModel = 5;
+//	}
+//}
 
 void setUpCamera(Camera* camera, int shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
@@ -463,13 +498,6 @@ int main(int argc, char* argv[])
 	Cube objCube;
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
-	// Models
-	Thomas* Model1 = new Thomas();
-	Melina* Model2 = new Melina();
-	Sharon* Model3 = new Sharon();
-	Anissa* Model4 = new Anissa();
-	Keven* Model5 = new Keven();
-
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -488,10 +516,10 @@ int main(int argc, char* argv[])
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation);
-		Model2->draw(worldMatrixLocation);
-		Model3->draw(worldMatrixLocation);
-		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);
+		//Model2->draw(worldMatrixLocation);
+		//Model3->draw(worldMatrixLocation);
+		//Model4->draw(worldMatrixLocation);
+		//Model5->draw(worldMatrixLocation);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
@@ -506,35 +534,38 @@ int main(int argc, char* argv[])
 		// Set up Camera
 		setUpCamera(camera_ptr, shaderProgram);
 
+		// Choose which model to do transformation
+		selectModel(window);
+
 		// Transformations of Models
 
 		// Translating left
-		translateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		translateLeft(window);
 
 		// Translating right
-		translateRight(window, Model1, Model2, Model3, Model4, Model5);
+		translateRight(window);
 
 		// Translating up
-		translateUp(window, Model1, Model2, Model3, Model4, Model5);
+		translateUp(window);
 
 		// Translating down
-		translateDown(window, Model1, Model2, Model3, Model4, Model5);
+		translateDown(window);
 
 		// Rotating Left
-		rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		rotateLeft(window);
 		
 		// Rotating Right
-		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+		rotateRight(window);
 
 		// Scale Up
-		scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+		scaleUp(window);
 
 		// Scale Down
-		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
+		scaleDown(window);
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.
-		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
+		//cameraFocus(window, shaderProgram, camera_ptr);
 
 		// End frame
 		glfwSwapBuffers(window);
