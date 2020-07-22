@@ -21,16 +21,18 @@
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <Objects/Thomas.h>
+
 #include <Objects/Shaders.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
-
+/*
 #include <Objects/Thomas.h>
 #include <Objects/Melina.h>
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
 #include <Objects/Keven.h>
-
+*/
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
 static int currentModel = -1;
@@ -41,11 +43,13 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 
 // Models
 Thomas* Model1 = new Thomas();
+/*
+Thomas* Model1 = new Thomas();
 Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
-
+*/
 void initialize() {
 	glfwInit();
 
@@ -138,9 +142,13 @@ void selectModel(GLFWwindow* window) {
 Methods for translating models. Passing all models for the switch statements.
 Translations in increments of 0.005f
 */
+
 void translateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
+		Model1->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+		//break;
+		/*
 		switch (currentModel)
 		{
 		case 1:
@@ -161,197 +169,198 @@ void translateLeft(GLFWwindow* window) {
 		default:
 			break;
 		}
+		*/
 	}
 }
-
-void translateRight(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
-			break;
-		case 2:
-			Model2->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
-			break;
-		case 3:
-			Model3->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
-			break;
-		case 4:
-			Model4->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
-			break;
-		case 5:
-			Model5->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void translateUp(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 2:
-			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 3:
-			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 4:
-			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 5:
-			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void translateDown(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
-			break;
-		case 2:
-			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
-			break;
-		case 3:
-			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
-			break;
-		case 4:
-			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
-			break;
-		case 5:
-			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-/*
-Methods for rotating models. Passing all models for the switch statements.
-Rotations in increments of 0.5f radians.
-*/
-void rotateLeft(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 3:
-			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 4:
-			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 5:
-			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void rotateRight(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
-			break;
-		case 3:
-			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 4:
-			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		case 5:
-			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-/*
-Methods for scaling. Passing all models for switch statements.
-Scaling in increments of 0.005f.
-*/
-void scaleUp(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
-			break;
-		case 2:
-			Model2->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
-			break;
-		case 3:
-			Model3->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
-			break;
-		case 4:
-			Model4->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
-			break;
-		case 5:
-			Model5->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
-void scaleDown(GLFWwindow* window) {
-	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-	{
-		switch (currentModel)
-		{
-		case 1:
-			Model1->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
-			break;
-		case 2:
-			Model2->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
-			break;
-		case 3:
-			Model3->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
-			break;
-		case 4:
-			Model4->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
-			break;
-		case 5:
-			Model5->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
-			break;
-		default:
-			break;
-		}
-	}
-}
+//
+//void translateRight(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+//			break;
+//		case 2:
+//			Model2->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+//			break;
+//		case 3:
+//			Model3->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+//			break;
+//		case 4:
+//			Model4->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+//			break;
+//		case 5:
+//			Model5->translate(glm::translate(mat4(1.0f), vec3(0.005f, 0.0f, 0.0f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//
+//void translateUp(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 2:
+//			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 3:
+//			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 4:
+//			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 5:
+//			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//
+//void translateDown(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+//			break;
+//		case 2:
+//			Model2->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+//			break;
+//		case 3:
+//			Model3->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+//			break;
+//		case 4:
+//			Model4->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+//			break;
+//		case 5:
+//			Model5->translate(glm::translate(mat4(1.0f), vec3(0.0f, -0.005f, 0.0f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//
+///*
+//Methods for rotating models. Passing all models for the switch statements.
+//Rotations in increments of 0.5f radians.
+//*/
+//void rotateLeft(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 2:
+//			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 3:
+//			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 4:
+//			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 5:
+//			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//
+//void rotateRight(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 2:
+//			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
+//			break;
+//		case 3:
+//			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 4:
+//			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		case 5:
+//			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//
+///*
+//Methods for scaling. Passing all models for switch statements.
+//Scaling in increments of 0.005f.
+//*/
+//void scaleUp(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+//			break;
+//		case 2:
+//			Model2->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+//			break;
+//		case 3:
+//			Model3->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+//			break;
+//		case 4:
+//			Model4->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+//			break;
+//		case 5:
+//			Model5->scale(glm::scale(mat4(1.0f), vec3(1.005f, 1.005f, 1.005f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
+//void scaleDown(GLFWwindow* window) {
+//	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+//	{
+//		switch (currentModel)
+//		{
+//		case 1:
+//			Model1->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+//			break;
+//		case 2:
+//			Model2->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+//			break;
+//		case 3:
+//			Model3->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+//			break;
+//		case 4:
+//			Model4->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+//			break;
+//		case 5:
+//			Model5->scale(glm::scale(mat4(1.0f), vec3(0.995f, 0.995f, 0.995f)));
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//}
 
 ///*
 //Method for focusing on a single model at a time.
@@ -539,29 +548,29 @@ int main(int argc, char* argv[])
 
 		// Transformations of Models
 
-		// Translating left
+		//// Translating left
 		translateLeft(window);
 
-		// Translating right
-		translateRight(window);
+		//// Translating right
+		//translateRight(window);
 
-		// Translating up
-		translateUp(window);
+		//// Translating up
+		//translateUp(window);
 
-		// Translating down
-		translateDown(window);
+		//// Translating down
+		//translateDown(window);
 
-		// Rotating Left
-		rotateLeft(window);
-		
-		// Rotating Right
-		rotateRight(window);
+		//// Rotating Left
+		//rotateLeft(window);
+		//
+		//// Rotating Right
+		//rotateRight(window);
 
-		// Scale Up
-		scaleUp(window);
+		//// Scale Up
+		//scaleUp(window);
 
-		// Scale Down
-		scaleDown(window);
+		//// Scale Down
+		//scaleDown(window);
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.
