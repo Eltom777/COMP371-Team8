@@ -28,6 +28,7 @@
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
 #include <Objects/Keven.h>
+#include <Objects/texturedGrid.h>
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
@@ -492,7 +493,8 @@ int main(int argc, char* argv[])
 
 	// Compile and link shaders here ...
 	Shaders shaders;
-	int shaderProgram = shaders.compileAndLinkShaders();
+	int shaderProgram = shaders.compileAndLinkShadersHelper(false);
+	int texturedShaderProgram = shaders.compileAndLinkShadersHelper(true);
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);
@@ -500,6 +502,9 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
+	texturedGrid objtexture;
+	int textureID = objtexture.loadTexture();
+	int textureVAO = objtexture.createtextureGridVAO();
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
 	// Entering Main Loop
@@ -511,11 +516,24 @@ int main(int argc, char* argv[])
 		// Each frame, reset color of each pixel to glClearColor
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		
 		// Set up Perspective View
 		setUpProjection(shaderProgram, camera_ptr);
+		
+		glUseProgram(texturedShaderProgram);
+		glActiveTexture(GL_TEXTURE0);
+		GLuint textureLocation = glGetUniformLocation(texturedShaderProgram, "textureSampler");
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glUniform1i(textureLocation, 0);                // Set our Texture sampler to user Texture Unit 0
+		
+		
+		glBindVertexArray(textureVAO);
+		glDrawElements(GL_TRIANGLES, objtexture.gridToPrint, GL_UNSIGNED_INT, nullptr);
 
 		// Render grid and axis and cube
-		renderGridAxisCube(shaderProgram, VAO, objGrid);
+		renderGridAxisCube(texturedShaderProgram, VAO, objGrid);
+		
+		
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 
