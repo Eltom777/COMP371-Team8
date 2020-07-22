@@ -93,7 +93,11 @@ const glm::vec3 Cube::vertices[] = {
 
 Cube::Cube()
 {
-	modelMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
+	rotationMatrix = mat4(1.0f);
+	translationMatrix = mat4(1.0f);
+	scalingMatrix = mat4(1.0f);
+	float scalingFactor = 1.0f / static_cast <float>(scaleFactor.getNumberOfColumns());
+	modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
 Cube::~Cube() {
@@ -106,7 +110,7 @@ mat4 Cube::getModelMatrix() {
 
 void Cube::setModelMatrix(mat4 matrix)
 {
-	modelMatrix = matrix;
+	modelMatrix = translationMatrix;
 }
 
 void Cube::concatModelMatrix(mat4 tmatrix)
