@@ -8,11 +8,11 @@ class LetterO : public AlphaNumeric
 public:
 	LetterO();
 	~LetterO();
-	void updateModelMatrix();
 	void setup();
+	void updateModelMatrix();
 	void draw(GLuint worldMatrixLocation);
 	//int getVAO();
 
 private:
-	Cube components[NUMOFCUBES];
+	//Cube components[NUMOFCUBES];
 };

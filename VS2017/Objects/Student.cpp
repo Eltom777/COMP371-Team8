@@ -6,20 +6,25 @@ void Student::updateModelMatrix() {
 	}
 }
 
+mat4 Student::getModelMatrix()
+{
+	return modelMatrix;
+}
+
 void Student::translate(mat4 t) {
 	for (AlphaNumeric* component : components) {
-		component->translate(t);
+		component->translateModel(t);
 	}
 }
 
 void Student::scale(mat4 t) {
 	for (AlphaNumeric* component : components) {
-		component->scale(t);
+		component->translateModel(t);
 	}
 }
 
 void Student::rotate(mat4 t) {
 	for (AlphaNumeric* component : components) {
-		component->rotate(t);
+		component->translateModel(t);
 	}
 }
