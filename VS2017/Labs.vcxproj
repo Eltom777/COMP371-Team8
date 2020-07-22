@@ -14,7 +14,7 @@
     <ProjectGuid>{277EAE68-9EED-4EFF-BAD3-2A70787A3E8D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Labs</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>COMP371-Assignment1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\keven\git\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017\Objects;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ThirdParty/;C:\Users\keven\git\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017\Objects;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,6 +136,7 @@
     <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
     <ClCompile Include="Objects\Sharon.cpp" />
+    <ClCompile Include="Objects\texturedGrid.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />
     <ClInclude Include="Objects\Sharon.h" />
+    <ClInclude Include="Objects\texturedGrid.h" />
     <ClInclude Include="Objects\Thomas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

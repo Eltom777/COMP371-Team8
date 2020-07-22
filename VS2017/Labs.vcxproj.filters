@@ -132,6 +132,9 @@
     <ClCompile Include="Objects\Number0.cpp">
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\texturedGrid.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Objects\Number0.h">
       <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\texturedGrid.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
