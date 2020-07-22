@@ -19,13 +19,13 @@ void Number3::setup() { //create number3
 
 	// set letter slightly above grid
 	for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.09f, 0.0f)));
+		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)));
 	}
 }
 
 void Number3::updateModelMatrix() {
 	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (Cube component : components) {
+	for (int i = 0; i < NUMOFCUBES; i++) {
 		//component.concatModelMatrix(modelMatrix);
 	}
 }

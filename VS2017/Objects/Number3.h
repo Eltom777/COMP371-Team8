@@ -11,7 +11,5 @@ class Number3 : public AlphaNumeric
 		void updateModelMatrix();
 		void setup();
 		void draw(GLuint modelMatrixLocation);
-	private:
-		Cube components[NUMOFCUBES];
 };
 

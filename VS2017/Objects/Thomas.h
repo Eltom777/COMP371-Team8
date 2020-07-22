@@ -8,5 +8,4 @@ public :
 	~Thomas();
 	void setup();
 	void draw(GLuint modelMatrixLocation);
-	//int getVAO();
 };

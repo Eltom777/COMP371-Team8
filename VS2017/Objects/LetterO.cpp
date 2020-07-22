@@ -20,7 +20,7 @@ void LetterO::setup() { //create letter O
 
 	// set letter slightly above grid
 	for(int i = 0; i < NUMOFCUBES; i++){
-		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.09f, 0.0f)));
+		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.08f, 0.0f)));
 	}
 }
 
