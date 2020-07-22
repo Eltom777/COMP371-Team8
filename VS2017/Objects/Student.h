@@ -6,9 +6,9 @@ class Student
 public:
 	void updateModelMatrix();
 	mat4 getModelMatrix();
-	void translate(mat4 mat);
-	void scale(mat4 mat);
-	void rotate(mat4 mat);
+	void translate(mat4 t);
+	void scale(mat4 s);
+	void rotate(mat4 r);
 
 protected:
 	AlphaNumeric* components[2] = { Letter, Number };
