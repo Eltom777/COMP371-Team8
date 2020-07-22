@@ -11,5 +11,8 @@ public:
 	~Shaders() {};
 	const char* getVertexShaderSource();
 	const char* getFragmentShaderSource();
-	int compileAndLinkShaders();
+	const char* getTexturedVertexShaderSource();
+	const char* getTexturedFragmentShaderSource();
+	int compileAndLinkShaders(const char* vertexShaderSource, const char* fragmentShaderSource);
+	int compileAndLinkShadersHelper(bool typeOfShader); //true = texture | false = no texture
 };
