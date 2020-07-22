@@ -105,6 +105,39 @@
     <ClCompile Include="Objects\Thomas.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Anissa.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Keven.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Melina.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Sharon.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number0.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number4.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Number9.cpp">
+      <Filter>Objects\Numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\LetterA.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\LetterI.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\LetterL.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\LetterV.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -133,6 +166,39 @@
     </ClInclude>
     <ClInclude Include="Objects\Thomas.h">
       <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Anissa.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Keven.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Melina.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Sharon.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number0.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number4.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Number9.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterA.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterI.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterL.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\LetterV.h">
+      <Filter>Objects\Letters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

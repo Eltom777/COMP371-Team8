@@ -119,24 +119,46 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="Objects\Anissa.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
     <ClCompile Include="Objects\AlphaNumeric.cpp" />
+    <ClCompile Include="Objects\Keven.cpp" />
+    <ClCompile Include="Objects\LetterA.cpp" />
+    <ClCompile Include="Objects\LetterI.cpp" />
+    <ClCompile Include="Objects\LetterL.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
+    <ClCompile Include="Objects\LetterV.cpp" />
+    <ClCompile Include="Objects\Melina.cpp" />
+    <ClCompile Include="Objects\Number0.cpp" />
     <ClCompile Include="Objects\Number3.cpp" />
+    <ClCompile Include="Objects\Number4.cpp" />
+    <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
+    <ClCompile Include="Objects\Sharon.cpp" />
     <ClCompile Include="Objects\Student.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\Anissa.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
+    <ClInclude Include="Objects\Keven.h" />
+    <ClInclude Include="Objects\LetterA.h" />
+    <ClInclude Include="Objects\LetterI.h" />
+    <ClInclude Include="Objects\LetterL.h" />
     <ClInclude Include="Objects\LetterO.h" />
+    <ClInclude Include="Objects\LetterV.h" />
+    <ClInclude Include="Objects\Melina.h" />
+    <ClInclude Include="Objects\Number0.h" />
     <ClInclude Include="Objects\Number3.h" />
+    <ClInclude Include="Objects\Number4.h" />
+    <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />
+    <ClInclude Include="Objects\Sharon.h" />
     <ClInclude Include="Objects\Student.h" />
     <ClInclude Include="Objects\Thomas.h" />
   </ItemGroup>
