@@ -96,8 +96,7 @@ Cube::Cube()
 	rotationMatrix = mat4(1.0f);
 	translationMatrix = mat4(1.0f);
 	scalingMatrix = mat4(1.0f);
-	float scalingFactor = 1.0f / static_cast <float>(scaleFactor.getNumberOfColumns());
-	modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
+	//modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
 Cube::~Cube() {
@@ -108,17 +107,27 @@ mat4 Cube::getModelMatrix() {
 	return modelMatrix;
 }
 
-void Cube::setModelMatrix(mat4 matrix)
+void Cube::setModelMatrix()
 {
-	modelMatrix = translationMatrix;
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
-void Cube::concatModelMatrix(mat4 tmatrix)
+void Cube::updateScale(mat4 s)
 {
-	vec3 translationComponent = vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
-	modelMatrix = translate(mat4(1.0), translationComponent * -1.0f) * modelMatrix; //place back to origin
-	modelMatrix = tmatrix * modelMatrix; //apply transformation
-	modelMatrix = translate(mat4(1.0), translationComponent) * modelMatrix; //send back to spot + any added translation by tmatrix
+	scalingMatrix = s * scalingMatrix;
+	setModelMatrix();
+}
+
+void Cube::updateRotation(mat4 r)
+{
+	rotationMatrix = r * rotationMatrix;
+	setModelMatrix();
+}
+
+void Cube::updateTranslation(mat4 t)
+{
+	translationMatrix = t * translationMatrix;
+	setModelMatrix();
 }
 
 int Cube::createCubeVAO() {
