@@ -8,8 +8,8 @@ Keven::Keven() {
 
 void Keven::setup() {
 	// set positions of number and letter relative to the center of the model
-	components[0]->translateModel(glm::translate(mat4(1.0f), vec3(0.1f, 0.0f, 0.0f)));
-	components[1]->translateModel(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
+	components[0]->translateModel(glm::translate(mat4(1.0f), vec3(-0.1f, 0.0f, 0.0f)));
+	components[1]->translateModel(glm::translate(mat4(1.0f), vec3(0.1f, 0.0f, 0.0f)));
 
 	mat4 initialDisplacement = glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, -0.05f));
 	modelMatrix = initialDisplacement * modelMatrix;
