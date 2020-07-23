@@ -36,6 +36,7 @@ Camera* camera_ptr;
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 // Models
 Thomas* Model1 = new Thomas();
@@ -361,15 +362,15 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 
 	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+	if (currentModel == 1 && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model1->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
 		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 0.0f), // position
-			translationComponent, // front camera.cameraPos + camera.cameraFront
-			camera->cameraUp);  // up
+											translationComponent, // front camera.cameraPos + camera.cameraFront
+											camera->cameraUp);  // up
 
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
@@ -378,7 +379,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 
 	// Melina Model
-	else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+	else if (currentModel == 2 && glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model2->getModelMatrix();
 
@@ -395,7 +396,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 
 	// Sharon Model
-	else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+	else if (currentModel == 3 && glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model3->getModelMatrix();
 
@@ -411,7 +412,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 
 	// Anissa Model
-	else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+	else if (currentModel == 4 && glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model4->getModelMatrix();
 
@@ -428,7 +429,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
   
   // Keven Model
-	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+	else if (currentModel == 5 && glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
 
@@ -442,6 +443,10 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
 		currentModel = 5;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+	{
+		currentModel = -1;
 	}
 }
 
@@ -472,6 +477,7 @@ int main(int argc, char* argv[])
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -530,7 +536,8 @@ int main(int argc, char* argv[])
 		camera_ptr->handleFrameData();
     
 		// Set up Camera
-		setUpCamera(camera_ptr, shaderProgram);
+		if(currentModel == -1)
+			setUpCamera(camera_ptr, shaderProgram);
 
 		// Choose which model to do transformation
 		selectModel(window);
@@ -564,6 +571,7 @@ int main(int argc, char* argv[])
 		 /*Change camera view to model view 
 		 ** Currently, key needs to be held down because camera is set up in the while loop.
 		 */
+
 		cameraFocus(window, shaderProgram, camera_ptr);
 
 		// End frame
@@ -595,3 +603,8 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
 } 	
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
