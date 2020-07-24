@@ -13,6 +13,9 @@ public:
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void traverse(mat4 mat);
 	void traverse(mat4 mat, Cube* current);
+	Cube* components;
+
+
 	void randomLocation(float x, float z);
 	Cube* components;
 	GLuint textureId;
@@ -29,4 +32,7 @@ protected:
 	int numberOfCubes;
 	char* filename; //Texture location
 	bool isLetter;
+	Cube* components;
+	
+	
 };

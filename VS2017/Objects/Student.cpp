@@ -39,7 +39,6 @@ void Student::scale(mat4 s) {
 	}
 }
 
-// NOTE TO SELF (Melina): remove all worldMatrixLocations params after finished testing :|
 void Student::rotate(mat4 r) {
 	
 	//Place back to origin
@@ -52,6 +51,8 @@ void Student::rotate(mat4 r) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(r);
 	}
+
+	//modelMatrix = r * modelMatrix;
 
 	//Place back to original spot
 	tempworldMatrix = glm::translate(mat4(1.0), translationComponent);
