@@ -1,6 +1,7 @@
 #pragma once
 #include "Grid.h"
 #include<vector>
+#include <glm/gtc/matrix_transform.hpp>
 
 class Sphere {
 
@@ -35,5 +36,7 @@ private:
 	mat4 translationMatrix = mat4(1.0f);
 	mat4 scalingMatrix = mat4(1.0f);
 	mat4 rotationMatrix = mat4(1.0f);
+	Grid gridPointer;
+	float scalingFactor = 1.0f / static_cast <float>(gridPointer.getNumberOfColumns());;
 
 };

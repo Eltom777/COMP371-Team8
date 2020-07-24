@@ -31,6 +31,9 @@
 #include <Objects/Keven.h>
 #include <Sphere.h>
 
+#include "OBJloader.h"  //For loading .obj files
+#include "OBJloaderV2.h"  //For loading .obj files using a polygon list format
+
 using namespace std;
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
@@ -481,6 +484,10 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+	string spherePath = "Models/sphere.obj";
+	int sphereVertices;
+	GLuint sphereVAO = setupModelEBO(spherePath, sphereVertices); //Only one letter to change!
+
 	// Black background
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -549,7 +556,11 @@ int main(int argc, char* argv[])
 		Model5->draw(shaderProgram, isTexture);
 
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		sphere->draw(worldMatrixLocation);
+		//sphere->draw(worldMatrixLocation);
+		glBindVertexArray(sphereVAO);
+		glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
+		//glDrawArrays(GL_TRIANGLES, 0, sphereVertices);
+
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
