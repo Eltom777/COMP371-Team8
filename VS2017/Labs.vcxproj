@@ -137,7 +137,7 @@
     <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
     <ClCompile Include="Objects\Sharon.cpp" />
-    <ClCompile Include="Objects\Student.cpp" />
+	<ClCompile Include="Objects\Student.cpp" />
 	<ClCompile Include="Objects\texturedGrid.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
@@ -160,8 +160,7 @@
     <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />
     <ClInclude Include="Objects\Sharon.h" />
-    <ClInclude Include="Objects\Student.h" />
-	<ClInclude Include="Objects\texturedGrid.h" />
+	<ClInclude Include="Objects\Student.h" />
     <ClInclude Include="Objects\Thomas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
