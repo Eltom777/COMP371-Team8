@@ -97,6 +97,9 @@ Cube::Cube()
 	translationMatrix = mat4(1.0f);
 	scalingMatrix = mat4(1.0f);
 	//modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
+
+	child = NULL;
+	//sibling = NULL;
 }
 
 Cube::~Cube() {
@@ -124,10 +127,29 @@ void Cube::updateRotation(mat4 r)
 	setModelMatrix();
 }
 
+void Cube::setTranslation(vec3 t)
+{
+	translationMatrix[3][0] = t[0];
+	translationMatrix[3][1] = t[1];
+	translationMatrix[3][2] = t[2];
+
+	setModelMatrix();
+}
+
 void Cube::updateTranslation(mat4 t)
 {
 	translationMatrix = t * translationMatrix;
 	setModelMatrix();
+}
+
+void Cube::updateChild(Cube* c)
+{
+	this->child = c;
+}
+
+Cube* Cube::getChild()
+{
+	return this->child;
 }
 
 int Cube::createCubeVAO() {

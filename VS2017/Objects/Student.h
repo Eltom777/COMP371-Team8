@@ -8,7 +8,7 @@ public:
 	mat4 getModelMatrix();
 	void translate(mat4 t);
 	void scale(mat4 s);
-	void rotate(mat4 r);
+	void rotate(mat4 r, GLuint modelMatrixLocation);
 
 protected:
 	AlphaNumeric* components[2] = { Letter, Number };

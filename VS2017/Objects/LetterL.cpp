@@ -12,6 +12,8 @@ void LetterL::setup() { //create letter O
 	components[1].updateScale(glm::scale(mat4(1.0f), vec3(4.0f, 2.0f, 2.0f)));
 	components[1].updateTranslation(glm::translate(mat4(1.0f), vec3(0.05f, -0.05f, 0.0f)));
 
+	components[0].updateChild(&components[1]);
+
 	// set letter slightly above grid
 	for (int i = 0; i < NUMOFCUBES; i++) {
 		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));

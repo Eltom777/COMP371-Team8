@@ -251,25 +251,25 @@ void translateDown(GLFWwindow* window) {
 Methods for rotating models. Passing all models for the switch statements.
 Rotations in increments of 0.5f radians.
 */
-void rotateLeft(GLFWwindow* window) {
+void rotateLeft(GLFWwindow* window, GLuint modelMatrixLocation) {
 	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)), modelMatrixLocation);
 			break;
 		case 3:
-			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -277,25 +277,25 @@ void rotateLeft(GLFWwindow* window) {
 	}
 }
 
-void rotateRight(GLFWwindow* window) {
+void rotateRight(GLFWwindow* window, GLuint modelMatrixLocation) {
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)), modelMatrixLocation);
 			break;
 		case 3:
-			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -529,6 +529,11 @@ int main(int argc, char* argv[])
 		renderGridAxisCube(shaderProgram, VAO, objGrid);
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
+
+		// Rotating Right
+		rotateRight(window, worldMatrixLocation);
+
+
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation);
 		Model2->draw(worldMatrixLocation);
@@ -571,10 +576,9 @@ int main(int argc, char* argv[])
 		translateDown(window);
 
 		// Rotating Left
-		rotateLeft(window);
+		//rotateLeft(window);
 		
-		// Rotating Right
-		rotateRight(window);
+		
 
 		// Scale Up
 		scaleUp(window);

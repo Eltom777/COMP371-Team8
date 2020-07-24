@@ -11,5 +11,6 @@ public:
 	void setup();
 	void updateModelMatrix();
 	void draw(GLuint modelMatrixLocation);
+
 };
 
