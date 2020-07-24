@@ -484,7 +484,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	string spherePath = "Models/sphere.obj";
+	string spherePath = "../Assets/Models/sphere.obj";
 	int sphereVertices;
 	GLuint sphereVAO = setupModelEBO(spherePath, sphereVertices); //Only one letter to change!
 
@@ -602,9 +602,7 @@ int main(int argc, char* argv[])
 		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Change camera view to model view 
-		// ** Currently, key needs to be held down because camera is set up in the while loop.
-		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4,  Model5);
-		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4, Model5);
+		cameraFocus(window, shaderProgram, camera_ptr);
 
 		// End frame
 		glfwSwapBuffers(window);
@@ -614,6 +612,8 @@ int main(int argc, char* argv[])
 
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
+
+		glBindVertexArray(0);
 	}
   
 	// Shutdown GLFW
