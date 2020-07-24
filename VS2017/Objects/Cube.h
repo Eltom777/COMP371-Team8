@@ -12,7 +12,14 @@ public:
 	int createCubeVAO();
 	void updateScale(mat4 s);
 	void updateRotation(mat4 r);
+	void setTranslation(vec3 t);
 	void updateTranslation(mat4 t);
+
+	void updateChild(Cube* c);
+
+	Cube* getChild();
+	Cube* child;
+	//Cube* sibling;
 
 private:
 	static const glm::vec3 vertices[];
