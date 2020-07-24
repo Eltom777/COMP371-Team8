@@ -206,5 +206,11 @@
     <ClInclude Include="Sphere.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\OBJloader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\OBJloaderV2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

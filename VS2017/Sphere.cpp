@@ -6,7 +6,10 @@
 // referencing the tutorial & code from "http://www.songho.ca/opengl/gl_sphere.html"
 
 Sphere::Sphere() {
-	setup();
+	rotationMatrix = mat4(1.0f);
+	translationMatrix = mat4(1.0f);
+	scalingMatrix = mat4(1.0f);
+	//setup();
 }
 
 Sphere::~Sphere() {
@@ -15,59 +18,61 @@ Sphere::~Sphere() {
 
 void Sphere::setup() {
 
-	const float PI = acos(-1);
+	//const float PI = acos(-1);
 
-	glm::vec3 white = glm::vec3(1.0f, 1.0f, 1.0f);
+	//glm::vec3 white = glm::vec3(1.0f, 0.0f, 0.0f);
 
-	float x, y, z, xy;
+	//float x, y, z, xy;
 
-	float colStep = 2 * PI / COLS;
-	float rowStep = PI / ROWS;
-	float colAngle, rowAngle;
+	//float colStep = 2 * PI / COLS;
+	//float rowStep = PI / ROWS;
+	//float colAngle, rowAngle;
 
-	int pos = 0;
+	//int pos = 0;
 
-	for (int i = 0; i <= ROWS; ++i) {
-		
-		// calculate data for the current row
-		rowAngle = PI / 2 - i * rowStep;
-		xy = RADIUS * cosf(rowAngle);
-		z = RADIUS * sinf(rowAngle);
+	//for (int i = 0; i <= ROWS; ++i) {
+	//	
+	//	// calculate data for the current row
+	//	rowAngle = PI / 2 - i * rowStep;
+	//	xy = RADIUS * cosf(rowAngle);
+	//	z = RADIUS * sinf(rowAngle);
 
-		for (int j = 0; j <= COLS; ++j) {
-			
-			colAngle = j * colStep;
+	//	for (int j = 0; j <= COLS; ++j) {
+	//		
+	//		colAngle = j * colStep;
 
-			// vertex positions
-			x = xy * cosf(colAngle);
-			y = xy * sinf(colAngle);
+	//		// vertex positions
+	//		x = xy * cosf(colAngle);
+	//		y = xy * sinf(colAngle);
 
-			verticesVec.push_back(glm::vec3(x, y, z));
-			verticesVec.push_back(white);
+	//		verticesVec.push_back(glm::vec3(x, y, z));
+	//		verticesVec.push_back(white);
 
-			vertices[pos] = glm::vec3(x, y, z);
-			pos += 1;
-			vertices[pos] = white;
-			pos += 1;
-		}
-	}
-
+	//		vertices[pos] = glm::vec3(x, y, z);
+	//		pos += 1;
+	//		vertices[pos] = white;
+	//		pos += 1;
+	//	}
+	//}
 }
 
 void Sphere::updateModelMatrix() {
-
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
 void Sphere::translateModel(mat4 t) {
-
+	translationMatrix = t * translationMatrix;
+	updateModelMatrix();
 }
 
 void Sphere::scaleModel(mat4 s) {
-
+	scalingMatrix = s * scalingMatrix;
+	updateModelMatrix();
 }
 
 void Sphere::rotateModel(mat4 r) {
-
+	rotationMatrix = r * rotationMatrix;
+	updateModelMatrix();
 }
 
 mat4 Sphere::getModelMatrix() {
