@@ -147,8 +147,11 @@
     <ClCompile Include="Objects\LetterV.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Shader.cpp">
+	<ClCompile Include="Sphere.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Shader.cpp">
+    	<Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Object.cpp">
       <Filter>Objects</Filter>
@@ -225,7 +228,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects\AlphaNumeric.h">
+	<ClInclude Include="Sphere.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    
   </ItemGroup>
 </Project>

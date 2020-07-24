@@ -29,6 +29,7 @@
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
 #include <Objects/Keven.h>
+#include <Sphere.h>
 
 using namespace std;
 
@@ -48,6 +49,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 // Models
 Thomas* Model1 = new Thomas();
@@ -55,8 +57,6 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
 
 void initialize() {
 	glfwInit();
@@ -547,6 +547,9 @@ int main(int argc, char* argv[])
 		Model3->draw(shaderProgram, isTexture);
 		Model4->draw(shaderProgram, isTexture);
 		Model5->draw(shaderProgram, isTexture);
+
+		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
+		sphere->draw(worldMatrixLocation);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
