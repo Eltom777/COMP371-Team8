@@ -22,7 +22,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -139,6 +139,7 @@
     <ClCompile Include="Objects\Sharon.cpp" />
     <ClCompile Include="Objects\Student.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Anissa.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Objects\Sharon.h" />
     <ClInclude Include="Objects\Student.h" />
     <ClInclude Include="Objects\Thomas.h" />
+    <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
