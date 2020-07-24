@@ -29,7 +29,6 @@
 #include <Objects/Sharon.h>
 #include <Objects/Anissa.h>
 #include <Objects/Keven.h>
-#include <Objects/texturedGrid.h>
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
@@ -82,7 +81,7 @@ void renderGridAxisCube(int shaderProgram, int* VAO, Grid objGrid) {
 	// Draw grid and axis
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO[1]);
-	glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
+	//glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
 	glBindVertexArray(VAO[2]);
 	glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
 	glBindVertexArray(VAO[0]);
@@ -463,9 +462,9 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	texturedGrid objtexture;
-	int textureID = objtexture.loadTexture();
-	int textureVAO = objtexture.createtextureGridVAO();
+	//texturedGrid objtexture;
+	int textureID = objGrid.loadTexture();
+	int textureVAO = objGrid.createtextureGridVAO();
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
 	// Models
@@ -496,7 +495,7 @@ int main(int argc, char* argv[])
 		
 		
 		glBindVertexArray(textureVAO);
-		glDrawElements(GL_TRIANGLES, objtexture.gridToPrint, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		// Render grid and axis and cube
 		renderGridAxisCube(texturedShaderProgram, VAO, objGrid);
