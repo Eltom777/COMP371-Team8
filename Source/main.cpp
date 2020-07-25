@@ -521,7 +521,7 @@ int main(int argc, char* argv[])
 	Grid objGrid;
 	Cube objCube;
 	//texturedGrid objtexture;
-	objGrid.loadTexture();
+	objGrid.setup();
 	int textureVAO = objGrid.createtextureGridVAO();
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
@@ -546,7 +546,7 @@ int main(int argc, char* argv[])
 
 
 		// Rotating Right
-		rotateRight(window, worldMatrixLocation);
+		//rotateRight(window, worldMatrixLocation);
 
 
 		// Draw AlphaNumeric models

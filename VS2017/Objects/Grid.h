@@ -38,6 +38,7 @@ public:
 	const int axisToPrint = 6;
 	Grid();
 	~Grid();
+	void setup();
 	void generateGrid();
 	int createAxisVAO();
 	int createGridVAO();

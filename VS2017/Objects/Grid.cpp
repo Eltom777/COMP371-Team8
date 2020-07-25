@@ -33,10 +33,14 @@ const vec3 Grid::axis[] = {
 
 Grid::Grid() {
 	generateGrid();
+	
+}
+
+void Grid::setup() {
 	gridVAO = createGridVAO();
 	textureGridVAO = createtextureGridVAO();
 	axisVAO = createAxisVAO();
-	//loadTexture();
+	loadTexture();
 }
 
 void Grid::generateGrid() {
