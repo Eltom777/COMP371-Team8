@@ -20,7 +20,7 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
-#include <Objects/Shaders.h>
+#include <Objects/Shader.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/Thomas.h>
@@ -32,6 +32,7 @@
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
 static int currentModel = -1;
+static bool isTexture = true;
 Camera* camera_ptr;
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
@@ -74,24 +75,20 @@ int* createCubeGridVAO(Cube objCube, Grid objGrid) {
 	return VAO;
 }
 
-void setUpProjection(int shaderProgram, Camera* camera) {
+void setUpProjection(Shader* shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
-	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
-	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+	shaderProgram->setMat4("projectionMatrix", Projection);
 }
 
-void renderGridAxisCube(int shaderProgram, int* VAO, Grid objGrid) {
+void renderGridAxisCube(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
 	// Draw grid and axis
-	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO[1]);
-	//glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
-	glBindVertexArray(VAO[2]);
-	glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
-	glBindVertexArray(VAO[0]);
+	objGrid.drawAxis(shaderArray[0]);
+	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
+	//shaderProgram->use();
 }
 
 /*
@@ -130,6 +127,19 @@ void selectModel(GLFWwindow* window) {
 	else if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
 		currentModel = 5; // Keven
+	}
+}
+
+void enableTexture(GLFWwindow* window, Shader* shaderProgram) {
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		if (isTexture) {
+			shaderProgram--;	//using pointer arithemtic to get next item in array 
+			isTexture = false;
+		}
+		else {
+			shaderProgram++;
+			isTexture = true;
+		}
 	}
 }
 
@@ -450,12 +460,12 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 }
 
-void setUpCamera(Camera* camera, int shaderProgram) {
+void setUpCamera(Camera* camera, Shader* shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+	shaderProgram->setMat4("viewMatrix", viewMatrix);
 }
 
 /*
@@ -491,18 +501,31 @@ int main(int argc, char* argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Compile and link shaders here ...
-	Shaders shaders;
-	int shaderProgram = shaders.compileAndLinkShadersHelper(false);
-	int texturedShaderProgram = shaders.compileAndLinkShadersHelper(true);
+	// Array of Shader Programs : 0 = color shader , 1 = texture shader
+	Shader shaderPrograms[] = { 
+								Shader("../Assets/Shaders/colorVertexShader.vertexshader", "../Assets/Shaders/colorFragmentShader.Fragmentshader"),
+								Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader") 
+							};
+	Shader* shaderProgram = shaderPrograms;
+	shaderProgram++;
+
+	Shader* colorShader = shaderPrograms;
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);
+
+	// Set View and Projection matrices on both shaders
+	setUpProjection(shaderProgram, camera_ptr);
+	setUpCamera(camera_ptr, shaderProgram);
+
+	setUpProjection(colorShader, camera_ptr);
+	setUpCamera(camera_ptr, colorShader);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
 	//texturedGrid objtexture;
-	int textureID = objGrid.loadTexture();
+	objGrid.loadTexture();
 	int textureVAO = objGrid.createtextureGridVAO();
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
@@ -518,38 +541,27 @@ int main(int argc, char* argv[])
 		
 		// Set up Perspective View
 		setUpProjection(shaderProgram, camera_ptr);
-		
-		glUseProgram(texturedShaderProgram);
-		glActiveTexture(GL_TEXTURE0);
-		GLuint textureLocation = glGetUniformLocation(texturedShaderProgram, "textureSampler");
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glUniform1i(textureLocation, 0);                // Set our Texture sampler to user Texture Unit 0
-		
-		
-		glBindVertexArray(textureVAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		setUpProjection(colorShader, camera_ptr);
 
 		// Render grid and axis and cube
-		renderGridAxisCube(texturedShaderProgram, VAO, objGrid);
+		renderGridAxisCube(shaderProgram, shaderPrograms, objGrid);
 		
 		
 
-		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 
 		// Rotating Right
 		rotateRight(window, worldMatrixLocation);
 
 
 		// Draw AlphaNumeric models
-		Model1->draw(worldMatrixLocation);
+		/*Model1->draw(worldMatrixLocation);
 		Model2->draw(worldMatrixLocation);
 		Model3->draw(worldMatrixLocation);
 		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);
+		Model5->draw(worldMatrixLocation);*/
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
-		glm::mat4 worldMatrix = mat4(1.0f);
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]);
+		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
 
 		// Model Render Mode
 		renderMode(window);
@@ -560,40 +572,44 @@ int main(int argc, char* argv[])
 		// Set up Camera
 		if(currentModel == -1)
 			setUpCamera(camera_ptr, shaderProgram);
+			setUpCamera(camera_ptr, colorShader);
 
 		// Choose which model to do transformation
 		selectModel(window);
-
-		// Transformations of Models
-
-		// Translating left
-		translateLeft(window);
-
-		// Translating right
-		translateRight(window);
-
-		// Translating up
-		translateUp(window);
-
-		// Translating down
-		translateDown(window);
-
-		// Rotating Left
-		//rotateLeft(window);
-		
 		
 
-		// Scale Up
-		scaleUp(window);
+		//// Transformations of Models
 
-		// Scale Down
-		scaleDown(window);
+		//// Translating left
+		//translateLeft(window, Model1, Model2, Model3, Model4, Model5);
 
-		 /*Change camera view to model view 
-		 ** Currently, key needs to be held down because camera is set up in the while loop.
-		 */
+		//// Translating right
+		//translateRight(window, Model1, Model2, Model3, Model4, Model5);
 
-		cameraFocus(window, shaderProgram, camera_ptr);
+		//// Translating up
+		//translateUp(window, Model1, Model2, Model3, Model4, Model5);
+
+		//// Translating down
+		//translateDown(window, Model1, Model2, Model3, Model4, Model5);
+
+		//// Rotating Left
+		//rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		//
+		//// Rotating Right
+		//rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+
+		//// Scale Up
+		//scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+
+		//// Scale Down
+		//scaleDown(window, Model1, Model2, Model3, Model4, Model5);
+
+		// Change camera view to model view 
+		// ** Currently, key needs to be held down because camera is set up in the while loop.
+		//cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
+
+		//enable textures
+		enableTexture(window, shaderProgram);
 
 		// End frame
 		glfwSwapBuffers(window);

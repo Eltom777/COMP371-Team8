@@ -30,6 +30,9 @@
     <Filter Include="Objects\Numbers">
       <UniqueIdentifier>{0fbfdb31-809c-4a73-ad22-fee8f171b729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{ff74c47e-6c2c-481f-b0f6-78c6854ad0e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -65,6 +68,18 @@
     <None Include="..\Assets\Shaders\Texture.vertexshader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="..\Assets\Shaders\colorFragmentShader.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\colorVertexShader.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\texturedFragmentShader.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\texturedVertexShader.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp">
@@ -89,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="Objects\LetterO.cpp">
       <Filter>Objects\Letters</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Shaders.cpp">
-      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Objects\AlphaNumeric.cpp">
       <Filter>Objects</Filter>
@@ -138,6 +150,9 @@
     <ClCompile Include="Objects\LetterV.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Shader.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -151,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="Objects\LetterO.h">
       <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Shaders.h">
-      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects\AlphaNumeric.h">
       <Filter>Objects</Filter>
@@ -199,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Objects\LetterV.h">
       <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Shader.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
