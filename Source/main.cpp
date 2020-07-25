@@ -31,9 +31,6 @@
 #include <Objects/Keven.h>
 #include <Sphere.h>
 
-#include "OBJloader.h"  //For loading .obj files
-#include "OBJloaderV2.h"  //For loading .obj files using a polygon list format
-
 using namespace std;
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
@@ -446,9 +443,6 @@ void setUpCamera(Camera* camera, Shader shaderProgram) {
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
 
-	shaderProgram.setMat4("viewMatrix", viewMatrix);
-}
-
 
 
 
@@ -483,10 +477,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	string spherePath = "../Assets/Models/sphere.obj";
-	int sphereVertices;
-	GLuint sphereVAO = setupModelEBO(spherePath, sphereVertices); //Only one letter to change!
-
 	// Black background
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -511,8 +501,16 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
+	int* VAO = createCubeGridVAO(objCube, objGrid);
 	objCube.setModelMatrix();
 	objGrid.setup();
+	
+	//Load Sphere
+	int* VAO = createCubeGridVAO(objCube, objGrid);
+	Sphere objSphere;
+	string spherePath = "../Assets/Models/sphere.obj";
+	int sphereVertices;
+	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
 	
 	//Load Texture and VAO for Models
 	Model1->create();
@@ -521,6 +519,7 @@ int main(int argc, char* argv[])
 	Model4->create();
 	Model5->create();
 
+	
 	
 
 	// Entering Main Loop
@@ -558,16 +557,7 @@ int main(int argc, char* argv[])
 		Model5->draw(shaderProgram, isTexture);
 
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		//sphere->draw(worldMatrixLocation);
-		glBindVertexArray(sphereVAO);
-		mat4 sphereMatrix = mat4(1.0);
-		sphereMatrix = glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f));
-		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.0f, 0.5f, 0.0f)) * sphereMatrix;
-		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.75f, 0.01f, -0.75f)) * sphereMatrix;
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &sphereMatrix[0][0]);
-		glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
-		//glDrawArrays(GL_TRIANGLES, 0, sphereVertices);
-
+		sphere->draw(worldMatrixLocation, sphereVAO, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));

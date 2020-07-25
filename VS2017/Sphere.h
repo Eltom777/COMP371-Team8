@@ -3,6 +3,8 @@
 #include<vector>
 #include <glm/gtc/matrix_transform.hpp>
 
+using namespace std;
+
 class Sphere {
 
 	// cols = sectors = longitude, rows = stacks = latitude
@@ -18,12 +20,13 @@ public:
 	~Sphere();
 	void setup();
 	mat4 getModelMatrix();
+	void draw(GLuint worldMatrixLocation, int sphereVAO, int sphereVertices);
 	void updateModelMatrix();
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r);
-	int createSphereVAO();
-	void draw(GLuint modelLocation);
+	GLuint createSphereVAO(string path, int& vertexCount);
+	//void draw(GLuint modelLocation);
 
 private:
 
