@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <iostream>
+#include <Objects/Shader.h>
 
 using namespace glm;
 
@@ -30,7 +31,7 @@ private:
 	GLuint gridVAO;
 	GLuint axisVAO;
 	GLuint textureGridVAO;
-	GLuint textureID;
+	GLuint textureId;
 	mat4 modelMatrix = mat4(1.0f);
 public:
 	const int gridToPrint = SIZEOFARRAY >> 1;
@@ -43,6 +44,7 @@ public:
 	int getNumberOfColumns();
 	int createtextureGridVAO();
 	GLuint loadTexture();
-	//void draw(GLuint worldMatrixLocation, bool isTexture);
+	void drawGrid(Shader* shaderProgram, bool isTexture);
+	void drawAxis(Shader shaderProgram);
 };
 
