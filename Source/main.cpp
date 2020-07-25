@@ -42,6 +42,7 @@ static int currentModel = -1;
 static bool isTexture = false;
 Camera* camera_ptr;
 Shader* shaderProgram;
+int width, height;
 
 // random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
@@ -79,7 +80,7 @@ void initialize() {
 void setUpProjection(Shader shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
-		1024.0f / 768.0f,     // aspect ratio
+		(float)width / height,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
 	shaderProgram.setMat4("projectionMatrix", Projection);
@@ -471,9 +472,7 @@ int main(int argc, char* argv[])
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
-	glfwSetKeyCallback(window, key_callback);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetKeyCallback(window, key_callback);
 	glfwSetKeyCallback(window, key_callback);
 
 	// Initialize GLEW
@@ -535,8 +534,11 @@ int main(int argc, char* argv[])
 
 		
 		// Set up Perspective View
+		setUpProjection(shaderProgram, camera_ptr);
 		setUpProjection(shaderPrograms[0], camera_ptr);
 		setUpProjection(shaderPrograms[1], camera_ptr);
+		glfwGetWindowSize(window, &width, &height); // if window is resized, get new size to draw perspective view correctly
+		setUpProjection(shaderProgram, camera_ptr);
 
 		// Render grid and axis and cube
 		renderGridAxisCube(shaderProgram, shaderPrograms, objGrid);
@@ -636,6 +638,7 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
 } 	
 
+// Makes sure the window is correctly resized (continues drawing)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(-4, -4, width + 4, height + 4); // changed values: supposed to fix pitfall but doesnt seem to work
