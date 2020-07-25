@@ -45,6 +45,8 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 void initialize() {
 	glfwInit();
@@ -131,16 +133,8 @@ void selectModel(GLFWwindow* window) {
 }
 
 void enableTexture(GLFWwindow* window, Shader* shaderProgram) {
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
-		if (isTexture) {
-			shaderProgram--;	//using pointer arithemtic to get next item in array 
-			isTexture = false;
-		}
-		else {
-			shaderProgram++;
-			isTexture = true;
-		}
-	}
+		if (!isTexture) { shaderProgram--; }
+		else { shaderProgram++; }
 }
 
 /*
@@ -488,6 +482,8 @@ int main(int argc, char* argv[])
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetKeyCallback(window, key_callback);
+	
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -645,3 +641,14 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	{
+		if (isTexture)
+			isTexture = false;
+		else
+			isTexture = true;
+	}
+}
+
