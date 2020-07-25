@@ -106,12 +106,16 @@
     <None Include="..\Assets\Scenes\CoordinateSystem.scene" />
     <None Include="..\Assets\Scenes\StaticScene.scene" />
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader" />
+    <None Include="..\Assets\Shaders\colorFragmentShader.fragmentshader" />
+    <None Include="..\Assets\Shaders\colorVertexShader.vertexshader" />
     <None Include="..\Assets\Shaders\PathLines.fragmentshader" />
     <None Include="..\Assets\Shaders\PathLines.vertexshader" />
     <None Include="..\Assets\Shaders\SolidColor.fragmentshader" />
     <None Include="..\Assets\Shaders\SolidColor.vertexshader" />
     <None Include="..\Assets\Shaders\Texture.fragmentshader" />
     <None Include="..\Assets\Shaders\Texture.vertexshader" />
+    <None Include="..\Assets\Shaders\texturedFragmentShader.fragmentshader" />
+    <None Include="..\Assets\Shaders\texturedVertexShader.vertexshader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp" />
@@ -134,7 +138,7 @@
     <ClCompile Include="Objects\Number3.cpp" />
     <ClCompile Include="Objects\Number4.cpp" />
     <ClCompile Include="Objects\Number9.cpp" />
-    <ClCompile Include="Objects\Shaders.cpp" />
+    <ClCompile Include="Objects\Shader.cpp" />
     <ClCompile Include="Objects\Sharon.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
@@ -155,7 +159,7 @@
     <ClInclude Include="Objects\Number3.h" />
     <ClInclude Include="Objects\Number4.h" />
     <ClInclude Include="Objects\Number9.h" />
-    <ClInclude Include="Objects\Shaders.h" />
+    <ClInclude Include="Objects\Shader.h" />
     <ClInclude Include="Objects\Sharon.h" />
     <ClInclude Include="Objects\Thomas.h" />
   </ItemGroup>
