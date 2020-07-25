@@ -39,6 +39,8 @@ using namespace std;
 // if -1, then we are not looking at any models
 static int currentModel = -1;
 Camera* camera_ptr;
+int width, height;
+
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
@@ -84,7 +86,7 @@ int* createCubeGridVAO(Cube objCube, Grid objGrid) {
 void setUpProjection(int shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
-		1024.0f / 768.0f,     // aspect ratio
+		(float)width / height,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
 	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
@@ -579,7 +581,7 @@ int main(int argc, char* argv[])
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // resizes window correctly
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -618,6 +620,7 @@ int main(int argc, char* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Set up Perspective View
+		glfwGetWindowSize(window, &width, &height); // if window is resized, get new size to draw perspective view correctly
 		setUpProjection(shaderProgram, camera_ptr);
 
 		// Render grid and axis and cube
@@ -716,6 +719,7 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
 } 	
 
+// Makes sure the window is correctly resized (continues drawing)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
