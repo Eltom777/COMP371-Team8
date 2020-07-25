@@ -637,6 +637,11 @@ int main(int argc, char* argv[])
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
 		//sphere->draw(worldMatrixLocation);
 		glBindVertexArray(sphereVAO);
+		mat4 sphereMatrix = mat4(1.0);
+		sphereMatrix = glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f));
+		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.0f, 0.5f, 0.0f)) * sphereMatrix;
+		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.75f, 0.01f, -0.75f)) * sphereMatrix;
+		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &sphereMatrix[0][0]);
 		glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
 		//glDrawArrays(GL_TRIANGLES, 0, sphereVertices);
 
