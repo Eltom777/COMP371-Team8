@@ -30,9 +30,6 @@
 #include <Objects/Keven.h>
 #include <Sphere.h>
 
-#include "OBJloader.h"  //For loading .obj files
-#include "OBJloaderV2.h"  //For loading .obj files using a polygon list format
-
 using namespace std;
 
 // which model we are currently looking at (0, 1, 2, 3, 4)
@@ -467,101 +464,6 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
-GLuint setupModelVBO(string path, int& vertexCount) {
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec3> normals;
-	std::vector<glm::vec2> UVs;
-
-	//read the vertex data from the model's OBJ file
-	loadOBJ(path.c_str(), vertices, normals, UVs);
-
-	GLuint VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO); //Becomes active VAO
-	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-
-	//Vertex VBO setup
-	GLuint vertices_VBO;
-	glGenBuffers(1, &vertices_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-
-	//Normals VBO setup
-	GLuint normals_VBO;
-	glGenBuffers(1, &normals_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, normals_VBO);
-	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(1);
-
-	//UVs VBO setup
-	GLuint uvs_VBO;
-	glGenBuffers(1, &uvs_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uvs_VBO);
-	glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(2);
-
-	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs, as we are using multiple VAOs)
-	vertexCount = vertices.size();
-	return VAO;
-}
-
-//Sets up a model using an Element Buffer Object to refer to vertex data
-GLuint setupModelEBO(string path, int& vertexCount)
-{
-	vector<int> vertexIndices; //The contiguous sets of three indices of vertices, normals and UVs, used to make a triangle
-	vector<glm::vec3> vertices;
-	vector<glm::vec3> normals;
-	vector<glm::vec2> UVs;
-
-	//read the vertices from the cube.obj file
-	//We won't be needing the normals or UVs for this program
-	loadOBJ2(path.c_str(), vertexIndices, vertices, normals, UVs);
-
-	GLuint VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO); //Becomes active VAO
-	// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-
-	//Vertex VBO setup
-	GLuint vertices_VBO;
-	glGenBuffers(1, &vertices_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-
-	//Normals VBO setup
-	GLuint normals_VBO;
-	glGenBuffers(1, &normals_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, normals_VBO);
-	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(1);
-
-	//UVs VBO setup
-	GLuint uvs_VBO;
-	glGenBuffers(1, &uvs_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uvs_VBO);
-	glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(glm::vec2), &UVs.front(), GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(2);
-
-	//EBO setup
-	GLuint EBO;
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIndices.size() * sizeof(int), &vertexIndices.front(), GL_STATIC_DRAW);
-
-	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
-	vertexCount = vertexIndices.size();
-	return VAO;
-}
-
-
 /*
 Main method.
 */
@@ -591,10 +493,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	string spherePath = "../Assets/Models/sphere.obj";
-	int sphereVertices;
-	GLuint sphereVAO = setupModelEBO(spherePath, sphereVertices); //Only one letter to change!
-
 	// Black background
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -609,6 +507,10 @@ int main(int argc, char* argv[])
 	Grid objGrid;
 	Cube objCube;
 	int* VAO = createCubeGridVAO(objCube, objGrid);
+	Sphere objSphere;
+	string spherePath = "../Assets/Models/sphere.obj";
+	int sphereVertices;
+	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -635,16 +537,7 @@ int main(int argc, char* argv[])
 		Model5->draw(worldMatrixLocation);
 
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		//sphere->draw(worldMatrixLocation);
-		glBindVertexArray(sphereVAO);
-		mat4 sphereMatrix = mat4(1.0);
-		sphereMatrix = glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f));
-		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.0f, 0.5f, 0.0f)) * sphereMatrix;
-		sphereMatrix = glm::translate(mat4(1.0), glm::vec3(0.75f, 0.01f, -0.75f)) * sphereMatrix;
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &sphereMatrix[0][0]);
-		glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
-		//glDrawArrays(GL_TRIANGLES, 0, sphereVertices);
-
+		sphere->draw(worldMatrixLocation, sphereVAO, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
