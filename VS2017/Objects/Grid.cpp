@@ -33,9 +33,10 @@ const vec3 Grid::axis[] = {
 
 Grid::Grid() {
 	generateGrid();
-	//gridVAO = createGridVAO();
-	//textureGridVAO = createtextureGridVAO();
-	//textureID = loadTexture();
+	gridVAO = createGridVAO();
+	textureGridVAO = createtextureGridVAO();
+	axisVAO = createAxisVAO();
+	//loadTexture();
 }
 
 void Grid::generateGrid() {
@@ -104,7 +105,7 @@ int Grid::createGridVAO() {
 GLuint Grid::loadTexture()
 {
 	// Step1 Create and bind textures
-	GLuint textureId = 0;
+	textureId = 0;
 	glGenTextures(1, &textureId);
 	assert(textureId != 0);
 
@@ -243,30 +244,48 @@ int Grid::createAxisVAO() {
 	return vao;
 }
 
-//void Grid::draw(GLuint shaderProgram, bool isTexture) {
-//
-//	
-//	if (isTexture) {
-//		//bind texture
-//		glActiveTexture(GL_TEXTURE0);
-//		GLuint textureLocation = glGetUniformLocation(shaderProgram, "textureSampler");
-//		glBindTexture(GL_TEXTURE_2D, textureID);
-//		glUniform1i(textureLocation, 0);
-//
-//		//bind VAO
-//		glBindVertexArray(textureGridVAO);
-//
-//		//draw textured grid
-//		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-//	}
-//	else {
-//		//bind VAO
-//		glBindVertexArray(gridVAO);
-//
-//		//draw grid
-//		glDrawArrays(GL_LINES, 0, gridToPrint);
-//	}
-//}
+void Grid::drawGrid(Shader* shaderProgram, bool isTexture) {
+	
+	if (isTexture) {
+		shaderProgram->use(); //glUseProgram()
+
+		//bind texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
+
+		//bind VAO
+		glBindVertexArray(textureGridVAO);
+
+		//draw textured grid
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	}
+	else {
+		shaderProgram->use();
+
+		//bind VAO
+		glBindVertexArray(gridVAO);
+
+		//draw grid
+		glDrawArrays(GL_LINES, 0, gridToPrint);
+	}
+
+	//Unbind VAO
+	glBindVertexArray(0);
+}
+
+void Grid::drawAxis(Shader shaderProgram) {
+	shaderProgram.use();
+
+	//bind VAO
+	glBindVertexArray(axisVAO);
+
+	//draw textured grid
+	glDrawArrays(GL_LINES, 0, axisToPrint);
+
+	//Unbind VAO
+	glBindVertexArray(0);
+}
 
 Grid::~Grid() {
 
