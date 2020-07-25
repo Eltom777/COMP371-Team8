@@ -1,19 +1,15 @@
 #pragma once
 #include "AlphaNumeric.h"
 
-class Number3
+class Number3 : public AlphaNumeric
 {
 	static const int NUMOFCUBES = 4;
 
 	public:
 		Number3();
 		~Number3();
+		void updateModelMatrix();
 		void setup();
-		void concatWorldMatrix(mat4 mat);
-		mat4 getWorldMatrix();
-		void draw(GLuint worldMatrixLocation);
-	private:
-		Cube components[NUMOFCUBES];
-		mat4 worldMatrix;
+		void draw(GLuint modelMatrixLocation);
 };
 

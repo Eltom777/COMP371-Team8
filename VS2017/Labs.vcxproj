@@ -22,7 +22,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\keven\git\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017;C:\Users\nix\Documents\UNI\371\COMP371-Team8\VS2017\Objects;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017;../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;C:\Users\Sharon\Documents\Concordia\COMP371\Project\COMP371-Team8\VS2017\Objects;D:\OpenGL_code\COMP371-Team8\VS2017;C:\git\COMP371-Team8\VS2017\Objects;C:\git\COMP371-Team8\VS2017</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;../VS2017;../VS2017/Objects</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,12 +123,13 @@
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
+    <ClCompile Include="Objects\AlphaNumeric.cpp" />
     <ClCompile Include="Objects\Keven.cpp" />
     <ClCompile Include="Objects\LetterA.cpp" />
     <ClCompile Include="Objects\LetterI.cpp" />
-    <ClCompile Include="Objects\LetterV.cpp" />
     <ClCompile Include="Objects\LetterL.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
+    <ClCompile Include="Objects\LetterV.cpp" />
     <ClCompile Include="Objects\Melina.cpp" />
     <ClCompile Include="Objects\Number0.cpp" />
     <ClCompile Include="Objects\Number3.cpp" />
@@ -136,20 +137,21 @@
     <ClCompile Include="Objects\Number9.cpp" />
     <ClCompile Include="Objects\Shaders.cpp" />
     <ClCompile Include="Objects\Sharon.cpp" />
+    <ClCompile Include="Objects\Student.cpp" />
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Anissa.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
+    <ClInclude Include="Objects\AlphaNumeric.h" />
     <ClInclude Include="Objects\Keven.h" />
     <ClInclude Include="Objects\LetterA.h" />
     <ClInclude Include="Objects\LetterI.h" />
-    <ClInclude Include="Objects\LetterV.h" />
     <ClInclude Include="Objects\LetterL.h" />
     <ClInclude Include="Objects\LetterO.h" />
+    <ClInclude Include="Objects\LetterV.h" />
     <ClInclude Include="Objects\Melina.h" />
     <ClInclude Include="Objects\Number0.h" />
     <ClInclude Include="Objects\Number3.h" />
@@ -157,6 +159,7 @@
     <ClInclude Include="Objects\Number9.h" />
     <ClInclude Include="Objects\Shaders.h" />
     <ClInclude Include="Objects\Sharon.h" />
+    <ClInclude Include="Objects\Student.h" />
     <ClInclude Include="Objects\Thomas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,16 +1,12 @@
 #include "LetterV.h"
 #include "Number0.h"
+#include "Student.h"
 
-class Keven : public AlphaNumeric {
+class Keven : public Student {
 public:
 	Keven();
 	~Keven();
 	void setup();
-	void concatWorldMatrix(mat4 mat);
-	mat4 getWorldMatrix();
-	void draw(GLuint worldMatrixLocation);
-private:
-	LetterV letter;
-	Number0 number;
-	mat4 worldMatrix;
+	void draw(GLuint modelMatrixLocation);
+	//int getVAO();
 };

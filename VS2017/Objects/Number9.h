@@ -9,12 +9,8 @@ public:
 	Number9();
 	~Number9();
 	void setup();
-	void concatWorldMatrix(mat4 mat);
-	mat4 getWorldMatrix();
-	void draw(GLuint worldMatrixLocation);
+	void updateModelMatrix();
+	void draw(GLuint modelMatrixLocation);
 
-private:
-	Cube components[NUMOFCUBES];
-	mat4 worldMatrix;
 };
 

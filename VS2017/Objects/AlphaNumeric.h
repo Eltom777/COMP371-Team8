@@ -1,12 +1,28 @@
 #pragma once
 #include "Cube.h"
 
-class AlphaNumeric {
+class AlphaNumeric
+{
 public:
-    // pure virtual functions
-    // makes sure that all the letters and numbers we create have the same base functions
-    virtual void setup() = 0; // set up position and shape of cubes for the model
-    virtual void concatWorldMatrix(mat4 mat) = 0; // apply transformation to all cubes (trans, rot, scale)
-    virtual mat4 getWorldMatrix() = 0; // get matrix of model (position & transformations) in world space 
-    virtual void draw(GLuint worldMatrixLocation) = 0; // render model cube by cube
+	AlphaNumeric(int numOfCubes);
+	mat4 getModelMatrix();
+	virtual void updateModelMatrix() = 0;
+	void translateModel(mat4 t);
+	void scaleModel(mat4 s);
+	void rotateModel(mat4 r, GLuint modelMatrixLocation);
+	void traverse(mat4 mat);
+	void traverse(mat4 mat, Cube* current);
+	Cube* components;
+
+
+	virtual void draw(GLuint modelMatrixLocation) = 0;
+	~AlphaNumeric();
+
+protected:
+	mat4 modelMatrix = mat4(1.0f);
+	mat4 translationMatrix = mat4(1.0f);
+	mat4 scalingMatrix = mat4(1.0f);
+	mat4 rotationMatrix = mat4(1.0f);
+	int numberOfCubes;
+	
 };

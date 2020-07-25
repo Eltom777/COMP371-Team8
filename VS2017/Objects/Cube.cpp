@@ -93,28 +93,63 @@ const glm::vec3 Cube::vertices[] = {
 
 Cube::Cube()
 {
-	worldMatrix = glm::scale(mat4(1.0f), vec3(0.01f, 0.01f, 0.01f)); //TO DO: Normalize using grid object
+	rotationMatrix = mat4(1.0f);
+	translationMatrix = mat4(1.0f);
+	scalingMatrix = mat4(1.0f);
+	//modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
+
+	child = NULL;
+	//sibling = NULL;
 }
 
 Cube::~Cube() {
 
 }
 
-mat4 Cube::getWorldMatrix() {
-	return worldMatrix;
+mat4 Cube::getModelMatrix() {
+	return modelMatrix;
 }
 
-void Cube::setWorldMatrix(mat4 matrix)
+void Cube::setModelMatrix()
 {
-	worldMatrix = matrix;
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
-void Cube::concatWorldMatrix(mat4 tmatrix)
+void Cube::updateScale(mat4 s)
 {
-	vec3 translationComponent = vec3(worldMatrix[3][0], worldMatrix[3][1], worldMatrix[3][2]);
-	worldMatrix = translate(mat4(1.0), translationComponent * -1.0f) * worldMatrix; //place back to origin
-	worldMatrix = tmatrix * worldMatrix; //apply transformation
-	worldMatrix = translate(mat4(1.0), translationComponent) * worldMatrix; //send back to spot + any added translation by tmatrix
+	scalingMatrix = s * scalingMatrix;
+	setModelMatrix();
+}
+
+void Cube::updateRotation(mat4 r)
+{
+	rotationMatrix = r * rotationMatrix;
+	setModelMatrix();
+}
+
+void Cube::setTranslation(vec3 t)
+{
+	translationMatrix[3][0] = t[0];
+	translationMatrix[3][1] = t[1];
+	translationMatrix[3][2] = t[2];
+
+	setModelMatrix();
+}
+
+void Cube::updateTranslation(mat4 t)
+{
+	translationMatrix = t * translationMatrix;
+	setModelMatrix();
+}
+
+void Cube::updateChild(Cube* c)
+{
+	this->child = c;
+}
+
+Cube* Cube::getChild()
+{
+	return this->child;
 }
 
 int Cube::createCubeVAO() {

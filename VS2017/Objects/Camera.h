@@ -42,6 +42,4 @@ public:
 	void mouseScrollHandler(GLFWwindow* window, double xOffset, double yOffset);
 private:
 	GLFWwindow* window;
-
-	
 };

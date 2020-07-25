@@ -1,18 +1,13 @@
 #include "LetterI.h"
 #include "Number3.h"
+#include "Student.h"
 
-class Anissa : public AlphaNumeric
+class Anissa : public Student
 {
-	public: 
-		Anissa();
-		~Anissa();
-		void setup();
-		void concatWorldMatrix(mat4 mat);
-		mat4 getWorldMatrix();
-		void draw(GLuint worldMatrixLocation);
-
-	private:
-		LetterI letter;
-		Number3 number;
-		mat4 worldMatrix;
+public: 
+	Anissa();
+	~Anissa();
+	void setup();
+	void draw(GLuint modelMatrixLocation);
+	//int getVAO();
 };

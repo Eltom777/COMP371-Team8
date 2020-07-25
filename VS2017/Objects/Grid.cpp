@@ -82,6 +82,11 @@ int Grid::createGridVAO() {
 	return vao;
 }
 
+int Grid::getNumberOfColumns()
+{
+	return COLUMNS;
+}
+
 int Grid::createAxisVAO() {
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
