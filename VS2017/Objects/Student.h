@@ -1,5 +1,6 @@
 #pragma once
 #include "AlphaNumeric.h"
+#include "Sphere.h"
 
 class Student
 {
@@ -15,8 +16,9 @@ public:
 	void randomLocation(float x, float z);
 
 protected:
-	AlphaNumeric* components[2] = { Letter, Number };
-	AlphaNumeric* Letter;
-	AlphaNumeric* Number;
+	AlphaNumeric* components[2] = { letter, number };
+	AlphaNumeric* letter;
+	AlphaNumeric* number;
+	Sphere* sphere;
 	mat4 modelMatrix = mat4(1.0f);
 };

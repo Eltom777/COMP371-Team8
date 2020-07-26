@@ -4,6 +4,7 @@ void Student::updateModelMatrix() {
 	for (AlphaNumeric* component : components) {
 		component->updateModelMatrix();
 	}
+	sphere->updateModelMatrix();
 }
 
 mat4 Student::getModelMatrix()
@@ -16,6 +17,7 @@ void Student::translate(mat4 t) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(t);
 	}
+	sphere->translateModel(t);
 }
 
 void Student::scale(mat4 s) {
@@ -26,17 +28,21 @@ void Student::scale(mat4 s) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
+	sphere->translateModel(tempworldMatrix);
 	
 	//modelMatrix = s * modelMatrix;
 	for (AlphaNumeric* component : components) {
 		component->translateModel(s);
 	}
+	sphere->translateModel(s);
 
 	//Place back to original spot
 	tempworldMatrix = glm::translate(mat4(1.0), translationComponent);
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
+	
+	sphere->translateModel(tempworldMatrix);
 }
 
 void Student::rotate(mat4 r) {
@@ -48,9 +54,13 @@ void Student::rotate(mat4 r) {
 		component->translateModel(tempworldMatrix);
 	}
 
+	sphere->translateModel(tempworldMatrix);
+
 	for (AlphaNumeric* component : components) {
 		component->translateModel(r);
 	}
+
+	sphere->translateModel(r);
 
 	//modelMatrix = r * modelMatrix;
 
@@ -65,6 +75,7 @@ void Student::rotate(mat4 r) {
 void Student::draw(Shader* shaderProgram, const bool isTexture) {
 	components[0]->draw(shaderProgram, isTexture);
 	components[1]->draw(shaderProgram, isTexture);
+	sphere->draw(modelMatrixLocation, sphereVertices);
 }
 
 void Student::create() {
@@ -80,4 +91,6 @@ void Student::randomLocation(float x, float z)
 	for (AlphaNumeric* component : components) {
 		component->randomLocation(x, z);
 	}
+
+	sphere->translateModel(tempworldMatrix);
 }
