@@ -28,7 +28,7 @@ void Student::scale(mat4 s) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-	
+
 	//modelMatrix = s * modelMatrix;
 	for (AlphaNumeric* component : components) {
 		component->translateModel(s);
@@ -43,7 +43,7 @@ void Student::scale(mat4 s) {
 
 // NOTE TO SELF (Melina): remove all worldMatrixLocations params after finished testing :|
 void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
-	
+
 	//TESTING
 	//components[1]->rotateModel(r, worldMatrixLocation);
 	////components[1]->rotateModel(r, worldMatrixLocation);

@@ -42,7 +42,7 @@ const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
 const float range = MAX_RAND - MIN_RAND;
 
 //Function interfaces for camera response to mouse input.
-void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -70,7 +70,7 @@ void initialize() {
 }
 
 /*
-Returns an array of VAOs for cubes, grids, and axes. 
+Returns an array of VAOs for cubes, grids, and axes.
 */
 int* createCubeGridVAO(Cube objCube, Grid objGrid) {
 	// create VAOs
@@ -378,8 +378,8 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
 		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 0.0f), // position
-											translationComponent, // front camera.cameraPos + camera.cameraFront
-											camera->cameraUp);  // up
+			translationComponent, // front camera.cameraPos + camera.cameraFront
+			camera->cameraUp);  // up
 
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
@@ -436,8 +436,8 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 
 		currentModel = 4;
 	}
-  
-  // Keven Model
+
+	// Keven Model
 	else if (currentModel == 5 && glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
@@ -516,7 +516,7 @@ int main(int argc, char* argv[])
 	Cube objCube;
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
-	
+
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -539,7 +539,7 @@ int main(int argc, char* argv[])
 		rotateRight(window, worldMatrixLocation);
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
-	
+
 
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation);
@@ -557,9 +557,9 @@ int main(int argc, char* argv[])
 
 		// Camera frame timing
 		camera_ptr->handleFrameData();
-    
+
 		// Set up Camera
-		if(currentModel == -1)
+		if (currentModel == -1)
 			setUpCamera(camera_ptr, shaderProgram);
 
 		// Choose which model to do transformation
@@ -581,8 +581,8 @@ int main(int argc, char* argv[])
 
 		// Rotating Left
 		//rotateLeft(window);
-		
-		
+
+
 
 		// Scale Up
 		scaleUp(window);
@@ -590,9 +590,9 @@ int main(int argc, char* argv[])
 		// Scale Down
 		scaleDown(window);
 
-		 /*Change camera view to model view 
-		 ** Currently, key needs to be held down because camera is set up in the while loop.
-		 */
+		/*Change camera view to model view
+		** Currently, key needs to be held down because camera is set up in the while loop.
+		*/
 
 		cameraFocus(window, shaderProgram, camera_ptr);
 
@@ -605,7 +605,7 @@ int main(int argc, char* argv[])
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
 	}
-  
+
 	// Shutdown GLFW
 	glfwTerminate();
 
@@ -624,7 +624,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
-} 	
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -651,7 +651,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		mat4 m;
 		switch (currentModel)
 		{
-		case 1: 
+		case 1:
 			m = Model1->getModelMatrix();
 			break;
 		case 2:

@@ -80,6 +80,7 @@ void AlphaNumeric::randomLocation(float x, float z)
 	for (int i = 0; i < numberOfCubes; i++) {
 		components[i].updateTranslation(t);
 	}
+
 }
 
 AlphaNumeric::~AlphaNumeric() {
