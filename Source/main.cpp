@@ -534,9 +534,6 @@ int main(int argc, char* argv[])
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 
-		// Rotating Right
-		rotateRight(window, worldMatrixLocation);
-
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation, sphereVertices);
 		Model2->draw(worldMatrixLocation, sphereVertices);
@@ -580,9 +577,10 @@ int main(int argc, char* argv[])
 
 		// Rotating Left
 		//rotateLeft(window);
-		
-		
 
+		// Rotating Right
+		rotateRight(window, worldMatrixLocation);
+		
 		// Scale Up
 		scaleUp(window);
 
