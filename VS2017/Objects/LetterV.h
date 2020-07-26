@@ -10,5 +10,4 @@ public:
 	~LetterV();
 	void setup();
 	void updateModelMatrix();
-	void draw(GLuint worldMatrixLocation);
 };

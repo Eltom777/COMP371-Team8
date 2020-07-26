@@ -18,11 +18,11 @@ void Anissa::setup() {
 	components[1]->translateModel(initialDisplacement);
 }
 
-void Anissa::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
-}
+//void Anissa::draw(GLuint modelMatrixLocation) {
+//	// draw all components of model
+//	components[0]->draw(modelMatrixLocation);
+//	components[1]->draw(modelMatrixLocation);
+//}
 
 Anissa::~Anissa() {
 

@@ -10,6 +10,5 @@ class Number3 : public AlphaNumeric
 		~Number3();
 		void updateModelMatrix();
 		void setup();
-		void draw(GLuint modelMatrixLocation);
 };
 

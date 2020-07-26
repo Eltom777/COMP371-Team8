@@ -7,6 +7,6 @@ public:
 	Sharon();
 	~Sharon();
 	void setup();
-	void draw(GLuint modelMatrixLocation);
+	//void draw(GLuint modelMatrixLocation);
 	//int getVAO();
 };

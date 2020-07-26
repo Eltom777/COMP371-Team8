@@ -1,6 +1,6 @@
 #include "Number0.h"
 
-Number0::Number0(): AlphaNumeric(NUMOFCUBES) {
+Number0::Number0(): AlphaNumeric(NUMOFCUBES, false) {
 	setup();
 }
 
@@ -35,14 +35,6 @@ void Number0::updateModelMatrix() {
 	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
 	for (int i = 0; i < NUMOFCUBES; i++) {
 		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-void Number0::draw(GLuint modelMatrixLocation) {
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-
 	}
 }
 

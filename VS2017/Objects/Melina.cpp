@@ -18,11 +18,11 @@ void Melina::setup() {
 	components[1]->translateModel(initialDisplacement);
 }
 
-void Melina::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
-}
+//void Melina::draw(GLuint modelMatrixLocation) {
+//	// draw all components of model
+//	components[0]->draw(modelMatrixLocation);
+//	components[1]->draw(modelMatrixLocation);
+//}
 
 Melina::~Melina() {
 

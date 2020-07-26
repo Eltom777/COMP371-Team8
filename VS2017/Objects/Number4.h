@@ -10,6 +10,5 @@ public:
 	~Number4();
 	void setup();
 	void updateModelMatrix();
-	void draw(GLuint modelMatrixLocation);
 };
 

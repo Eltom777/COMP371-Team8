@@ -18,11 +18,11 @@ void Sharon::setup() {
 	components[1]->translateModel(initialDisplacement);
 }
 
-void Sharon::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
-}
+//void Sharon::draw(GLuint modelMatrixLocation) {
+//	// draw all components of model
+//	components[0]->draw(modelMatrixLocation);
+//	components[1]->draw(modelMatrixLocation);
+//}
 
 Sharon::~Sharon() {
 
