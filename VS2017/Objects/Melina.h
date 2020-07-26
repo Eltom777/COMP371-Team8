@@ -7,6 +7,4 @@ public:
 	Melina();
 	~Melina();
 	void setup();
-	void draw(GLuint modelMatrixLocation);
-	//int getVAO();
 };

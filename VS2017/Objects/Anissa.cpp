@@ -3,6 +3,7 @@
 Anissa::Anissa() {
 	components[0] = new LetterI();
 	components[1] = new Number3();
+	sphere = new Sphere();
 	setup();
 }
 
@@ -16,12 +17,7 @@ void Anissa::setup() {
 	// place model in predetermined position on grid
 	components[0]->translateModel(initialDisplacement);
 	components[1]->translateModel(initialDisplacement);
-}
-
-void Anissa::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
+	sphere->translateModel(initialDisplacement);
 }
 
 Anissa::~Anissa() {

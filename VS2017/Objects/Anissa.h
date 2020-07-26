@@ -8,6 +8,4 @@ public:
 	Anissa();
 	~Anissa();
 	void setup();
-	void draw(GLuint modelMatrixLocation);
-	//int getVAO();
 };

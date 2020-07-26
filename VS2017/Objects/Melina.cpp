@@ -3,6 +3,7 @@
 Melina::Melina() {
 	components[0] = new LetterL();
 	components[1] = new Number9();
+	sphere = new Sphere();
 	setup();
 }
 
@@ -16,12 +17,7 @@ void Melina::setup() {
 	// place model in predetermined position on grid
 	components[0]->translateModel(initialDisplacement); // Translate to top right corner
 	components[1]->translateModel(initialDisplacement);
-}
-
-void Melina::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
+	sphere->translateModel(initialDisplacement);
 }
 
 Melina::~Melina() {

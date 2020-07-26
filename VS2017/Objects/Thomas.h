@@ -7,5 +7,4 @@ public :
 	Thomas();
 	~Thomas();
 	void setup();
-	void draw(GLuint modelMatrixLocation);
 };

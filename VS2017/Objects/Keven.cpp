@@ -3,6 +3,7 @@
 Keven::Keven() {
 	components[0] = new LetterV();
 	components[1] = new Number0();
+	sphere = new Sphere();
 	setup();
 }
 
@@ -16,12 +17,7 @@ void Keven::setup() {
 	// place model in predetermined position on grid
 	components[0]->translateModel(initialDisplacement); // Translate to top left corner
 	components[1]->translateModel(initialDisplacement);
-}
-
-void Keven::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
+	sphere->translateModel(initialDisplacement);
 }
 
 Keven::~Keven() {

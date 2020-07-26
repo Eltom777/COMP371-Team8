@@ -7,7 +7,7 @@
 // - https://learnopengl.com/Getting-started/Hello-Window
 // - https://learnopengl.com/Getting-started/Hello-Triangle
 //
-// Modified by Team 8 for Assignment 1 due 12/07/2020.
+// Modified by Team 8 for Assignment 2 due 27/07/2020.
 //
 //
 
@@ -32,11 +32,15 @@
 
 using namespace std;
 
-// which model we are currently looking at (0, 1, 2, 3, 4)
-// if -1, then we are not looking at any models
+// Which model we are currently looking at (0, 1, 2, 3, 4)
+// If -1, then we are not looking at any models
 static int currentModel = -1;
 Camera* camera_ptr;
 int width, height;
+
+// Sphere paths and vertices variables
+string spherePath = "../Assets/Models/sphere.obj";
+int sphereVertices;
 
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
@@ -49,7 +53,7 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
-Sphere* sphere = new Sphere();
+// Sphere* sphere = new Sphere();
 
 void initialize() {
 	glfwInit();
@@ -69,13 +73,14 @@ void initialize() {
 /*
 Returns an array of VAOs for cubes, grids, and axes. 
 */
-int* createCubeGridVAO(Cube objCube, Grid objGrid) {
+int* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
 	// create VAOs
 	int cubeVAO = objCube.createCubeVAO();
 	int gridVAO = objGrid.createGridVAO();
 	int axisVAO = objGrid.createAxisVAO();
+	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
 
-	int VAO[3] = { cubeVAO, gridVAO, axisVAO };
+	int VAO[4] = { cubeVAO, gridVAO, axisVAO, sphereVAO };
 
 	return VAO;
 }
@@ -90,14 +95,15 @@ void setUpProjection(int shaderProgram, Camera* camera) {
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
 }
 
-void renderGridAxisCube(int shaderProgram, int* VAO, Grid objGrid) {
+void renderGridAxisCubeSphere(int shaderProgram, int* VAO, Grid objGrid) {
 	// Draw grid and axis
 	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO[1]);
+	glBindVertexArray(VAO[1]); // grid
 	glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
-	glBindVertexArray(VAO[2]);
+	glBindVertexArray(VAO[2]); // axis
 	glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
-	glBindVertexArray(VAO[0]);
+	glBindVertexArray(VAO[0]); // cube
+	glBindVertexArray(VAO[3]); // sphere
 }
 
 /*
@@ -141,7 +147,7 @@ void selectModel(GLFWwindow* window) {
 
 /*
 Methods for translating models. Passing all models for the switch statements.
-Translations in increments of 0.005f
+Translations in increments of 0.005f.
 */
 void translateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -332,6 +338,7 @@ void scaleUp(GLFWwindow* window) {
 		}
 	}
 }
+
 void scaleDown(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 	{
@@ -506,11 +513,8 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	int* VAO = createCubeGridVAO(objCube, objGrid);
 	Sphere objSphere;
-	string spherePath = "../Assets/Models/sphere.obj";
-	int sphereVertices;
-	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
+	int* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -526,23 +530,22 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderProgram, camera_ptr);
 
 		// Render grid and axis and cube
-		renderGridAxisCube(shaderProgram, VAO, objGrid);
+		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 
 		// Rotating Right
 		rotateRight(window, worldMatrixLocation);
 
-
 		// Draw AlphaNumeric models
-		Model1->draw(worldMatrixLocation);
-		Model2->draw(worldMatrixLocation);
-		Model3->draw(worldMatrixLocation);
-		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);
+		Model1->draw(worldMatrixLocation, sphereVertices);
+		Model2->draw(worldMatrixLocation, sphereVertices);
+		Model3->draw(worldMatrixLocation, sphereVertices);
+		Model4->draw(worldMatrixLocation, sphereVertices);
+		Model5->draw(worldMatrixLocation, sphereVertices);
 
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		sphere->draw(worldMatrixLocation, sphereVAO, sphereVertices);
+		//sphere->draw(worldMatrixLocation, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
