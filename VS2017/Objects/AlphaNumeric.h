@@ -12,6 +12,7 @@ public:
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void traverse(mat4 mat);
 	void traverse(mat4 mat, Cube* current);
+	void randomLocation(float x, float z);
 	Cube* components;
 
 

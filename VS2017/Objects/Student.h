@@ -10,6 +10,8 @@ public:
 	void scale(mat4 s);
 	void rotate(mat4 r, GLuint modelMatrixLocation);
 
+	void randomLocation(float x, float z);
+
 protected:
 	AlphaNumeric* components[2] = { Letter, Number };
 	AlphaNumeric* Letter;
