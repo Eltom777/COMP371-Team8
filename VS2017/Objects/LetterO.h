@@ -9,5 +9,4 @@ public:
 	LetterO();
 	~LetterO();
 	void setup();
-	void updateModelMatrix();
 };

@@ -20,14 +20,6 @@ void LetterL::setup() { //create letter O
 	}
 }
 
-void LetterL::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-
 LetterL::~LetterL() {
-
+	delete[] components;
 }

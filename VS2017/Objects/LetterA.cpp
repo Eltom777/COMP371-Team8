@@ -1,6 +1,9 @@
 #include "LetterA.h"
 
+LetterA::LetterA() : AlphaNumeric(NUMOFCUBES) {
 LetterA::LetterA() : AlphaNumeric(NUMOFCUBES, true) {
+LetterA::LetterA() : AlphaNumeric(NUMOFCUBES) {
+	numberOfCubes = NUMOFCUBES;
 	setup();
 }
 
@@ -32,5 +35,5 @@ void LetterA::updateModelMatrix() {
 }
 
 LetterA::~LetterA() {
-
+	delete[] components;
 }

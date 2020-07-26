@@ -9,6 +9,5 @@ public:
 	Number4();
 	~Number4();
 	void setup();
-	void updateModelMatrix();
 };
 

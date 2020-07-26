@@ -22,14 +22,6 @@ void LetterI::setup() { // create letter I
 	}
 }
 
-void LetterI::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-
 LetterI::~LetterI() {
-
+	delete[] components;
 }

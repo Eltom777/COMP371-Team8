@@ -2,7 +2,6 @@
 #include <iostream>
 
 Number9::Number9() : AlphaNumeric(NUMOFCUBES, false) {
-	modelMatrix = mat4(1.0f);
 	setup();
 }
 
@@ -37,15 +36,6 @@ void Number9::setup() { //create number 9
 	}
 }
 
-
-
-void Number9::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
 Number9::~Number9() {
-
+	delete[] components;
 }

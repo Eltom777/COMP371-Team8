@@ -23,13 +23,6 @@ void Number3::setup() { //create number3
 	}
 }
 
-void Number3::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.concatModelMatrix(modelMatrix);
-	}
-}
-
 Number3::~Number3() {
-
+	delete[] components;
 }

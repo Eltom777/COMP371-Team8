@@ -9,6 +9,5 @@ public:
 	LetterL();
 	~LetterL();
 	void setup();
-	void updateModelMatrix();
 };
 

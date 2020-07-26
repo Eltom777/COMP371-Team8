@@ -22,14 +22,6 @@ void Number4::setup() { //create number 4
 	
 }
 
-void Number4::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-
 Number4::~Number4() {
-
+	delete[] components;
 }

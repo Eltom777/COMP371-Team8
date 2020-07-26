@@ -7,7 +7,7 @@ class AlphaNumeric : public Object
 public:
 	AlphaNumeric(int numOfCubes, bool isLetter);
 	mat4 getModelMatrix();
-	virtual void updateModelMatrix() = 0;
+	void updateModelMatrix();
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);

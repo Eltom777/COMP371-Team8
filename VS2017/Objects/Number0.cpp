@@ -31,13 +31,6 @@ void Number0::setup() {
 	}
 }
 
-void Number0::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
 Number0::~Number0() {
-
+	delete[] components;
 }

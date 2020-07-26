@@ -24,13 +24,6 @@ void LetterO::setup() { //create letter O
 	}
 }
 
-void LetterO::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//components[i].concatModelMatrix(modelMatrix);
-	}
-}
-
 LetterO::~LetterO() {
-	
+	delete[] components;
 }

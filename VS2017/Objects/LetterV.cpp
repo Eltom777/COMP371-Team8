@@ -27,13 +27,6 @@ void LetterV::setup() { //create letter V
 	}
 }
 
-void LetterV::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
 LetterV::~LetterV() {
-
+	delete[] components;
 }

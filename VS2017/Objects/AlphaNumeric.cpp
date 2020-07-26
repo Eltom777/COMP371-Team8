@@ -121,6 +121,14 @@ void AlphaNumeric::randomLocation(float x, float z)
 	}
 }
 
+void AlphaNumeric::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (int i = 0; i < numberOfCubes; i++) {
+		//components[i].setModelMatrix(modelMatrix);
+	}
+}
+
+
 AlphaNumeric::~AlphaNumeric() {
 	delete[] components;
 }
