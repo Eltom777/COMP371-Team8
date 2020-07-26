@@ -81,9 +81,11 @@ void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
 	sphere->translateModel(tempworldMatrix);
 }
 
-void Student::draw(GLuint modelMatrixLocation, int sphereVertices) {
+void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
 	// draw all components of model
+	glBindVertexArray(cubeVAO);
 	components[0]->draw(modelMatrixLocation);
 	components[1]->draw(modelMatrixLocation);
+	glBindVertexArray(sphereVAO);
 	sphere->draw(modelMatrixLocation, sphereVertices);
 }

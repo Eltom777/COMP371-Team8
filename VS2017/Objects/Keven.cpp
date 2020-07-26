@@ -17,6 +17,7 @@ void Keven::setup() {
 	components[0]->translateModel(initialDisplacement); // Translate to top left corner
 	components[1]->translateModel(initialDisplacement);
 	sphere->translateModel(initialDisplacement);
+	sphere->translateModel(glm::translate(mat4(1.0f), vec3(0.0f, 0.15f, 0.0f)));
 }
 
 Keven::~Keven() {
