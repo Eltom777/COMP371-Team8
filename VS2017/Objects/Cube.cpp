@@ -92,6 +92,7 @@ const glm::vec3 Cube::vertices[] = {
 
 Cube::Cube()
 {
+	modelMatrix = mat4(1.0f);
 	rotationMatrix = mat4(1.0f);
 	translationMatrix = mat4(1.0f);
 	scalingMatrix = mat4(1.0f);

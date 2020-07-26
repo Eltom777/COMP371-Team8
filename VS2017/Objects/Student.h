@@ -16,6 +16,6 @@ protected:
 	AlphaNumeric* components[2] = { letter, number };
 	AlphaNumeric* letter;
 	AlphaNumeric* number;
-	Sphere* sphere;
+	Sphere* sphere = new Sphere();
 	mat4 modelMatrix = mat4(1.0f);
 };

@@ -3,7 +3,6 @@
 Melina::Melina() {
 	components[0] = new LetterL();
 	components[1] = new Number9();
-	sphere = new Sphere();
 	setup();
 }
 
