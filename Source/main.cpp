@@ -574,9 +574,6 @@ int main(int argc, char* argv[])
 		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
 
 
-		// Rotating Right
-		rotateRight(window, worldMatrixLocation);
-
 		// Draw AlphaNumeric models
 		Model1->draw(shaderProgram, isTexture);
 		Model2->draw(shaderProgram, isTexture);
