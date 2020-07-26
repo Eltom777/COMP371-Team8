@@ -19,73 +19,34 @@ Sphere::~Sphere() {
 }
 
 void Sphere::setup() {
-
 	scaleModel(glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f)));
-	translateModel(glm::translate(mat4(1.0), glm::vec3(0.0f, 0.5f, 0.0f)));
-
-	//const float PI = acos(-1);
-
-	//glm::vec3 white = glm::vec3(1.0f, 0.0f, 0.0f);
-
-	//float x, y, z, xy;
-
-	//float colStep = 2 * PI / COLS;
-	//float rowStep = PI / ROWS;
-	//float colAngle, rowAngle;
-
-	//int pos = 0;
-
-	//for (int i = 0; i <= ROWS; ++i) {
-	//	
-	//	// calculate data for the current row
-	//	rowAngle = PI / 2 - i * rowStep;
-	//	xy = RADIUS * cosf(rowAngle);
-	//	z = RADIUS * sinf(rowAngle);
-
-	//	for (int j = 0; j <= COLS; ++j) {
-	//		
-	//		colAngle = j * colStep;
-
-	//		// vertex positions
-	//		x = xy * cosf(colAngle);
-	//		y = xy * sinf(colAngle);
-
-	//		verticesVec.push_back(glm::vec3(x, y, z));
-	//		verticesVec.push_back(white);
-
-	//		vertices[pos] = glm::vec3(x, y, z);
-	//		pos += 1;
-	//		vertices[pos] = white;
-	//		pos += 1;
-	//	}
-	//}
+	translateModel(glm::translate(mat4(1.0), glm::vec3(0.0f, 0.1f, 0.0f)));
 }
 
 void Sphere::updateModelMatrix() {
-	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix /** glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor))*/;
 }
 
 void Sphere::translateModel(mat4 t) {
-	modelMatrix = t * modelMatrix;
-	//updateModelMatrix();
+	translationMatrix = t * translationMatrix;
+	updateModelMatrix();
 }
 
 void Sphere::scaleModel(mat4 s) {
-	modelMatrix = s * modelMatrix;
-	//updateModelMatrix();
+	scalingMatrix = s * scalingMatrix;
+	updateModelMatrix();
 }
 
 void Sphere::rotateModel(mat4 r) {
-	modelMatrix = r * modelMatrix;
-	//updateModelMatrix();
+	rotationMatrix = r * rotationMatrix;
+	updateModelMatrix();
 }
 
 mat4 Sphere::getModelMatrix() {
 	return modelMatrix;
 }
 
-void Sphere::draw(GLuint worldMatrixLocation, int sphereVAO, int sphereVertices) {
-	glBindVertexArray(sphereVAO);
+void Sphere::draw(GLuint worldMatrixLocation, int sphereVertices) {
 	glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &modelMatrix[0][0]);
 	glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
 }
