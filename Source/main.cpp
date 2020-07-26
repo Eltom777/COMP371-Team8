@@ -73,14 +73,14 @@ void initialize() {
 /*
 Returns an array of VAOs for cubes, grids, and axes. 
 */
-int* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
+GLuint* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
 	// create VAOs
-	int cubeVAO = objCube.createCubeVAO();
-	int gridVAO = objGrid.createGridVAO();
-	int axisVAO = objGrid.createAxisVAO();
+	GLuint cubeVAO = objCube.createCubeVAO();
+	GLuint gridVAO = objGrid.createGridVAO();
+	GLuint axisVAO = objGrid.createAxisVAO();
 	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
 
-	int VAO[4] = { cubeVAO, gridVAO, axisVAO, sphereVAO };
+	GLuint VAO[4] = { cubeVAO, gridVAO, axisVAO, sphereVAO };
 
 	return VAO;
 }
@@ -95,7 +95,7 @@ void setUpProjection(int shaderProgram, Camera* camera) {
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
 }
 
-void renderGridAxisCubeSphere(int shaderProgram, int* VAO, Grid objGrid) {
+void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
 	// Draw grid and axis
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO[1]); // grid
@@ -514,7 +514,7 @@ int main(int argc, char* argv[])
 	Grid objGrid;
 	Cube objCube;
 	Sphere objSphere;
-	int* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
+	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
