@@ -16,13 +16,8 @@ void Melina::setup() {
 	// place model in predetermined position on grid
 	components[0]->translateModel(initialDisplacement); // Translate to top right corner
 	components[1]->translateModel(initialDisplacement);
+	sphere->translateModel(initialDisplacement);
 }
-
-//void Melina::draw(GLuint modelMatrixLocation) {
-//	// draw all components of model
-//	components[0]->draw(modelMatrixLocation);
-//	components[1]->draw(modelMatrixLocation);
-//}
 
 Melina::~Melina() {
 

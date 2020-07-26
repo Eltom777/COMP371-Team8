@@ -3,6 +3,7 @@
 Sharon::Sharon() {
 	components[0] = new LetterA();
 	components[1] = new Number4();
+	sphere = new Sphere();
 	setup();
 }
 
@@ -16,13 +17,8 @@ void Sharon::setup() {
 	// place model in predetermined position on grid
 	components[0]->translateModel(initialDisplacement); // Translate to bottom left corner
 	components[1]->translateModel(initialDisplacement);
+	sphere->translateModel(initialDisplacement);
 }
-
-//void Sharon::draw(GLuint modelMatrixLocation) {
-//	// draw all components of model
-//	components[0]->draw(modelMatrixLocation);
-//	components[1]->draw(modelMatrixLocation);
-//}
 
 Sharon::~Sharon() {
 
