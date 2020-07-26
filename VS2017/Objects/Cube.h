@@ -26,11 +26,9 @@ public:
 	void updateTranslation(mat4 t);
 
 	void updateChild(Cube* c);
-
 	Cube* getChild();
 	Cube* child;
 	//Cube* sibling;
-
 	void draw(Shader* shaderProgram, bool isTexture);
 
 private:

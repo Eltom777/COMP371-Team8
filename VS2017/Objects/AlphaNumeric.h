@@ -13,17 +13,14 @@ public:
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void traverse(mat4 mat);
 	void traverse(mat4 mat, Cube* current);
-	Cube* components;
-
-
 	void randomLocation(float x, float z);
 	Cube* components;
 	GLuint textureId;
 	void draw(Shader* shaderProgram, const bool isTexture);
 	GLuint cubeVAO;
 	void create();
-	~AlphaNumeric();
 
+	Cube* components;
 protected:
 	mat4 modelMatrix = mat4(1.0f);
 	mat4 translationMatrix = mat4(1.0f);
@@ -33,6 +30,4 @@ protected:
 	char* filename; //Texture location
 	bool isLetter;
 	Cube* components;
-	
-	
 };
