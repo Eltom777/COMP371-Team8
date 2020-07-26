@@ -90,7 +90,6 @@ void renderGridAxisCube(Shader* shaderProgram, const Shader shaderArray[], Grid 
 	// Draw grid and axis
 	objGrid.drawAxis(shaderArray[0]);
 	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
-	//shaderProgram->use();
 }
 
 /*
@@ -132,6 +131,9 @@ void selectModel(GLFWwindow* window) {
 	}
 }
 
+/*
+Toggle Textures on and off
+*/
 void enableTexture(GLFWwindow* window, Shader* shaderProgram) {
 		if (!isTexture) { shaderProgram--; }
 		else { shaderProgram++; }
@@ -141,7 +143,7 @@ void enableTexture(GLFWwindow* window, Shader* shaderProgram) {
 Methods for translating models. Passing all models for the switch statements.
 Translations in increments of 0.005f
 */
-void translateLeft(GLFWwindow* window) {
+void translateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -167,7 +169,7 @@ void translateLeft(GLFWwindow* window) {
 	}
 }
 
-void translateRight(GLFWwindow* window) {
+void translateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -193,7 +195,7 @@ void translateRight(GLFWwindow* window) {
 	}
 }
 
-void translateUp(GLFWwindow* window) {
+void translateUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -219,7 +221,7 @@ void translateUp(GLFWwindow* window) {
 	}
 }
 
-void translateDown(GLFWwindow* window) {
+void translateDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -249,25 +251,25 @@ void translateDown(GLFWwindow* window) {
 Methods for rotating models. Passing all models for the switch statements.
 Rotations in increments of 0.5f radians.
 */
-void rotateLeft(GLFWwindow* window, GLuint modelMatrixLocation) {
+void rotateLeft(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)), modelMatrixLocation);
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -275,25 +277,25 @@ void rotateLeft(GLFWwindow* window, GLuint modelMatrixLocation) {
 	}
 }
 
-void rotateRight(GLFWwindow* window, GLuint modelMatrixLocation) {
+void rotateRight(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)), modelMatrixLocation);
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)));
 			break;
 		case 3:
-			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -305,7 +307,7 @@ void rotateRight(GLFWwindow* window, GLuint modelMatrixLocation) {
 Methods for scaling. Passing all models for switch statements.
 Scaling in increments of 0.005f.
 */
-void scaleUp(GLFWwindow* window) {
+void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -330,7 +332,7 @@ void scaleUp(GLFWwindow* window) {
 		}
 	}
 }
-void scaleDown(GLFWwindow* window) {
+void scaleDown(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 	{
 		switch (currentModel)
@@ -362,9 +364,7 @@ Numbers pressed are associated with corresponding model.
 Sets camera's focus to number associated with chosen model.
 Sets currentModel to number associated with chosen model.
 */
-void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
-
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
 
 	if (currentModel == 1 && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 	{
@@ -376,8 +376,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 											translationComponent, // front camera.cameraPos + camera.cameraFront
 											camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 1;
 	}
@@ -393,8 +392,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 2;
 	}
@@ -410,7 +408,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 3;
 	}
@@ -426,8 +424,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 4;
 	}
@@ -443,8 +440,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 5;
 	}
@@ -520,10 +516,15 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	//texturedGrid objtexture;
+	objCube.setModelMatrix();
 	objGrid.setup();
-	int textureVAO = objGrid.createtextureGridVAO();
-	int* VAO = createCubeGridVAO(objCube, objGrid);
+	
+	//Load Texture and VAO for Models
+	Model1->create();
+	Model2->create();
+	Model3->create();
+	Model4->create();
+	Model5->create();
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -542,19 +543,17 @@ int main(int argc, char* argv[])
 		// Render grid and axis and cube
 		renderGridAxisCube(shaderProgram, shaderPrograms, objGrid);
 		
-		
-
 
 		// Rotating Right
 		//rotateRight(window, worldMatrixLocation);
 
 
 		// Draw AlphaNumeric models
-		/*Model1->draw(worldMatrixLocation);
-		Model2->draw(worldMatrixLocation);
-		Model3->draw(worldMatrixLocation);
-		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);*/
+		Model1->draw(shaderProgram, isTexture);
+		Model2->draw(shaderProgram, isTexture);
+		Model3->draw(shaderProgram, isTexture);
+		Model4->draw(shaderProgram, isTexture);
+		Model5->draw(shaderProgram, isTexture);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
@@ -574,35 +573,35 @@ int main(int argc, char* argv[])
 		selectModel(window);
 		
 
-		//// Transformations of Models
+		// Transformations of Models
 
-		//// Translating left
-		//translateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating left
+		translateLeft(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating right
-		//translateRight(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating right
+		translateRight(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating up
-		//translateUp(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating up
+		translateUp(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating down
-		//translateDown(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating down
+		translateDown(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Rotating Left
-		//rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
-		//
-		//// Rotating Right
-		//rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+		// Rotating Left
+		rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		
+		// Rotating Right
+		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Scale Up
-		//scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+		// Scale Up
+		scaleUp(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Scale Down
-		//scaleDown(window, Model1, Model2, Model3, Model4, Model5);
+		// Scale Down
+		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.
-		//cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
+		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4, Model5);
 
 		//enable textures
 		enableTexture(window, shaderProgram);

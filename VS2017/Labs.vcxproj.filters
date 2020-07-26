@@ -153,6 +153,9 @@
     <ClCompile Include="Objects\Shader.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -213,6 +216,9 @@
       <Filter>Objects\Letters</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Shader.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Object.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
