@@ -580,11 +580,11 @@ int main(int argc, char* argv[])
 		Model3->draw(shaderProgram, isTexture);
 		Model4->draw(shaderProgram, isTexture);
 		Model5->draw(shaderProgram, isTexture);
-		//Model1->draw(worldMatrixLocation, sphereVertices);
-		//Model2->draw(worldMatrixLocation, sphereVertices);
-		//Model3->draw(worldMatrixLocation, sphereVertices);
-		//Model4->draw(worldMatrixLocation, sphereVertices);
-		//Model5->draw(worldMatrixLocation, sphereVertices);
+		//Model1->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		//Model2->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		//Model3->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		//Model4->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		//Model5->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
 		
 
 		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;

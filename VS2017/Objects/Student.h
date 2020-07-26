@@ -14,6 +14,8 @@ public:
 	void create();
 
 	void randomLocation(float x, float z);
+	//void draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO);
+	
 
 protected:
 	AlphaNumeric* components[2] = { letter, number };
