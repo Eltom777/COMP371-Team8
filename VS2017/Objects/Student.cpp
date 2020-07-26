@@ -40,7 +40,7 @@ void Student::scale(mat4 s) {
 }
 
 // NOTE TO SELF (Melina): remove all worldMatrixLocations params after finished testing :|
-void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
+void Student::rotate(mat4 r) {
 	
 	//TESTING
 	//components[1]->rotateModel(r, worldMatrixLocation);
@@ -67,4 +67,14 @@ void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
+}
+
+void Student::draw(Shader* shaderProgram, const bool isTexture) {
+	components[0]->draw(shaderProgram, isTexture);
+	components[1]->draw(shaderProgram, isTexture);
+}
+
+void Student::create() {
+	components[0]->create();
+	components[1]->create();
 }

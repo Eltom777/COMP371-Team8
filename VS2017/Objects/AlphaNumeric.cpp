@@ -5,9 +5,16 @@ mat4 AlphaNumeric::getModelMatrix() {
 	return modelMatrix;
 }
 
-AlphaNumeric::AlphaNumeric(int numOfCubes) {
+AlphaNumeric::AlphaNumeric(int numOfCubes, bool isLetter) {
 	numberOfCubes = numOfCubes;
 	components = new Cube[numberOfCubes];
+	this->isLetter = isLetter;
+	if (isLetter) {
+		filename = "../Assets/Textures/Wood.jpg";
+	}
+	else {
+		filename = "../Assets/Textures/Metal.jpg";
+	}
 }
 
 void AlphaNumeric::translateModel(mat4 t)
@@ -71,6 +78,38 @@ void AlphaNumeric::traverse(mat4 mat, Cube* current)
 		traverse(mat, current->getChild());
 	}
 }
+
+void AlphaNumeric::create() {
+	cubeVAO = components[0].createCubeVAO();
+	textureId = loadTexture(filename);
+}
+
+void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
+	
+	shaderProgram->use();
+	
+	if (isTexture) {
+		if (isLetter) {
+			glActiveTexture(GL_TEXTURE1);
+		}
+		else {
+			glActiveTexture(GL_TEXTURE2);
+		}
+		//bind texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
+	}
+
+	//bind vao
+	glBindVertexArray(cubeVAO);
+
+	for (int i = 0; i < numberOfCubes; i++) {
+		shaderProgram->setMat4("worldMatrix", components[i].getModelMatrix());
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+}
+
 
 AlphaNumeric::~AlphaNumeric() {
 	delete[] components;
