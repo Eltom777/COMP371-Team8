@@ -1,6 +1,7 @@
 #include "LetterO.h"
 
 LetterO::LetterO() : AlphaNumeric(NUMOFCUBES) {
+	numberOfCubes = NUMOFCUBES;
 	setup();
 }
 
@@ -24,21 +25,6 @@ void LetterO::setup() { //create letter O
 	}
 }
 
-void LetterO::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//components[i].concatModelMatrix(modelMatrix);
-	}
-}
-
-void LetterO::draw(GLuint modelMatrixLocation) {
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
-	}
-}
-
 LetterO::~LetterO() {
-	
+	delete[] components;
 }

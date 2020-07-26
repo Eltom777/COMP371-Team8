@@ -2,7 +2,7 @@
 #include <iostream>
 
 Number9::Number9() : AlphaNumeric(NUMOFCUBES) {
-	modelMatrix = mat4(1.0f);
+	numberOfCubes = NUMOFCUBES;
 	setup();
 }
 
@@ -37,22 +37,6 @@ void Number9::setup() { //create number 9
 	}
 }
 
-
-
-void Number9::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-void Number9::draw(GLuint modelMatrixLocation) {
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
-}
-
 Number9::~Number9() {
-
+	delete[] components;
 }

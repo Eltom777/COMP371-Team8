@@ -72,6 +72,20 @@ void AlphaNumeric::traverse(mat4 mat, Cube* current)
 	}
 }
 
+void AlphaNumeric::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+	for (int i = 0; i < numberOfCubes; i++) {
+		//components[i].setModelMatrix(modelMatrix);
+	}
+}
+
+void AlphaNumeric::draw(GLuint modelMatrixLocation) {
+	for (int i = 0; i < numberOfCubes; i++) {
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+}
+
 AlphaNumeric::~AlphaNumeric() {
 	delete[] components;
 }

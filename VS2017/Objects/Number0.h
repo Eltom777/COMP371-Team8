@@ -9,8 +9,5 @@ public:
 	Number0();
 	~Number0();
 	void setup();
-	void updateModelMatrix();
-	void draw(GLuint modelMatrixLocation);
-
 };
 

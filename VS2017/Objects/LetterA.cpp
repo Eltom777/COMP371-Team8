@@ -1,6 +1,7 @@
 #include "LetterA.h"
 
 LetterA::LetterA() : AlphaNumeric(NUMOFCUBES) {
+	numberOfCubes = NUMOFCUBES;
 	setup();
 }
 
@@ -24,20 +25,6 @@ void LetterA::setup() { //create letter A
 	}
 }
 
-void LetterA::updateModelMatrix() {
-	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		//component.setModelMatrix(modelMatrix);
-	}
-}
-
-void LetterA::draw(GLuint worldMatrixLocation) {
-	for (int i = 0; i < NUMOFCUBES; i++) {
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting worldmatrix of each cube
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
-}
-
 LetterA::~LetterA() {
-
+	delete[] components;
 }

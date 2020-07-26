@@ -7,13 +7,13 @@ public:
 	AlphaNumeric(int numOfCubes);
 	~AlphaNumeric();
 	mat4 getModelMatrix();
-	virtual void updateModelMatrix() = 0;
+	void updateModelMatrix();
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void traverse(mat4 mat);
 	void traverse(mat4 mat, Cube* current);
-	virtual void draw(GLuint modelMatrixLocation) = 0;
+	void draw(GLuint modelMatrixLocation);
 
 	Cube* components;
 protected:
