@@ -3,7 +3,6 @@
 Thomas::Thomas() {
 	components[0] = new LetterO();
 	components[1] = new Number3();
-	sphere = new Sphere();
 	setup();
 }
 

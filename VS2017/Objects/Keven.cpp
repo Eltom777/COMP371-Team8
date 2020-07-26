@@ -3,7 +3,6 @@
 Keven::Keven() {
 	components[0] = new LetterV();
 	components[1] = new Number0();
-	sphere = new Sphere();
 	setup();
 }
 

@@ -3,7 +3,6 @@
 Anissa::Anissa() {
 	components[0] = new LetterI();
 	components[1] = new Number3();
-	sphere = new Sphere();
 	setup();
 }
 

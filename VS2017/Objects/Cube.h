@@ -34,7 +34,6 @@ public:
 private:
 	static const TexturedColoredVertex vertices[];
 	mat4 modelMatrix;
-	mat4 worldMatrix;
 	mat4 rotationMatrix;
 	mat4 translationMatrix;
 	mat4 scalingMatrix;

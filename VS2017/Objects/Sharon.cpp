@@ -3,7 +3,6 @@
 Sharon::Sharon() {
 	components[0] = new LetterA();
 	components[1] = new Number4();
-	sphere = new Sphere();
 	setup();
 }
 
