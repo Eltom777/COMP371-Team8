@@ -21,7 +21,7 @@ public:
 	~Sphere();
 	void setup();
 	mat4 getModelMatrix();
-	void draw(GLuint worldMatrixLocation, int sphereVAO, int sphereVertices);
+	void draw(GLuint worldMatrixLocation, int sphereVertices);
 	void updateModelMatrix();
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
