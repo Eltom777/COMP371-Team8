@@ -6,8 +6,6 @@
 
 using namespace std;
 
-// referencing the tutorial & code from "http://www.songho.ca/opengl/gl_sphere.html"
-
 Sphere::Sphere() {
 	modelMatrix = mat4(1.0f);
 	rotationMatrix = mat4(1.0f);
@@ -93,7 +91,7 @@ void Sphere::draw(GLuint worldMatrixLocation, int sphereVAO, int sphereVertices)
 }
 
 //Sets up a model using an Element Buffer Object to refer to vertex data
-GLuint Sphere::createSphereVAO(string path, int& vertexCount)
+GLuint Sphere::createSphereVAO(std::string path, int& vertexCount)
 {
 	vector<int> vertexIndices; //The contiguous sets of three indices of vertices, normals and UVs, used to make a triangle
 	vector<glm::vec3> vertices;

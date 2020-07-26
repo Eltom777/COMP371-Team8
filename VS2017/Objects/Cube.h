@@ -2,8 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Grid.h"
 
-class Cube
-{
+class Cube {
 public:
 	Cube();
 	~Cube();
@@ -16,11 +15,9 @@ public:
 	void updateTranslation(mat4 t);
 
 	void updateChild(Cube* c);
-
 	Cube* getChild();
 	Cube* child;
 	//Cube* sibling;
-
 private:
 	static const glm::vec3 vertices[];
 	mat4 modelMatrix;
@@ -29,6 +26,6 @@ private:
 	mat4 translationMatrix;
 	mat4 scalingMatrix;
 	Grid gridPointer;
-	float scalingFactor = 1.0f / static_cast <float>(gridPointer.getNumberOfColumns());;
+	float scalingFactor = 1.0f / static_cast <float>(gridPointer.getNumberOfColumns());
 };
 

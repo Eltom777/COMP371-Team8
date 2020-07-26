@@ -3,7 +3,6 @@
 // All sides of cube are 1.0f
 
 const glm::vec3 Cube::vertices[] = {
-
 	// Colored cube for testing :)
 	// front face
 	glm::vec3(-1.0f, -1.0f, -1.0f),

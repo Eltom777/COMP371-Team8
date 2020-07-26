@@ -10,13 +10,6 @@ static const int SIZEOFARRAY = (COLUMNS + COLUMNS + 2) * 4; //Total # of vertice
 static const float AXISLENGTH = static_cast<float>(10) / static_cast <float>(COLUMNS); // 5 * normalise -> normalise = 2 / Columns
 
 class Grid {
-
-
-private:
-    static const vec3 axis[];
-	vec3 grid[SIZEOFARRAY];
-	GLuint gridVAO;
-	GLuint axisVAO;
 public:
 	const int gridToPrint = SIZEOFARRAY >> 1;
 	const int axisToPrint = 6;
@@ -26,5 +19,10 @@ public:
 	int createAxisVAO();
 	int createGridVAO();
 	int getNumberOfColumns();
+private:
+	static const vec3 axis[];
+	vec3 grid[SIZEOFARRAY];
+	GLuint gridVAO;
+	GLuint axisVAO;
 };
 

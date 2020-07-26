@@ -1,6 +1,7 @@
 #pragma once
 #include "Grid.h"
-#include<vector>
+#include <vector>
+#include <string>
 #include <glm/gtc/matrix_transform.hpp>
 
 using namespace std;
@@ -25,7 +26,7 @@ public:
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r);
-	GLuint createSphereVAO(string path, int& vertexCount);
+	GLuint createSphereVAO(std::string path, int& vertexCount);
 	//void draw(GLuint modelLocation);
 
 private:
