@@ -526,13 +526,6 @@ int main(int argc, char* argv[])
 	Model4->create();
 	Model5->create();
 
-	// Models
-	Thomas* Model1 = new Thomas();
-	Melina* Model2 = new Melina();
-	Sharon* Model3 = new Sharon();
-	Anissa* Model4 = new Anissa();
-	Keven* Model5 = new Keven();
-
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
