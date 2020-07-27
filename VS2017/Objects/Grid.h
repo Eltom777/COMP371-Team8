@@ -47,9 +47,5 @@ public:
 	int createtextureGridVAO();
 	void drawGrid(Shader* shaderProgram, bool isTexture);
 	void drawAxis(Shader shaderProgram);
-	int createtextureGridVAO();
-	GLuint loadTexture();
-	void drawGrid(Shader* shaderProgram, bool isTexture);
-	void drawAxis(Shader shaderProgram);
 };
 

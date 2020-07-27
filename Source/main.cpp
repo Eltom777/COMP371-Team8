@@ -90,7 +90,6 @@ void renderGridAxisCube(Shader* shaderProgram, const Shader shaderArray[], Grid 
 	// Draw grid and axis
 	objGrid.drawAxis(shaderArray[0]);
 	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
-	//shaderProgram->use();
 }
 
 /*
@@ -517,10 +516,15 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	//texturedGrid objtexture;
-	objGrid.loadTexture();
-	int textureVAO = objGrid.createtextureGridVAO();
-	int* VAO = createCubeGridVAO(objCube, objGrid);
+	objCube.setModelMatrix();
+	objGrid.setup();
+	
+	//Load Texture and VAO for Models
+	Model1->create();
+	Model2->create();
+	Model3->create();
+	Model4->create();
+	Model5->create();
 
 	// Models
 	Thomas* Model1 = new Thomas();
@@ -552,11 +556,11 @@ int main(int argc, char* argv[])
 
 
 		// Draw AlphaNumeric models
-		/*Model1->draw(worldMatrixLocation);
-		Model2->draw(worldMatrixLocation);
-		Model3->draw(worldMatrixLocation);
-		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);*/
+		Model1->draw(shaderProgram, isTexture);
+		Model2->draw(shaderProgram, isTexture);
+		Model3->draw(shaderProgram, isTexture);
+		Model4->draw(shaderProgram, isTexture);
+		Model5->draw(shaderProgram, isTexture);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
@@ -571,37 +575,36 @@ int main(int argc, char* argv[])
 		setUpCamera(camera_ptr, shaderProgram);
 		setUpCamera(camera_ptr, colorShader);
 
-		//// Transformations of Models
+		// Transformations of Models
 
-		//// Translating left
-		//translateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating left
+		translateLeft(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating right
-		//translateRight(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating right
+		translateRight(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating up
-		//translateUp(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating up
+		translateUp(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Translating down
-		//translateDown(window, Model1, Model2, Model3, Model4, Model5);
+		// Translating down
+		translateDown(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Rotating Left
-		//rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
-		//
-		//// Rotating Right
-		//rotateRight(window, Model1, Model2, Model3, Model4, Model5);
+		// Rotating Left
+		rotateLeft(window, Model1, Model2, Model3, Model4, Model5);
+		
+		// Rotating Right
+		rotateRight(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Scale Up
-		//scaleUp(window, Model1, Model2, Model3, Model4, Model5);
+		// Scale Up
+		scaleUp(window, Model1, Model2, Model3, Model4, Model5);
 
-		//// Scale Down
-		//scaleDown(window, Model1, Model2, Model3, Model4, Model5);
+		// Scale Down
+		scaleDown(window, Model1, Model2, Model3, Model4, Model5);
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.
-		cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
+		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4,  Model5);
 		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4, Model5);
-		//cameraFocus(window, shaderProgram, Model1, Model2, Model3, Model4, camera_ptr, Model5);
 
 		//enable textures
 		enableTexture(window, shaderProgram);
@@ -640,17 +643,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
-	{
-		if (isTexture)
-			isTexture = false;
-		else
-			isTexture = true;
-	}
-}
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_X && action == GLFW_PRESS)
