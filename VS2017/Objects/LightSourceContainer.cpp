@@ -15,10 +15,10 @@ void LightSourceContainer::setup() {
 	components[0]->translateModel(initialDisplacement); // Translate to top left corner
 }
 
-void LightSourceContainer::draw(GLuint modelMatrixLocation) {
-	// draw all components of model
-	components[0]->draw(modelMatrixLocation);
-}
+//void LightSourceContainer::draw(GLuint modelMatrixLocation) {
+//	// draw all components of model
+//	components[0]->draw(modelMatrixLocation);
+//}
 
 LightSourceContainer::~LightSourceContainer() {
 
