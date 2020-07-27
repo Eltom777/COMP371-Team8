@@ -64,13 +64,13 @@ void initialize() {
 #endif
 }
 
-void setUpProjection(Shader* shaderProgram, Camera* camera) {
+void setUpProjection(Shader shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
-	shaderProgram->setMat4("projectionMatrix", Projection);
+	shaderProgram.setMat4("projectionMatrix", Projection);
 }
 
 void renderGridAxisCube(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
@@ -429,12 +429,12 @@ void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera, Thom
 	}
 }
 
-void setUpCamera(Camera* camera, Shader* shaderProgram) {
+void setUpCamera(Camera* camera, Shader shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
 
-	shaderProgram->setMat4("viewMatrix", viewMatrix);
+	shaderProgram.setMat4("viewMatrix", viewMatrix);
 }
 
 /*
@@ -478,19 +478,16 @@ int main(int argc, char* argv[])
 								Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader") 
 							};
 	shaderProgram = shaderPrograms;
-	//shaderProgram++;
-
-	Shader* colorShader = shaderPrograms;
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);
 
 	// Set View and Projection matrices on both shaders
-	setUpProjection(shaderProgram, camera_ptr);
-	setUpCamera(camera_ptr, shaderProgram);
+	setUpProjection(shaderPrograms[0], camera_ptr);
+	setUpCamera(camera_ptr, shaderPrograms[0]);
 
-	setUpProjection(colorShader, camera_ptr);
-	setUpCamera(camera_ptr, colorShader);
+	setUpProjection(shaderPrograms[1], camera_ptr);
+	setUpCamera(camera_ptr, shaderPrograms[1]);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
@@ -516,8 +513,8 @@ int main(int argc, char* argv[])
 
 		
 		// Set up Perspective View
-		setUpProjection(shaderProgram, camera_ptr);
-		setUpProjection(colorShader, camera_ptr);
+		setUpProjection(shaderPrograms[0], camera_ptr);
+		setUpProjection(shaderPrograms[1], camera_ptr);
 
 		// Render grid and axis and cube
 		renderGridAxisCube(shaderProgram, shaderPrograms, objGrid);
@@ -544,8 +541,8 @@ int main(int argc, char* argv[])
 		camera_ptr->handleFrameData();
     
 		// Set up Camera
-		setUpCamera(camera_ptr, shaderProgram);
-		setUpCamera(camera_ptr, colorShader);
+		setUpCamera(camera_ptr, shaderPrograms[0]);
+		setUpCamera(camera_ptr, shaderPrograms[1]);
 
 		// Transformations of Models
 
