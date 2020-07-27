@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include "Cube.h"
 #include <vector>
 #include <cmath>
 #include <iostream>
@@ -11,6 +12,7 @@ Sphere::Sphere() {
 	rotationMatrix = mat4(1.0f);
 	translationMatrix = mat4(1.0f);
 	scalingMatrix = mat4(1.0f);
+	child = NULL;
 	setup();
 }
 
@@ -46,9 +48,20 @@ mat4 Sphere::getModelMatrix() {
 	return modelMatrix;
 }
 
+void Sphere::updateChild(Cube* c)
+{
+	this->child = c;
+}
+
+Cube* Sphere::getChild()
+{
+	return this->child;
+}
+
 void Sphere::draw(GLuint worldMatrixLocation, int sphereVertices) {
 	glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &modelMatrix[0][0]);
 	glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
 //Sets up a model using an Element Buffer Object to refer to vertex data

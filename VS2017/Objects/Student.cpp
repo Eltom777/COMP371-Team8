@@ -29,7 +29,7 @@ void Student::scale(mat4 s) {
 		component->translateModel(tempworldMatrix);
 	}
 	sphere->translateModel(tempworldMatrix);
-	
+
 	//modelMatrix = s * modelMatrix;
 	for (AlphaNumeric* component : components) {
 		component->translateModel(s);
@@ -41,19 +41,11 @@ void Student::scale(mat4 s) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-	
 	sphere->translateModel(tempworldMatrix);
 }
 
 // NOTE TO SELF (Melina): remove all worldMatrixLocations params after finished testing :|
-void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
-	
-	//TESTING
-	//components[1]->rotateModel(r, worldMatrixLocation);
-	////components[1]->rotateModel(r, worldMatrixLocation);
-
-	//modelMatrix = r * modelMatrix;
-
+void Student::rotate(mat4 r) {
 
 	//Place back to origin
 	vec3 translationComponent = vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
@@ -61,31 +53,33 @@ void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-
 	sphere->translateModel(tempworldMatrix);
 
 	for (AlphaNumeric* component : components) {
 		component->translateModel(r);
 	}
-
 	sphere->translateModel(r);
-
-	modelMatrix = r * modelMatrix;
+	//modelMatrix = r * modelMatrix;
 
 	//Place back to original spot
 	tempworldMatrix = glm::translate(mat4(1.0), translationComponent);
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-
 	sphere->translateModel(tempworldMatrix);
 }
 
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
 	// draw all components of model
 	glBindVertexArray(cubeVAO);
-	components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);
+	/*components[0]->draw(modelMatrixLocation);
+	components[1]->draw(modelMatrixLocation);*/
+
+	components[0]->drawTop(modelMatrixLocation);
+	components[0]->drawBottom(modelMatrixLocation);
+	components[1]->drawTop(modelMatrixLocation);
+	components[1]->drawBottom(modelMatrixLocation);
+
 	glBindVertexArray(sphereVAO);
 	sphere->draw(modelMatrixLocation, sphereVertices);
 }

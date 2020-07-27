@@ -14,9 +14,13 @@ public:
 	void setTranslation(vec3 t);
 	void updateTranslation(mat4 t);
 
+	//void updateChild(Cube* c, Sphere* s);
 	void updateChild(Cube* c);
+	//void getChild();
 	Cube* getChild();
-	Cube* child;
+	//Sphere* getSphereChild();
+	Cube* cubeChild;
+	//Sphere* sphereChild;
 	//Cube* sibling;
 private:
 	static const glm::vec3 vertices[];

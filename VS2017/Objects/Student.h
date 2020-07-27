@@ -9,7 +9,8 @@ public:
 	mat4 getModelMatrix();
 	void translate(mat4 t);
 	void scale(mat4 s);
-	void rotate(mat4 r, GLuint modelMatrixLocation);
+	//void rotate(mat4 r, GLuint modelMatrixLocation);
+	void rotate(mat4 r);
 	void draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO);
 
 protected:

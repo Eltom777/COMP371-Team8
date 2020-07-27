@@ -1,10 +1,11 @@
 #pragma once
 #include "Grid.h"
+#include "Cube.h"
 #include <vector>
 #include <string>
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace std;
+//using namespace std;
 
 class Sphere {
 public:
@@ -12,12 +13,16 @@ public:
 	~Sphere();
 	void setup();
 	mat4 getModelMatrix();
+	void updateChild(Cube * c);
+	Cube* getChild();
 	void updateModelMatrix();
 	void translateModel(mat4 t);
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r);
 	void draw(GLuint worldMatrixLocation, int sphereVertices);
 	GLuint createSphereVAO(std::string path, int& vertexCount);
+
+	Cube* child;
 private:
 	mat4 modelMatrix = mat4(1.0f);
 	mat4 translationMatrix = mat4(1.0f);
