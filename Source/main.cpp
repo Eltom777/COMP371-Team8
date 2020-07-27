@@ -418,7 +418,7 @@ void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera, Thom
 	}
   
   // Keven Model
-	{
+	else if (currentModel == 5 && glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
