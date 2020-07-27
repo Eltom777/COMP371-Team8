@@ -32,8 +32,9 @@
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
 static int currentModel = -1;
-static bool isTexture = true;
+static bool isTexture = false;
 Camera* camera_ptr;
+Shader* shaderProgram;
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
@@ -61,20 +62,6 @@ void initialize() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 #endif
-}
-
-/*
-Returns an array of VAOs for cubes, grids, and axes. 
-*/
-int* createCubeGridVAO(Cube objCube, Grid objGrid) {
-	// create VAOs
-	int cubeVAO = objCube.createCubeVAO();
-	int gridVAO = objGrid.createGridVAO();
-	int axisVAO = objGrid.createAxisVAO();
-
-	int VAO[3] = { cubeVAO, gridVAO, axisVAO };
-
-	return VAO;
 }
 
 void setUpProjection(Shader* shaderProgram, Camera* camera) {
@@ -129,14 +116,6 @@ void selectModel(GLFWwindow* window) {
 	{
 		currentModel = 5; // Keven
 	}
-}
-
-/*
-Toggle Textures on and off
-*/
-void enableTexture(GLFWwindow* window, Shader* shaderProgram) {
-		if (!isTexture) { shaderProgram--; }
-		else { shaderProgram++; }
 }
 
 /*
@@ -498,8 +477,8 @@ int main(int argc, char* argv[])
 								Shader("../Assets/Shaders/colorVertexShader.vertexshader", "../Assets/Shaders/colorFragmentShader.Fragmentshader"),
 								Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader") 
 							};
-	Shader* shaderProgram = shaderPrograms;
-	shaderProgram++;
+	shaderProgram = shaderPrograms;
+	//shaderProgram++;
 
 	Shader* colorShader = shaderPrograms;
 
@@ -599,9 +578,6 @@ int main(int argc, char* argv[])
 		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4,  Model5);
 		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4, Model5);
 
-		//enable textures
-		enableTexture(window, shaderProgram);
-
 		// End frame
 		glfwSwapBuffers(window);
 
@@ -636,13 +612,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
+/*
+Toggle Textures on and off
+*/
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_X && action == GLFW_PRESS)
 	{
-		if (isTexture)
+		if (isTexture) {
 			isTexture = false;
-		else
+			shaderProgram--;
+		}
+		else {
 			isTexture = true;
+			shaderProgram++;
+		}
 	}
 }
