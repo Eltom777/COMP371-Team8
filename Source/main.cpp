@@ -43,7 +43,6 @@ Shader* shaderProgram;
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
 const float range = MAX_RAND - MIN_RAND;
 
->
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
@@ -419,7 +418,6 @@ void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera, Thom
 	}
   
   // Keven Model
-	else if (currentModel == 5 && glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
 
@@ -631,16 +629,24 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	/*if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	/*
+	Toggle Textures on and off
+	*/
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
 	{
-		if (isTexture)
+		if (isTexture) {
 			isTexture = false;
-		else
+			shaderProgram--;
+		}
+		else {
 			isTexture = true;
-	}*/
+			shaderProgram++;
+		}
+	}
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
+		
 		// Get random x and z values
 		float randomX = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
 		float randomZ = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
@@ -697,22 +703,5 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 
 		currentModel = -1; // set view back to origin to see new location
-	}
-}
-/*
-Toggle Textures on and off
-*/
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_X && action == GLFW_PRESS)
-	{
-		if (isTexture) {
-			isTexture = false;
-			shaderProgram--;
-		}
-		else {
-			isTexture = true;
-			shaderProgram++;
-		}
 	}
 }
