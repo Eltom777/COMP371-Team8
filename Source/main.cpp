@@ -21,6 +21,7 @@
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
 #include <Objects/Shaders.h>
+#include <LightSourceContainer.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/Thomas.h>
@@ -44,6 +45,13 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
+
+
+// Lighting
+// These values seem to center the light for some reason, more investigating to do as why
+glm::vec3 lightSourcePosition(3.0f, -3.0f, 12.0f);
+//LightSourceContainer* LightSource = new LightSourceContainer(&lightSourcePosition); Does not appear where the light is comming from, reinstate once problem above is fixed
+
 
 void initialize() {
 	glfwInit();
@@ -79,6 +87,7 @@ void setUpProjection(int shaderProgram, Camera* camera) {
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
+
 
 	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
@@ -454,6 +463,8 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
+
+	
 	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
@@ -502,6 +513,7 @@ int main(int argc, char* argv[])
 	Cube objCube;
 	int* VAO = createCubeGridVAO(objCube, objGrid);
 
+
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -522,6 +534,13 @@ int main(int argc, char* argv[])
 		// Rotating Right
 		rotateRight(window, worldMatrixLocation);
 
+		//// activating lighting shader
+		glUseProgram(shaderProgram);
+		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 1.0f, 0.5f, 0.31f);
+		glUniform3f(glGetUniformLocation(shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, &lightSourcePosition[0]);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, &camera_ptr->cameraPos[0]);
+
 
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation);
@@ -529,6 +548,9 @@ int main(int argc, char* argv[])
 		Model3->draw(worldMatrixLocation);
 		Model4->draw(worldMatrixLocation);
 		Model5->draw(worldMatrixLocation);
+		//LightSource->draw(worldMatrixLocation); // reinstate once issue is figured out
+
+		// Draw the lamp object
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);

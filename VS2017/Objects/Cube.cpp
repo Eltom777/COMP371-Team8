@@ -174,13 +174,23 @@ int Cube::createCubeVAO() {
 	);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1,                  // attribute 1 matches aColor in Vertex Shader
+	//Replaced the old color attribute with the normal vector
+	//glVertexAttribPointer(1,                  // attribute 1 matches aColor in Vertex Shader
+	//	3,
+	//	GL_FLOAT,
+	//	GL_FALSE,
+	//	2 * sizeof(glm::vec3),
+	//	(void*)sizeof(glm::vec3)    // color is offseted a vec3 (comes after position)
+	//);
+	//glEnableVertexAttribArray(1);
+	//
+	// Testing using attribute 1 for normal vector:
+	glVertexAttribPointer(1,
 		3,
 		GL_FLOAT,
 		GL_FALSE,
-		2 * sizeof(glm::vec3),
-		(void*)sizeof(glm::vec3)    // color is offseted a vec3 (comes after position)
-	);
+		6 * sizeof(float),
+		(void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

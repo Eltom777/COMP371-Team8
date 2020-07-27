@@ -30,6 +30,9 @@
     <Filter Include="Objects\Numbers">
       <UniqueIdentifier>{0fbfdb31-809c-4a73-ad22-fee8f171b729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\lightSource">
+      <UniqueIdentifier>{47ce9f61-2eaf-4ed0-b869-bfa20358ff43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -138,6 +141,12 @@
     <ClCompile Include="Objects\LetterV.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
+    <ClCompile Include="LightCube.cpp">
+      <Filter>Objects\lightSource</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSourceContainer.cpp">
+      <Filter>Objects\lightSource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects\Grid.h">
@@ -199,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="Objects\LetterV.h">
       <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="LightCube.h">
+      <Filter>Objects\lightSource</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSourceContainer.h">
+      <Filter>Objects\lightSource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

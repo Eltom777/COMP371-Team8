@@ -20,6 +20,8 @@ public:
 	Cube* getChild();
 	Cube* child;
 	//Cube* sibling;
+	GLuint* cubeVboPtr;
+	GLuint cubeVbo;
 
 private:
 	static const glm::vec3 vertices[];
