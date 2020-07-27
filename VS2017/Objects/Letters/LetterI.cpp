@@ -26,7 +26,7 @@ void LetterI::setup() { // create letter I
 	updateBase(&bottomComponents[0]);
 																							  
 	// set letter slightly above grid
-	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)), 0);
+	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);
 	// bottomComponents[1].updateChild(NULL);
 
 	/*for (int i = 0; i < NUMOFCUBES; i++) {
