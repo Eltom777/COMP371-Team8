@@ -50,10 +50,9 @@ void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
 	
 	//TESTING
 	//components[1]->rotateModel(r, worldMatrixLocation);
-	////components[1]->rotateModel(r, worldMatrixLocation);
+	//components[1]->rotateModel(r, worldMatrixLocation);
 
 	//modelMatrix = r * modelMatrix;
-
 
 	//Place back to origin
 	vec3 translationComponent = vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
@@ -82,10 +81,14 @@ void Student::rotate(mat4 r, GLuint worldMatrixLocation) {
 }
 
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
-	// draw all components of model
+	// Draw all components of model, disable blending when drawing the alphanumeric models
+	glDisable(GL_BLEND);
 	glBindVertexArray(cubeVAO);
 	components[0]->draw(modelMatrixLocation);
 	components[1]->draw(modelMatrixLocation);
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
 	glBindVertexArray(sphereVAO);
 	sphere->draw(modelMatrixLocation, sphereVertices);
 }

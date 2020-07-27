@@ -28,7 +28,6 @@
 #include <Sharon.h>
 #include <Anissa.h>
 #include <Keven.h>
-#include <Sphere.h>
 
 using namespace std;
 
@@ -53,7 +52,6 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
-// Sphere* sphere = new Sphere();
 
 void initialize() {
 	glfwInit();
@@ -93,6 +91,14 @@ void setUpProjection(int shaderProgram, Camera* camera) {
 
 	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+}
+
+void setUpCamera(Camera* camera, int shaderProgram) {
+	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
+		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
+		camera->cameraUp);  // up
+	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
 void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
@@ -463,14 +469,6 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 }
 
-void setUpCamera(Camera* camera, int shaderProgram) {
-	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
-		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
-		camera->cameraUp);  // up
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
-}
-
 /*
 Main method.
 */
@@ -480,7 +478,7 @@ int main(int argc, char* argv[])
 	initialize();
 
 	// Create Window and rendering context using GLFW, resolution is 1024x768
-	GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1024, 768, "COMP371 - Assignment 2 - Team 8", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cerr << "Failed to create GLFW window" << std::endl;
@@ -540,9 +538,6 @@ int main(int argc, char* argv[])
 		Model3->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
 		Model4->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
 		Model5->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-
-		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		//sphere->draw(worldMatrixLocation, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
