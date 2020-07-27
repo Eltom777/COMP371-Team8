@@ -70,8 +70,8 @@ void Student::rotate(mat4 r) {
 }
 
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
-	// Draw all components of model, disable blending when drawing the alphanumeric models
 	glDisable(GL_BLEND);
+	glBindVertexArray(cubeVAO);
 	/*components[0]->draw(modelMatrixLocation);
 	components[1]->draw(modelMatrixLocation);*/
 	components[0]->drawTop(modelMatrixLocation);
