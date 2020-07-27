@@ -27,6 +27,7 @@ void LetterI::setup() { // create letter I
 	bottomComponents[0].updateChild(&bottomComponents[1]); // base
 	bottomComponents[1].updateChild(&topComponents[0]);
 	updateBase(&bottomComponents[0]);
+	topComponents[0].updateChild(&topComponents[1]);
 																							  
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);
