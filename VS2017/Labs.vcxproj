@@ -14,7 +14,7 @@
     <ProjectGuid>{277EAE68-9EED-4EFF-BAD3-2A70787A3E8D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Labs</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>COMP371-Assignment1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -22,7 +22,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;../VS2017;../VS2017/Objects</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;../VS2017;../VS2017/Shaders;../VS2017/Objects;../VS2017/Objects/Letters;../VS2017/Objects/Numbers;../VS2017/Objects/Students</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,52 +119,52 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="Objects\Anissa.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
     <ClCompile Include="Objects\AlphaNumeric.cpp" />
-    <ClCompile Include="Objects\Keven.cpp" />
-    <ClCompile Include="Objects\LetterA.cpp" />
-    <ClCompile Include="Objects\LetterI.cpp" />
-    <ClCompile Include="Objects\LetterL.cpp" />
-    <ClCompile Include="Objects\LetterO.cpp" />
-    <ClCompile Include="Objects\LetterV.cpp" />
-    <ClCompile Include="Objects\Melina.cpp" />
-    <ClCompile Include="Objects\Number0.cpp" />
-    <ClCompile Include="Objects\Number3.cpp" />
-    <ClCompile Include="Objects\Number4.cpp" />
-    <ClCompile Include="Objects\Number9.cpp" />
-    <ClCompile Include="Objects\Shaders.cpp" />
-    <ClCompile Include="Objects\Sharon.cpp" />
+    <ClCompile Include="Objects\Letters\LetterA.cpp" />
+    <ClCompile Include="Objects\Letters\LetterI.cpp" />
+    <ClCompile Include="Objects\Letters\LetterL.cpp" />
+    <ClCompile Include="Objects\Letters\LetterO.cpp" />
+    <ClCompile Include="Objects\Letters\LetterV.cpp" />
+    <ClCompile Include="Objects\Numbers\Number0.cpp" />
+    <ClCompile Include="Objects\Numbers\Number3.cpp" />
+    <ClCompile Include="Objects\Numbers\Number4.cpp" />
+    <ClCompile Include="Objects\Numbers\Number9.cpp" />
+    <ClCompile Include="Objects\Sphere.cpp" />
     <ClCompile Include="Objects\Student.cpp" />
-    <ClCompile Include="Objects\Thomas.cpp" />
-    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Objects\Students\Anissa.cpp" />
+    <ClCompile Include="Objects\Students\Keven.cpp" />
+    <ClCompile Include="Objects\Students\Melina.cpp" />
+    <ClCompile Include="Objects\Students\Sharon.cpp" />
+    <ClCompile Include="Objects\Students\Thomas.cpp" />
+    <ClCompile Include="Shaders\Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\OBJloader.h" />
     <ClInclude Include="..\Source\OBJloaderV2.h" />
-    <ClInclude Include="Objects\Anissa.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
     <ClInclude Include="Objects\AlphaNumeric.h" />
-    <ClInclude Include="Objects\Keven.h" />
-    <ClInclude Include="Objects\LetterA.h" />
-    <ClInclude Include="Objects\LetterI.h" />
-    <ClInclude Include="Objects\LetterL.h" />
-    <ClInclude Include="Objects\LetterO.h" />
-    <ClInclude Include="Objects\LetterV.h" />
-    <ClInclude Include="Objects\Melina.h" />
-    <ClInclude Include="Objects\Number0.h" />
-    <ClInclude Include="Objects\Number3.h" />
-    <ClInclude Include="Objects\Number4.h" />
-    <ClInclude Include="Objects\Number9.h" />
-    <ClInclude Include="Objects\Shaders.h" />
-    <ClInclude Include="Objects\Sharon.h" />
+    <ClInclude Include="Objects\Letters\LetterA.h" />
+    <ClInclude Include="Objects\Letters\LetterI.h" />
+    <ClInclude Include="Objects\Letters\LetterL.h" />
+    <ClInclude Include="Objects\Letters\LetterO.h" />
+    <ClInclude Include="Objects\Letters\LetterV.h" />
+    <ClInclude Include="Objects\Numbers\Number0.h" />
+    <ClInclude Include="Objects\Numbers\Number3.h" />
+    <ClInclude Include="Objects\Numbers\Number4.h" />
+    <ClInclude Include="Objects\Numbers\Number9.h" />
+    <ClInclude Include="Objects\Sphere.h" />
     <ClInclude Include="Objects\Student.h" />
-    <ClInclude Include="Objects\Thomas.h" />
-    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Objects\Students\Anissa.h" />
+    <ClInclude Include="Objects\Students\Keven.h" />
+    <ClInclude Include="Objects\Students\Melina.h" />
+    <ClInclude Include="Objects\Students\Sharon.h" />
+    <ClInclude Include="Objects\Students\Thomas.h" />
+    <ClInclude Include="Shaders\Shaders.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

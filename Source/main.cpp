@@ -20,14 +20,14 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
-#include <Objects/Shaders.h>
-#include <Objects/Grid.h> //rendered objects
-#include <Objects/Camera.h>
-#include <Objects/Thomas.h>
-#include <Objects/Melina.h>
-#include <Objects/Sharon.h>
-#include <Objects/Anissa.h>
-#include <Objects/Keven.h>
+#include <Shaders.h>
+#include <Grid.h> //rendered objects
+#include <Camera.h>
+#include <Thomas.h>
+#include <Melina.h>
+#include <Sharon.h>
+#include <Anissa.h>
+#include <Keven.h>
 #include <Sphere.h>
 
 using namespace std;

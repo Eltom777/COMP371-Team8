@@ -30,6 +30,9 @@
     <Filter Include="Objects\Numbers">
       <UniqueIdentifier>{0fbfdb31-809c-4a73-ad22-fee8f171b729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{bf9de2d6-99af-4ce2-a224-1b9aba6e076b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -84,61 +87,61 @@
     <ClCompile Include="Objects\Cube.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Camera.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\LetterO.cpp">
-      <Filter>Objects\Letters</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Shaders.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\AlphaNumeric.cpp">
       <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Number3.cpp">
-      <Filter>Objects\Numbers</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Student.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Thomas.cpp">
-      <Filter>Objects\Students</Filter>
+    <ClCompile Include="Objects\Sphere.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Anissa.cpp">
-      <Filter>Objects\Students</Filter>
+    <ClCompile Include="Objects\Letters\LetterA.cpp">
+      <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Keven.cpp">
-      <Filter>Objects\Students</Filter>
+    <ClCompile Include="Objects\Letters\LetterI.cpp">
+      <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Melina.cpp">
-      <Filter>Objects\Students</Filter>
+    <ClCompile Include="Objects\Letters\LetterL.cpp">
+      <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Sharon.cpp">
-      <Filter>Objects\Students</Filter>
+    <ClCompile Include="Objects\Letters\LetterO.cpp">
+      <Filter>Objects\Letters</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Number0.cpp">
+    <ClCompile Include="Objects\Letters\LetterV.cpp">
+      <Filter>Objects\Letters</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Numbers\Number0.cpp">
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Number4.cpp">
+    <ClCompile Include="Objects\Numbers\Number3.cpp">
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Number9.cpp">
+    <ClCompile Include="Objects\Numbers\Number4.cpp">
       <Filter>Objects\Numbers</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\LetterA.cpp">
-      <Filter>Objects\Letters</Filter>
+    <ClCompile Include="Objects\Numbers\Number9.cpp">
+      <Filter>Objects\Numbers</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\LetterI.cpp">
-      <Filter>Objects\Letters</Filter>
+    <ClCompile Include="Objects\Students\Anissa.cpp">
+      <Filter>Objects\Students</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\LetterL.cpp">
-      <Filter>Objects\Letters</Filter>
+    <ClCompile Include="Objects\Students\Keven.cpp">
+      <Filter>Objects\Students</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\LetterV.cpp">
-      <Filter>Objects\Letters</Filter>
+    <ClCompile Include="Objects\Students\Melina.cpp">
+      <Filter>Objects\Students</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
+    <ClCompile Include="Objects\Students\Sharon.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Students\Thomas.cpp">
+      <Filter>Objects\Students</Filter>
+    </ClCompile>
+    <ClCompile Include="Shaders\Shaders.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Camera.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -149,61 +152,10 @@
     <ClInclude Include="Objects\Cube.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Camera.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\LetterO.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Shaders.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\AlphaNumeric.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Number3.h">
-      <Filter>Objects\Numbers</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Student.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Thomas.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Anissa.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Keven.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Melina.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Sharon.h">
-      <Filter>Objects\Students</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Number0.h">
-      <Filter>Objects\Numbers</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Number4.h">
-      <Filter>Objects\Numbers</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\Number9.h">
-      <Filter>Objects\Numbers</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\LetterA.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\LetterI.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\LetterL.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\LetterV.h">
-      <Filter>Objects\Letters</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\OBJloader.h">
@@ -211,6 +163,57 @@
     </ClInclude>
     <ClInclude Include="..\Source\OBJloaderV2.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Sphere.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Letters\LetterA.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Letters\LetterI.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Letters\LetterL.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Letters\LetterO.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Letters\LetterV.h">
+      <Filter>Objects\Letters</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Numbers\Number0.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Numbers\Number3.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Numbers\Number4.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Numbers\Number9.h">
+      <Filter>Objects\Numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Students\Anissa.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Students\Keven.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Students\Melina.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Students\Sharon.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Students\Thomas.h">
+      <Filter>Objects\Students</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Shaders.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Camera.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
