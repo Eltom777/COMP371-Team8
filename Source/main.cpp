@@ -21,7 +21,12 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
+<<<<<<< HEAD
 #include <Objects/Shader.h>
+=======
+#include <Objects/Shaders.h>
+#include <LightSourceContainer.h>
+>>>>>>> added specular lighting
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/Thomas.h>
@@ -59,6 +64,13 @@ Keven* Model5 = new Keven();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 
+
+// Lighting
+// These values seem to center the light for some reason, more investigating to do as why
+glm::vec3 lightSourcePosition(3.0f, -3.0f, 12.0f);
+//LightSourceContainer* LightSource = new LightSourceContainer(&lightSourcePosition); Does not appear where the light is comming from, reinstate once problem above is fixed
+
+
 void initialize() {
 	glfwInit();
 
@@ -80,7 +92,13 @@ void setUpProjection(Shader shaderProgram, Camera* camera) {
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
+<<<<<<< HEAD
 	shaderProgram.setMat4("projectionMatrix", Projection);
+=======
+
+	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+>>>>>>> added specular lighting
 }
 
 void renderGridAxisCube(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
@@ -444,7 +462,13 @@ void setUpCamera(Camera* camera, Shader shaderProgram) {
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
 
+<<<<<<< HEAD
 	shaderProgram.setMat4("viewMatrix", viewMatrix);
+=======
+	
+	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+>>>>>>> added specular lighting
 }
 
 
@@ -519,6 +543,7 @@ int main(int argc, char* argv[])
 
 	
 
+
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -539,16 +564,34 @@ int main(int argc, char* argv[])
 		// Rotating Right
 		//rotateRight(window, worldMatrixLocation);
 
+		//// activating lighting shader
+		glUseProgram(shaderProgram);
+		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 1.0f, 0.5f, 0.31f);
+		glUniform3f(glGetUniformLocation(shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, &lightSourcePosition[0]);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, &camera_ptr->cameraPos[0]);
+
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 	
 
 		// Draw AlphaNumeric models
+<<<<<<< HEAD
 		Model1->draw(shaderProgram, isTexture);
 		Model2->draw(shaderProgram, isTexture);
 		Model3->draw(shaderProgram, isTexture);
 		Model4->draw(shaderProgram, isTexture);
 		Model5->draw(shaderProgram, isTexture);
+=======
+		Model1->draw(worldMatrixLocation);
+		Model2->draw(worldMatrixLocation);
+		Model3->draw(worldMatrixLocation);
+		Model4->draw(worldMatrixLocation);
+		Model5->draw(worldMatrixLocation);
+		//LightSource->draw(worldMatrixLocation); // reinstate once issue is figured out
+
+		// Draw the lamp object
+>>>>>>> added specular lighting
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));

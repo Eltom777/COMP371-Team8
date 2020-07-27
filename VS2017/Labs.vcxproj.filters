@@ -30,8 +30,13 @@
     <Filter Include="Objects\Numbers">
       <UniqueIdentifier>{0fbfdb31-809c-4a73-ad22-fee8f171b729}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Shaders">
       <UniqueIdentifier>{ff74c47e-6c2c-481f-b0f6-78c6854ad0e2}</UniqueIdentifier>
+=======
+    <Filter Include="Objects\lightSource">
+      <UniqueIdentifier>{47ce9f61-2eaf-4ed0-b869-bfa20358ff43}</UniqueIdentifier>
+>>>>>>> added specular lighting
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +152,7 @@
     <ClCompile Include="Objects\LetterV.cpp">
       <Filter>Objects\Letters</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Objects\Shader.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -158,6 +164,13 @@
     </ClCompile>
     <ClCompile Include="Objects\AlphaNumeric.cpp">
       <Filter>Objects</Filter>
+=======
+    <ClCompile Include="LightCube.cpp">
+      <Filter>Objects\lightSource</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSourceContainer.cpp">
+      <Filter>Objects\lightSource</Filter>
+>>>>>>> added specular lighting
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +228,7 @@
     <ClInclude Include="Objects\LetterV.h">
       <Filter>Objects\Letters</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Objects\Shader.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -226,6 +240,13 @@
     </ClInclude>
     <ClInclude Include="Objects\AlphaNumeric.h">
       <Filter>Objects</Filter>
+=======
+    <ClInclude Include="LightCube.h">
+      <Filter>Objects\lightSource</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSourceContainer.h">
+      <Filter>Objects\lightSource</Filter>
+>>>>>>> added specular lighting
     </ClInclude>
   </ItemGroup>
 </Project>

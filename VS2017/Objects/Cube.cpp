@@ -155,6 +155,16 @@ int Cube::createCubeVAO() {
 		(void*)sizeof(vec3)      // color is offseted a vec3 (comes after position)
 	);
 	glEnableVertexAttribArray(1);
+	//
+	// Normal vector
+	// TODO Reinstate once changes to VAO are completed
+	/*glVertexAttribPointer(1,
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		6 * sizeof(float),
+		(void*)(3 * sizeof(float)));*/
+	/*glEnableVertexAttribArray(1);*/
 
 	glVertexAttribPointer(2,                            // attribute 2 matches aColor in Vertex Shader
 		2,

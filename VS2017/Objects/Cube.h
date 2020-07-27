@@ -30,6 +30,8 @@ public:
 	Cube* getChild();
 	Cube* child;
 	//Cube* sibling;
+	GLuint* cubeVboPtr;
+	GLuint cubeVbo;
 
 	void draw(Shader* shaderProgram, bool isTexture);
 
