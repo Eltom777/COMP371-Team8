@@ -18,7 +18,7 @@ void LetterI::setup() { // create letter I
 	topComponents[0].updateTranslation(glm::translate(mat4(1.0f), vec3(-0.05f, 0.025f, 0.0f)));// top middle
 
 	topComponents[1].updateScale(glm::scale(mat4(1.0f), vec3(6.0f, 2.0f, 2.0f)));
-	topComponents[1].updateTranslation(glm::translate(mat4(1.0f), vec3(-0.05f, 0.115f, 0.0f)));// top
+	topComponents[1].updateTranslation(glm::translate(mat4(1.0f), vec3(-0.05f, 0.055f, 0.0f)));// top
 
 	// setup hierarchy
 	bottomComponents[0].updateChild(&bottomComponents[1]); // base
