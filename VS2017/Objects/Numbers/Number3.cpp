@@ -47,5 +47,7 @@ void Number3::setup() { //create number3
 }
 
 Number3::~Number3() {
-	delete[] components;
+	// delete[] components;
+	delete[] topComponents;
+	delete[] bottomComponents;
 }
