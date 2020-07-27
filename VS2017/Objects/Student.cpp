@@ -70,16 +70,17 @@ void Student::rotate(mat4 r) {
 }
 
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
-	// draw all components of model
+	glDisable(GL_BLEND);
 	glBindVertexArray(cubeVAO);
 	/*components[0]->draw(modelMatrixLocation);
 	components[1]->draw(modelMatrixLocation);*/
-
 	components[0]->drawTop(modelMatrixLocation);
 	components[0]->drawBottom(modelMatrixLocation);
 	components[1]->drawTop(modelMatrixLocation);
 	components[1]->drawBottom(modelMatrixLocation);
-
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
 	glBindVertexArray(sphereVAO);
 	sphere->draw(modelMatrixLocation, sphereVertices);
 }
