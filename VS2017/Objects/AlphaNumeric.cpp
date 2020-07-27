@@ -79,6 +79,7 @@ void AlphaNumeric::traverse(mat4 mat, Cube* current)
 	}
 }
 
+
 void AlphaNumeric::create() {
 	cubeVAO = components[0].createCubeVAO();
 	textureId = loadTexture(filename);
@@ -110,6 +111,15 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 	}
 }
 
+void AlphaNumeric::randomLocation(float x, float z)
+{
+	mat4 t = glm::translate(mat4(1.0), glm::vec3(x, 0.0f, z));
+	modelMatrix = t * modelMatrix;
+
+	for (int i = 0; i < numberOfCubes; i++) {
+		components[i].updateTranslation(t);
+	}
+}
 
 AlphaNumeric::~AlphaNumeric() {
 	delete[] components;

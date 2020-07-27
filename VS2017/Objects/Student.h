@@ -12,6 +12,8 @@ public:
 	void draw(Shader* shaderProgram, const bool isTexture);
 	void create();
 
+	void randomLocation(float x, float z);
+
 protected:
 	AlphaNumeric* components[2] = { Letter, Number };
 	AlphaNumeric* Letter;

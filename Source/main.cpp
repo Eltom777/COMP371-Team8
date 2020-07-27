@@ -12,6 +12,7 @@
 //
 
 #include <iostream>
+#include <string>
 
 #define GLEW_STATIC 1   // This allows linking with Static Library on Windows, without DLL
 #include <GL/glew.h>    // Include GLEW - OpenGL Extension Wrangler
@@ -29,15 +30,24 @@
 #include <Objects/Anissa.h>
 #include <Objects/Keven.h>
 
+using namespace std;
+
 // which model we are currently looking at (0, 1, 2, 3, 4)
 // if -1, then we are not looking at any models
 static int currentModel = -1;
 static bool isTexture = false;
 Camera* camera_ptr;
 Shader* shaderProgram;
+
+// random location range
+const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
+const float range = MAX_RAND - MIN_RAND;
+
+>
 //Function interfaces for camera response to mouse input.
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 // Models
@@ -437,6 +447,10 @@ void setUpCamera(Camera* camera, Shader shaderProgram) {
 	shaderProgram.setMat4("viewMatrix", viewMatrix);
 }
 
+
+
+
+
 /*
 Main method.
 */
@@ -456,6 +470,7 @@ int main(int argc, char* argv[])
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetKeyCallback(window, key_callback);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetKeyCallback(window, key_callback);
@@ -502,6 +517,8 @@ int main(int argc, char* argv[])
 	Model4->create();
 	Model5->create();
 
+	
+
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -519,10 +536,12 @@ int main(int argc, char* argv[])
 		// Render grid and axis and cube
 		renderGridAxisCube(shaderProgram, shaderPrograms, objGrid);
 		
-
 		// Rotating Right
 		//rotateRight(window, worldMatrixLocation);
 
+
+		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
+	
 
 		// Draw AlphaNumeric models
 		Model1->draw(shaderProgram, isTexture);
@@ -607,7 +626,78 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	glViewport(0, 0, width, height);
+	glViewport(-4, -4, width + 4, height + 4); // changed values: supposed to fix pitfall but doesnt seem to work
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	/*if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	{
+		if (isTexture)
+			isTexture = false;
+		else
+			isTexture = true;
+	}*/
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		// Get random x and z values
+		float randomX = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
+		float randomZ = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
+
+		// Make sure it doesn't go past the grid
+		mat4 m;
+		switch (currentModel)
+		{
+		case 1: 
+			m = Model1->getModelMatrix();
+			break;
+		case 2:
+			m = Model2->getModelMatrix();
+			break;
+		case 3:
+			m = Model3->getModelMatrix();
+			break;
+		case 4:
+			m = Model4->getModelMatrix();
+			break;
+		case 5:
+			m = Model5->getModelMatrix();
+			break;
+		}
+
+		float currentX = m[3][0];
+		float currentZ = m[3][2];
+
+		if (currentX + randomX < -1.0f) { randomX = randomX + 0.5f; }
+		else if (currentX + randomX > 1.0f) { randomX = randomX - 0.5f; }
+
+		if (currentZ + randomZ < -1.0f) { randomZ = randomZ += 0.5f; }
+		else if (currentZ + randomZ > 1.0f) { randomZ = randomZ - 0.5f; }
+
+		// Move to "random" location
+		// Currently relative of previous position (fix if time)
+		switch (currentModel)
+		{
+		case 1:
+			Model1->randomLocation(randomX, randomZ);
+			break;
+		case 2:
+			Model2->randomLocation(randomX, randomZ);
+			break;
+		case 3:
+			Model3->randomLocation(randomX, randomZ);
+			break;
+		case 4:
+			Model4->randomLocation(randomX, randomZ);
+			break;
+		case 5:
+			Model5->randomLocation(randomX, randomZ);
+			break;
+		}
+
+		currentModel = -1; // set view back to origin to see new location
+	}
 }
 /*
 Toggle Textures on and off
