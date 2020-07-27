@@ -71,7 +71,7 @@ Cube::Cube()
 	scalingMatrix = mat4(1.0f);
 	//modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 
-	child = NULL;
+	cubeChild = NULL;
 	//sibling = NULL;
 }
 
@@ -117,12 +117,12 @@ void Cube::updateTranslation(mat4 t)
 
 void Cube::updateChild(Cube* c)
 {
-	this->child = c;
+	this->cubeChild = c;
 }
 
 Cube* Cube::getChild()
 {
-	return this->child;
+	return this->cubeChild;
 }
 
 int Cube::createCubeVAO() {

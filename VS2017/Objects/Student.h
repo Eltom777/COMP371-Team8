@@ -9,6 +9,7 @@ public:
 	mat4 getModelMatrix();
 	void translate(mat4 t);
 	void scale(mat4 s);
+	//void rotate(mat4 r, GLuint modelMatrixLocation);
 	void rotate(mat4 r);
 	void draw(Shader* shaderProgram, const bool isTexture);
 	void create();

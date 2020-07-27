@@ -29,7 +29,7 @@ void Student::scale(mat4 s) {
 		component->translateModel(tempworldMatrix);
 	}
 	sphere->translateModel(tempworldMatrix);
-	
+
 	//modelMatrix = s * modelMatrix;
 	for (AlphaNumeric* component : components) {
 		component->translateModel(s);
@@ -41,27 +41,23 @@ void Student::scale(mat4 s) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-	
 	sphere->translateModel(tempworldMatrix);
 }
 
 void Student::rotate(mat4 r) {
-	
+
 	//Place back to origin
 	vec3 translationComponent = vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 	mat4 tempworldMatrix = glm::translate(mat4(1.0), translationComponent * -1.0f); //place back to origin
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-
 	sphere->translateModel(tempworldMatrix);
 
 	for (AlphaNumeric* component : components) {
 		component->translateModel(r);
 	}
-
 	sphere->translateModel(r);
-
 	//modelMatrix = r * modelMatrix;
 
 	//Place back to original spot
@@ -91,15 +87,20 @@ void Student::randomLocation(float x, float z)
 	for (AlphaNumeric* component : components) {
 		component->randomLocation(x, z);
 	}
-
 	sphere->translateModel(tempworldMatrix);
 }
 
 //void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
 	// draw all components of model
-	//glBindVertexArray(cubeVAO);
-	//components[0]->draw(modelMatrixLocation);
-	//components[1]->draw(modelMatrixLocation);
-	//glBindVertexArray(sphereVAO);
-	//sphere->draw(modelMatrixLocation, sphereVertices);
-//}
+	
+	glBindVertexArray(cubeVAO);
+
+
+	components[0]->drawTop(modelMatrixLocation);
+	components[0]->drawBottom(modelMatrixLocation);
+	components[1]->drawTop(modelMatrixLocation);
+	components[1]->drawBottom(modelMatrixLocation);
+
+	glBindVertexArray(sphereVAO);
+	sphere->draw(modelMatrixLocation, sphereVertices);
+}
