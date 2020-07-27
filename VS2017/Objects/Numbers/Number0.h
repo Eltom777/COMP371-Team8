@@ -3,7 +3,9 @@
 
 class Number0 : public AlphaNumeric
 {
-	static const int NUMOFCUBES = 5;
+	static const int NUMOFCUBES = 7;
+	static const int NUMOFTOPCUBES = 4;
+	static const int NUMOFBOTCUBES = 3;
 
 public:
 	Number0();
