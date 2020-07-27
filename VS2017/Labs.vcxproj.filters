@@ -33,6 +33,9 @@
     <Filter Include="Objects\lightSource">
       <UniqueIdentifier>{47ce9f61-2eaf-4ed0-b869-bfa20358ff43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{c6bae1ed-4556-41fc-9243-85014d28d499}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -159,10 +162,10 @@
     <ClCompile Include="Objects\AlphaNumeric.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-	   <ClCompile Include="LightCube.cpp">
+    <ClCompile Include="Objects\LightCube.cpp">
       <Filter>Objects\lightSource</Filter>
     </ClCompile>
-    <ClCompile Include="LightSourceContainer.cpp">
+    <ClCompile Include="Objects\LightSourceContainer.cpp">
       <Filter>Objects\lightSource</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,10 +236,10 @@
     <ClInclude Include="Objects\AlphaNumeric.h">
       <Filter>Objects</Filter>
     </ClInclude>
-	<ClInclude Include="LightCube.h">
+    <ClInclude Include="Objects\LightCube.h">
       <Filter>Objects\lightSource</Filter>
     </ClInclude>
-    <ClInclude Include="LightSourceContainer.h">
+    <ClInclude Include="Objects\LightSourceContainer.h">
       <Filter>Objects\lightSource</Filter>
     </ClInclude>
   </ItemGroup>

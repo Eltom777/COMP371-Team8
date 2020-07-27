@@ -123,8 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="LightCube.cpp" />
-    <ClCompile Include="LightSourceContainer.cpp" />
     <ClCompile Include="Objects\Anissa.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
@@ -136,6 +134,8 @@
     <ClCompile Include="Objects\LetterL.cpp" />
     <ClCompile Include="Objects\LetterO.cpp" />
     <ClCompile Include="Objects\LetterV.cpp" />
+    <ClCompile Include="Objects\LightCube.cpp" />
+    <ClCompile Include="Objects\LightSourceContainer.cpp" />
     <ClCompile Include="Objects\Melina.cpp" />
     <ClCompile Include="Objects\Number0.cpp" />
     <ClCompile Include="Objects\Number3.cpp" />
@@ -148,8 +148,6 @@
     <ClCompile Include="Objects\Thomas.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LightCube.h" />
-    <ClInclude Include="LightSourceContainer.h" />
     <ClInclude Include="Objects\Anissa.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
@@ -161,6 +159,8 @@
     <ClInclude Include="Objects\LetterL.h" />
     <ClInclude Include="Objects\LetterO.h" />
     <ClInclude Include="Objects\LetterV.h" />
+    <ClInclude Include="Objects\LightCube.h" />
+    <ClInclude Include="Objects\LightSourceContainer.h" />
     <ClInclude Include="Objects\Melina.h" />
     <ClInclude Include="Objects\Number0.h" />
     <ClInclude Include="Objects\Number3.h" />

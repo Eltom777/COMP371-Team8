@@ -22,7 +22,7 @@
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
 #include <Objects/Shader.h>
-#include <LightSourceContainer.h>
+#include <Objects/LightSourceContainer.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/Thomas.h>
@@ -425,7 +425,7 @@ void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera, Thom
 	}
   
   // Keven Model
-	{
+	else if (currentModel == 4 && glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
 
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
@@ -549,11 +549,11 @@ int main(int argc, char* argv[])
 
 
 		//// activating lighting shader
-		glUseProgram(shaderProgram);
+		/*glUseProgram(shaderProgram);
 		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 1.0f, 0.5f, 0.31f);
 		glUniform3f(glGetUniformLocation(shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
 		glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, &lightSourcePosition[0]);
-		glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, &camera_ptr->cameraPos[0]);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, &camera_ptr->cameraPos[0]);*/
 
 
 		// Draw AlphaNumeric models
