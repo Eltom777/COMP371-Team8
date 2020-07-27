@@ -156,17 +156,6 @@ int Cube::createCubeVAO() {
 	);
 	glEnableVertexAttribArray(1);
 
-	glVertexAttribPointer(2,                            // attribute 2 matches aColor in Vertex Shader
-		2,
-		GL_FLOAT,
-		GL_FALSE,
-		sizeof(Cube::TexturedColoredVertex),
-		(void*)(2 * sizeof(vec3))      // uv is offseted a vec2 (comes after position)
-	);
-	glEnableVertexAttribArray(2);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // VAO already stored the state we just defined, safe to unbind buffer
-	glBindVertexArray(0); // Unbind to not modify the VAO
 
 	return vao;
 }

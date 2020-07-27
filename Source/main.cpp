@@ -22,6 +22,7 @@
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
 #include <Objects/Shader.h>
+#include <LightSourceContainer.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
 #include <Objects/Thomas.h>
@@ -56,6 +57,12 @@ Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+
+// Lighting
+// These values seem to center the light for some reason, more investigating to do as why
+glm::vec3 lightSourcePosition(3.0f, -3.0f, 12.0f);
+//LightSourceContainer* LightSource = new LightSourceContainer(&lightSourcePosition); Does not appear where the light is comming from, reinstate once problem above is fixed
 
 
 void initialize() {
@@ -441,7 +448,6 @@ void setUpCamera(Camera* camera, Shader shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
-
 	shaderProgram.setMat4("viewMatrix", viewMatrix);
 }
 
@@ -540,6 +546,15 @@ int main(int argc, char* argv[])
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 	
+
+
+		//// activating lighting shader
+		glUseProgram(shaderProgram);
+		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 1.0f, 0.5f, 0.31f);
+		glUniform3f(glGetUniformLocation(shaderProgram, "lightColor"), 1.0f, 1.0f, 1.0f);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, &lightSourcePosition[0]);
+		glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, &camera_ptr->cameraPos[0]);
+
 
 		// Draw AlphaNumeric models
 		Model1->draw(shaderProgram, isTexture);
