@@ -124,3 +124,8 @@ void AlphaNumeric::randomLocation(float x, float z)
 AlphaNumeric::~AlphaNumeric() {
 	delete[] components;
 }
+
+AlphaNumeric::AlphaNumeric(int numOfCubes) {
+	numberOfCubes = numOfCubes;
+	components = new Cube[numberOfCubes];
+}

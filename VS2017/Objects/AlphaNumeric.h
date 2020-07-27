@@ -6,6 +6,7 @@ class AlphaNumeric : public Object
 {
 public:
 	AlphaNumeric(int numOfCubes, bool isLetter);
+	AlphaNumeric(int numOfCubes);
 	mat4 getModelMatrix();
 	virtual void updateModelMatrix() = 0;
 	void translateModel(mat4 t);
