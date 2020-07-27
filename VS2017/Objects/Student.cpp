@@ -91,16 +91,17 @@ void Student::randomLocation(float x, float z)
 }
 
 //void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
-	// draw all components of model
-	
-	glBindVertexArray(cubeVAO);
-
-
+	// Draw all components of model, disable blending when drawing the alphanumeric models
+	glDisable(GL_BLEND);
+	/*components[0]->draw(modelMatrixLocation);
+	components[1]->draw(modelMatrixLocation);*/
 	components[0]->drawTop(modelMatrixLocation);
 	components[0]->drawBottom(modelMatrixLocation);
 	components[1]->drawTop(modelMatrixLocation);
 	components[1]->drawBottom(modelMatrixLocation);
-
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
 	glBindVertexArray(sphereVAO);
 	sphere->draw(modelMatrixLocation, sphereVertices);
 }
