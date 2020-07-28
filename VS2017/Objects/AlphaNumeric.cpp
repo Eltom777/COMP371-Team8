@@ -153,8 +153,15 @@ void AlphaNumeric::randomLocation(float x, float z)
 	mat4 t = glm::translate(mat4(1.0), glm::vec3(x, 0.0f, z));
 	modelMatrix = t * modelMatrix;
 
-	for (int i = 0; i < numberOfCubes; i++) {
+	/*for (int i = 0; i < numberOfCubes; i++) {
 		components[i].updateTranslation(t);
+	}*/
+
+	for (int i = 0; i < numberOfTopCubes; i++) {
+		topComponents[i].updateTranslation(t);
+	}
+	for (int i = 0; i < numberOfBotCubes; i++) {
+		bottomComponents[i].updateTranslation(t);
 	}
 
 }

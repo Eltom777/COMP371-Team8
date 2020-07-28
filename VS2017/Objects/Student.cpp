@@ -88,7 +88,7 @@ void Student::randomLocation(float x, float z)
 		component->randomLocation(x, z);
 	}
 
-	sphere->translateModel(tempworldMatrix);
+	//sphere->translateModel(tempworldMatrix);
 }
 
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {

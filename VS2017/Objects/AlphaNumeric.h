@@ -20,7 +20,6 @@ public:
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void randomLocation(float x, float z);
-	Cube* components;
 	//void draw(GLuint modelMatrixLocation);
 
 	void drawTop(GLuint modelMatrixLocation);
