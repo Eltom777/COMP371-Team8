@@ -1,6 +1,6 @@
 #include "Number0.h"
 
-Number0::Number0(): AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES) {
+Number0::Number0(): AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES, false) {
 	numberOfTopCubes = NUMOFTOPCUBES;
 	numberOfBotCubes = NUMOFBOTCUBES;
 	setup();

@@ -1,7 +1,7 @@
 #include "Number9.h"
 #include <iostream>
 
-Number9::Number9() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES) {
+Number9::Number9() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES, false) {
 	//numberOfCubes = NUMOFCUBES;
 	numberOfTopCubes = NUMOFTOPCUBES;
 	numberOfBotCubes = NUMOFBOTCUBES;
