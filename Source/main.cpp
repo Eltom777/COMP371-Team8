@@ -12,6 +12,7 @@
 //
 
 #include <iostream>
+#include <string>
 
 #define GLEW_STATIC 1   // This allows linking with Static Library on Windows, without DLL
 #include <GL/glew.h>    // Include GLEW - OpenGL Extension Wrangler
@@ -20,6 +21,7 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
+
 #include <Shaders.h>
 #include <Grid.h> //rendered objects
 #include <Camera.h>
@@ -42,9 +44,14 @@ int width, height;
 string spherePath = "../Assets/Models/sphere.obj";
 int sphereVertices;
 
+// random location range
+const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
+const float range = MAX_RAND - MIN_RAND;
+
 //Function interfaces for camera response to mouse input.
-void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 // Models
@@ -71,7 +78,7 @@ void initialize() {
 }
 
 /*
-Returns an array of VAOs for cubes, grids, and axes. 
+Returns an array of VAOs for cubes, grids, and axes.
 */
 GLuint* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
 	// create VAOs
@@ -383,8 +390,8 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 		glm::vec3 translationComponent = glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 
 		glm::mat4 viewMatrix = glm::lookAt(glm::vec3(-0.75f, 0.01f, 0.0f), // position
-											translationComponent, // front camera.cameraPos + camera.cameraFront
-											camera->cameraUp);  // up
+			translationComponent, // front camera.cameraPos + camera.cameraFront
+			camera->cameraUp);  // up
 
 		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
@@ -441,8 +448,8 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 
 		currentModel = 4;
 	}
-  
-  // Keven Model
+
+	// Keven Model
 	else if (currentModel == 5 && glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 	{
 		glm::mat4 modelMatrix = Model5->getModelMatrix();
@@ -472,6 +479,10 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
+
+
+
+
 /*
 Main method.
 */
@@ -491,7 +502,8 @@ int main(int argc, char* argv[])
 	glfwMakeContextCurrent(window);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // resizes window correctly
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -517,6 +529,8 @@ int main(int argc, char* argv[])
 	Sphere objSphere;
 	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
+
+
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -534,6 +548,8 @@ int main(int argc, char* argv[])
 		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
+
+		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
 		// Draw AlphaNumeric models
 		Model1->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
@@ -554,9 +570,9 @@ int main(int argc, char* argv[])
 
 		// Camera frame timing
 		camera_ptr->handleFrameData();
-    
+
 		// Set up Camera
-		if(currentModel == -1)
+		if (currentModel == -1)
 			setUpCamera(camera_ptr, shaderProgram);
 
 		// Choose which model to do transformation
@@ -602,7 +618,7 @@ int main(int argc, char* argv[])
 
 		glBindVertexArray(0);
 	}
-  
+
 	// Shutdown GLFW
 	glfwTerminate();
 
@@ -621,10 +637,81 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
-} 	
+}
 
 // Makes sure the window is correctly resized (continues drawing)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	glViewport(0, 0, width, height);
+	glViewport(-4, -4, width + 4, height + 4); // changed values: supposed to fix pitfall but doesnt seem to work
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	/*if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	{
+		if (isTexture)
+			isTexture = false;
+		else
+			isTexture = true;
+	}*/
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		// Get random x and z values
+		float randomX = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
+		float randomZ = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
+
+		// Make sure it doesn't go past the grid
+		mat4 m;
+		switch (currentModel)
+		{
+		case 1:
+			m = Model1->getModelMatrix();
+			break;
+		case 2:
+			m = Model2->getModelMatrix();
+			break;
+		case 3:
+			m = Model3->getModelMatrix();
+			break;
+		case 4:
+			m = Model4->getModelMatrix();
+			break;
+		case 5:
+			m = Model5->getModelMatrix();
+			break;
+		}
+
+		float currentX = m[3][0];
+		float currentZ = m[3][2];
+
+		if (currentX + randomX < -1.0f) { randomX = randomX + 0.5f; }
+		else if (currentX + randomX > 1.0f) { randomX = randomX - 0.5f; }
+
+		if (currentZ + randomZ < -1.0f) { randomZ = randomZ += 0.5f; }
+		else if (currentZ + randomZ > 1.0f) { randomZ = randomZ - 0.5f; }
+
+		// Move to "random" location
+		// Currently relative of previous position (fix if time)
+		switch (currentModel)
+		{
+		case 1:
+			Model1->randomLocation(randomX, randomZ);
+			break;
+		case 2:
+			Model2->randomLocation(randomX, randomZ);
+			break;
+		case 3:
+			Model3->randomLocation(randomX, randomZ);
+			break;
+		case 4:
+			Model4->randomLocation(randomX, randomZ);
+			break;
+		case 5:
+			Model5->randomLocation(randomX, randomZ);
+			break;
+		}
+
+		currentModel = -1; // set view back to origin to see new location
+	}
 }

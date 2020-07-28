@@ -14,6 +14,8 @@ public:
 	void rotate(mat4 r);
 	void draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO);
 
+	void randomLocation(float x, float z);
+
 protected:
 	AlphaNumeric* components[2] = { letter, number };
 	AlphaNumeric* letter;
