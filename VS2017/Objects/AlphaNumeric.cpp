@@ -174,14 +174,14 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 }
 void AlphaNumeric::drawTop(Shader* shaderProgram) {
 	for (int i = 0; i < numberOfTopCubes; i++) {
-		shaderProgram->setMat4("modelMatrix", topComponents[i].getModelMatrix());//setting modelmatrix of each cube
+		shaderProgram->setMat4("worldMatrix", topComponents[i].getModelMatrix());//setting modelmatrix of each cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }
 
 void AlphaNumeric::drawBottom(Shader* shaderProgram) {
 	for (int i = 0; i < numberOfBotCubes; i++) {
-		shaderProgram->setMat4("modelMatrix", bottomComponents[i].getModelMatrix());//setting modelmatrix of each cube
+		shaderProgram->setMat4("worldMatrix", bottomComponents[i].getModelMatrix());//setting modelmatrix of each cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }

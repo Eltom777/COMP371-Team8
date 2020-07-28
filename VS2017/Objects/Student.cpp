@@ -94,6 +94,7 @@ void Student::randomLocation(float x, float z)
 void Student::create() {
 	components[0]->create();
 	components[1]->create();
+	sphere->create();
 }
 
 void Student::draw(Shader* shaderProgram, const bool isTexture) {
