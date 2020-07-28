@@ -38,6 +38,8 @@ using namespace std;
 static int currentModel = -1;
 Camera* camera_ptr;
 int width, height;
+Shader* shaderProgram;
+bool isTexture = false;
 
 // Sphere paths and vertices variables
 string spherePath = "../Assets/Models/sphere.obj";
@@ -91,14 +93,13 @@ GLuint* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
 	return VAO;
 }
 
-void setUpProjection(int shaderProgram, Camera* camera) {
+void setUpProjection(Shader shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
-		(float)width / height,     // aspect ratio
+		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
-	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
-	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
+	shaderProgram.setMat4("projectionMatrix", Projection);
 }
 
 void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
@@ -378,9 +379,7 @@ Numbers pressed are associated with corresponding model.
 Sets camera's focus to number associated with chosen model.
 Sets currentModel to number associated with chosen model.
 */
-void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
-
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera) {
 
 	if (currentModel == 1 && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 	{
@@ -392,8 +391,8 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
+
 
 		currentModel = 1;
 	}
@@ -409,8 +408,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 2;
 	}
@@ -426,7 +424,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 3;
 	}
@@ -442,8 +440,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 4;
 	}
@@ -459,8 +456,7 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 			translationComponent, // front camera.cameraPos + camera.cameraFront
 			camera->cameraUp);  // up
 
-		GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-		glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+		shaderProgram->setMat4("viewMatrix", viewMatrix);
 
 		currentModel = 5;
 	}
@@ -470,12 +466,12 @@ void cameraFocus(GLFWwindow* window, int shaderProgram, Camera* camera) {
 	}
 }
 
-void setUpCamera(Camera* camera, int shaderProgram) {
+void setUpCamera(Camera* camera, Shader shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
-	GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
-	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
+
+	shaderProgram.setMat4("viewMatrix", viewMatrix);
 }
 
 /*
@@ -512,18 +508,37 @@ int main(int argc, char* argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Compile and link shaders here ...
+	// Array of Shader Programs : 0 = color shader , 1 = texture shader
+	Shader shaderPrograms[] = {
+								Shader("../Assets/Shaders/colorVertexShader.vertexshader", "../Assets/Shaders/colorFragmentShader.Fragmentshader"),
+								Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader")
+	};
+	shaderProgram = shaderPrograms;
 
-
+	
 	// Create Camera Object
 	camera_ptr = new Camera(window);
+
+	// Set View and Projection matrices on both shaders
+	setUpProjection(shaderPrograms[0], camera_ptr);
+	setUpCamera(camera_ptr, shaderPrograms[0]);
+
+	setUpProjection(shaderPrograms[1], camera_ptr);
+	setUpCamera(camera_ptr, shaderPrograms[1]);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
 	Sphere objSphere;
+	objGrid.setup();
 	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
-
+	//Load Texture and VAO for Models
+	Model1->create();
+	Model2->create();
+	Model3->create();
+	Model4->create();
+	Model5->create();
 
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -536,7 +551,8 @@ int main(int argc, char* argv[])
 
 		// Set up Perspective View
 		glfwGetWindowSize(window, &width, &height); // if window is resized, get new size to draw perspective view correctly
-		setUpProjection(shaderProgram, camera_ptr);
+		setUpProjection(shaderPrograms[0], camera_ptr);
+		setUpProjection(shaderPrograms[1], camera_ptr);
 
 		// Render grid and axis and cube
 		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
@@ -556,8 +572,7 @@ int main(int argc, char* argv[])
 		//sphere->draw(worldMatrixLocation, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
-		glm::mat4 worldMatrix = mat4(1.0f);
-		glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &worldMatrix[0][0]);
+		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
 
 		// Model Render Mode
 		renderMode(window);
@@ -566,8 +581,10 @@ int main(int argc, char* argv[])
 		camera_ptr->handleFrameData();
 
 		// Set up Camera
-		if (currentModel == -1)
-			setUpCamera(camera_ptr, shaderProgram);
+		if (currentModel == -1) {
+			setUpCamera(camera_ptr, shaderPrograms[0]);
+			setUpCamera(camera_ptr, shaderPrograms[1]);
+		}
 
 		// Choose which model to do transformation
 		selectModel(window);
@@ -641,13 +658,17 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	/*if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
 	{
-		if (isTexture)
+		if (isTexture) {
 			isTexture = false;
-		else
+			shaderProgram--;
+		}
+		else {
 			isTexture = true;
-	}*/
+			shaderProgram++;
+		}
+	}
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
