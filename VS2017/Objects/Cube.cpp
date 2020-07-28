@@ -85,7 +85,7 @@ mat4 Cube::getModelMatrix() {
 
 void Cube::setModelMatrix()
 {
-	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
+	modelMatrix = translationMatrix * rotationMatrix * scalingMatrix * scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 }
 
 void Cube::updateScale(mat4 s)

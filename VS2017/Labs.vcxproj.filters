@@ -141,11 +141,11 @@
     <ClCompile Include="Objects\Camera.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects.cpp">
+    <ClCompile Include="Objects\Object.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Shader.cpp">
+      <Filter>Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,11 +215,11 @@
     <ClInclude Include="Objects\Camera.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects.h">
+    <ClInclude Include="Objects\Object.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Shader.h">
+      <Filter>Shaders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

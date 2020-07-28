@@ -3,8 +3,8 @@
 
 Melina::Melina() {
 	components[0] = new LetterL();
-	components[1] = new Number9();
-	setup();
+	//components[1] = new Number9();
+	//setup();
 }
 
 void Melina::setup() {

@@ -6,7 +6,7 @@ LetterV::LetterV() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES, true) {
 	setup();
 }
 
-void LetterV::setup() { //create letter V
+void LetterV::setup() { //create letter V (FIX EXCEPTION) 
 	// hardcoded relative positions
 	bottomComponents[0].updateScale(glm::scale(mat4(1.0f), vec3(2.0f, 2.0f, 2.0f))); // left (bottom)
 	bottomComponents[0].updateTranslation(glm::translate(mat4(1.0f), vec3(0.020f, -0.03f, 0.0f)));

@@ -37,7 +37,7 @@ private:
 	mat4 rotationMatrix;
 	mat4 translationMatrix;
 	mat4 scalingMatrix;
-	Grid gridPointer;
-	float scalingFactor = 1.0f / static_cast <float>(gridPointer.getNumberOfColumns());
+	Grid* gridPointer;
+	float scalingFactor = 1.0f / static_cast <float>(gridPointer->getNumberOfColumns());
 };
 
