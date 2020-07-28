@@ -76,7 +76,7 @@ void Student::rotate(mat4 r) {
 	for (AlphaNumeric* component : components) {
 		component->translateModel(tempworldMatrix);
 	}
-
+	sphere->translateModel(tempworldMatrix);
 }
 
 void Student::randomLocation(float x, float z)
