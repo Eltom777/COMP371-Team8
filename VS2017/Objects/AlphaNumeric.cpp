@@ -20,9 +20,9 @@ AlphaNumeric::AlphaNumeric(int numOfCubes) {
 //	base = NULL;
 //}
 
-AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes, int numOfCubes, bool isLetter) {
-	numberOfCubes = numOfCubes;
-	components = new Cube[numberOfCubes];
+AlphaNumeric::AlphaNumeric(int numOfBotCubes, int numOfTopCubes, bool isLetter) {
+	//numberOfCubes = numOfCubes;
+	//components = new Cube[numberOfCubes];
 	numberOfTopCubes = numOfTopCubes;
 	numberOfBotCubes = numOfBotCubes;
 	topComponents = new Cube[numberOfTopCubes];

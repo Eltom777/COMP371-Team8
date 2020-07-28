@@ -8,7 +8,7 @@ class AlphaNumeric
 public:
 	AlphaNumeric(int numOfCubes);
 	//AlphaNumeric(int numOfTopCubes, int numOfBotCubes);
-	AlphaNumeric(int numOfTopCubes, int numOfBotCubes, int numOfCubes, bool isLetter);
+	AlphaNumeric(int numOfBotCubes, int numOfTopCubes, bool isLetter);
 	~AlphaNumeric();
 	mat4 getModelMatrix();
 	void draw(Shader * shaderProgram, const bool isTexture);
