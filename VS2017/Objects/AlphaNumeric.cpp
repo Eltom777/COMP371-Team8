@@ -1,7 +1,7 @@
 #include "AlphaNumeric.h"
 #include <iostream>
 #include "Shader.h"
-#include "Objects.h"
+#include "Object.h"
 
 mat4 AlphaNumeric::getModelMatrix() {
 	return modelMatrix;
@@ -162,6 +162,9 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
 	}
+
+	// Disable blending
+	glDisable(GL_BLEND);
 
 	//bind vao
 	glBindVertexArray(cubeVAO);

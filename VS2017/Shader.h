@@ -11,7 +11,6 @@
 #include <iostream>
 #include <glm/glm.hpp>
 
-
 class Shader
 {
 public:

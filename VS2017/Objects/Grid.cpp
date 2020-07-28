@@ -102,6 +102,7 @@ int Grid::createGridVAO() {
 
 	return vao;
 }
+
 int Grid::getNumberOfColumns()
 {
 	return COLUMNS;
@@ -163,13 +164,11 @@ int Grid::createAxisVAO() {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-
 	// Upload Vertex Buffer to the GPU, keep a reference to it (vbo)
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(axis), axis, GL_STATIC_DRAW);
-
 
 	glVertexAttribPointer(0,                   // attribute 0 matches aPos in Vertex Shader
 		3,                   // size
@@ -179,7 +178,6 @@ int Grid::createAxisVAO() {
 		(void*)0             // array buffer offset
 	);
 	glEnableVertexAttribArray(0);
-
 
 	glVertexAttribPointer(1,                            // attribute 1 matches aColor in Vertex Shader
 		3,

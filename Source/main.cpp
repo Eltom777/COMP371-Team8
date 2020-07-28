@@ -44,10 +44,6 @@ Camera* camera_ptr;
 int width, height;
 Shader* shaderProgram;
 
-// Sphere paths and vertices variables
-string spherePath = "../Assets/Models/sphere.obj";
-int sphereVertices;
-
 // Random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
 const float range = MAX_RAND - MIN_RAND;
@@ -80,21 +76,6 @@ void initialize() {
 #endif
 }
 
-/*
-Returns an array of VAOs for cubes, grids, and axes.
-*/
-GLuint* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
-	// create VAOs
-	GLuint cubeVAO = objCube.createCubeVAO();
-	GLuint gridVAO = objGrid.createGridVAO();
-	GLuint axisVAO = objGrid.createAxisVAO();
-	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
-
-	GLuint VAO[4] = { cubeVAO, gridVAO, axisVAO, sphereVAO };
-
-	return VAO;
-}
-
 void setUpProjection(Shader shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
@@ -104,21 +85,10 @@ void setUpProjection(Shader shaderProgram, Camera* camera) {
 	shaderProgram.setMat4("projectionMatrix", Projection);
 }
 
-void renderGridAxisCubeSphere(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
+void renderGridAxis(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
 	// Draw grid and axis
 	objGrid.drawAxis(shaderArray[0]);
 	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
-}
-
-void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
-	// Draw grid and axis
-	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO[1]); // grid
-	glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
-	glBindVertexArray(VAO[2]); // axis
-	glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
-	glBindVertexArray(VAO[0]); // cube
-	glBindVertexArray(VAO[3]); // sphere
 }
 
 /*
@@ -537,12 +507,8 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	Sphere objSphere;
 	objCube.setModelMatrix();
 	objGrid.setup();
-	
-	// CHECK
-	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
 	//Load Texture and VAO for Models
 	Model1->create();
@@ -565,18 +531,17 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderPrograms[0], camera_ptr);
 		setUpProjection(shaderPrograms[1], camera_ptr);
 
-		// Render grid and axis and cube
-		renderGridAxisCubeSphere(shaderProgram, shaderPrograms, objGrid);
+		// Render grid and axis
+		renderGridAxis(shaderProgram, shaderPrograms, objGrid);
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
-		// CHECK
 		// Draw AlphaNumeric models
-		Model1->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
-		Model2->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
-		Model3->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
-		Model4->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
-		Model5->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
+		Model1->draw(shaderProgram, isTexture);
+		Model2->draw(shaderProgram, isTexture);
+		Model3->draw(shaderProgram, isTexture);
+		Model4->draw(shaderProgram, isTexture);
+		Model5->draw(shaderProgram, isTexture);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));

@@ -23,6 +23,8 @@ Sphere::~Sphere() {
 void Sphere::setup() {
 	scaleModel(glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f)));
 	translateModel(glm::translate(mat4(1.0), glm::vec3(0.0f, 0.1f, 0.0f)));
+	string spherePath = "../Assets/Models/sphere.obj";
+	sphereVAO = createSphereVAO(spherePath);
 }
 
 void Sphere::updateModelMatrix() {
@@ -58,14 +60,31 @@ Cube* Sphere::getChild()
 	return this->child;
 }
 
-void Sphere::draw(GLuint worldMatrixLocation, int sphereVertices) {
-	glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &modelMatrix[0][0]);
+//void Sphere::draw(GLuint worldMatrixLocation, int sphereVertices) {
+//	glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &modelMatrix[0][0]);
+//	glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
+//	glBindVertexArray(0);
+//}
+
+void Sphere::draw(Shader* shaderProgram) {
+	shaderProgram->use();
+
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	// bind VAO
+	glBindVertexArray(sphereVAO);
+
+	//draw textured grid
 	glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
+
+	//Unbind VAO
 	glBindVertexArray(0);
 }
 
 //Sets up a model using an Element Buffer Object to refer to vertex data
-GLuint Sphere::createSphereVAO(std::string path, int& vertexCount)
+GLuint Sphere::createSphereVAO(std::string path)
 {
 	vector<int> vertexIndices; //The contiguous sets of three indices of vertices, normals and UVs, used to make a triangle
 	vector<glm::vec3> vertices;
@@ -112,6 +131,6 @@ GLuint Sphere::createSphereVAO(std::string path, int& vertexCount)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertexIndices.size() * sizeof(int), &vertexIndices.front(), GL_STATIC_DRAW);
 
 	glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
-	vertexCount = vertexIndices.size();
+	sphereVertices = vertexIndices.size();
 	return VAO;
 }
