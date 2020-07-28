@@ -8,6 +8,7 @@
 //using namespace std;
 
 class Sphere {
+	const std::string spherePath = "../Assets/Models/sphere.obj";
 public:
 	Sphere();
 	~Sphere();
@@ -21,6 +22,7 @@ public:
 	void rotateModel(mat4 r);
 	void draw(Shader* shaderProgram);
 	GLuint createSphereVAO(std::string path);
+	void create();
 
 	Cube* child;
 private:

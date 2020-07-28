@@ -23,7 +23,9 @@ Sphere::~Sphere() {
 void Sphere::setup() {
 	scaleModel(glm::scale(mat4(1.0), glm::vec3(0.2f, 0.2f, 0.2f)));
 	translateModel(glm::translate(mat4(1.0), glm::vec3(0.0f, 0.1f, 0.0f)));
-	string spherePath = "../Assets/Models/sphere.obj";
+}
+
+void Sphere::create() {
 	sphereVAO = createSphereVAO(spherePath);
 }
 
@@ -68,7 +70,6 @@ Cube* Sphere::getChild()
 
 void Sphere::draw(Shader* shaderProgram) {
 	shaderProgram->use();
-
 	// Enable blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -77,6 +78,7 @@ void Sphere::draw(Shader* shaderProgram) {
 	glBindVertexArray(sphereVAO);
 
 	//draw textured grid
+	shaderProgram->setMat4("worldMatrix", modelMatrix);
 	glDrawElements(GL_TRIANGLES, sphereVertices, GL_UNSIGNED_INT, 0);
 
 	//Unbind VAO
