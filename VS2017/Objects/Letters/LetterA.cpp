@@ -28,11 +28,12 @@ void LetterA::setup() { //create letter A
 
 	bottomComponents[1].updateChild(&bottomComponents[0]); //base
 	bottomComponents[0].updateChild(&topComponents[0]);
-	updateBase(&bottomComponents[1]);
-
-	topComponents[0].updateChild(&topComponents[1]);
+	topComponents[0].updateChild(&topComponents[1]); //base top
 	topComponents[1].updateChild(&topComponents[2]);
 	topComponents[2].updateChild(&topComponents[3]);
+
+	updateBase(&bottomComponents[1]);
+	//updateBaseTop(&topComponents[0]);
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)), 0);

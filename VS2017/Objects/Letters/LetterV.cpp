@@ -30,13 +30,16 @@ void LetterV::setup() { //create letter V
 	topComponents[3].updateTranslation(glm::translate(mat4(1.0f), vec3(0.095f, 0.03f, 0.0f)));
 
 	// setup hierarchy
-	bottomComponents[0].updateChild(&bottomComponents[1]);
+	bottomComponents[0].updateChild(&bottomComponents[1]); //base
 	bottomComponents[1].updateChild(&bottomComponents[2]);
 	bottomComponents[2].updateChild(&topComponents[0]);
-	updateBase(&bottomComponents[0]);
-	topComponents[0].updateChild(&topComponents[1]);
+	
+	topComponents[0].updateChild(&topComponents[1]); //base top
 	topComponents[1].updateChild(&topComponents[2]);
 	topComponents[2].updateChild(&topComponents[3]);
+
+	updateBase(&bottomComponents[0]);
+	//updateBaseTop(&topComponents[0]);
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)), 0);

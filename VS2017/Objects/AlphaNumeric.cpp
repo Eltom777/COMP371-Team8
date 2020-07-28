@@ -28,6 +28,16 @@ Cube* AlphaNumeric::getBase()
 	return this->base;
 }
 
+void AlphaNumeric::updateBaseTop(Cube * b)
+{
+	this->baseTop = b;
+}
+
+Cube * AlphaNumeric::getBaseTop()
+{
+	return this->baseTop;
+}
+
 void AlphaNumeric::traverse(mat4 mat, int transformation)
 {
 	traverse(mat, getBase(), transformation);
@@ -61,15 +71,6 @@ void AlphaNumeric::traverse(mat4 mat, Cube* current, int transformation)
 		traverse(mat, current->getChild(), transformation);
 	}
 }
-
-//void AlphaNumeric::translateModel(mat4 t)
-//{
-//	modelMatrix = t * modelMatrix;
-//	for (int i = 0; i < numberOfCubes; i++) {
-//		components[i].updateTranslation(t);
-//	}
-//}
-//
 
 void AlphaNumeric::scaleModel(mat4 s)
 {
@@ -105,13 +106,20 @@ void AlphaNumeric::translateModel(mat4 t)
 {
 	modelMatrix = t * modelMatrix;
 	
-	//traverse(t, 0);
-
 	for (int i = 0; i < numberOfTopCubes; i++) {
 		topComponents[i].updateTranslation(t);
 	}
 	for (int i = 0; i < numberOfBotCubes; i++) {
 		bottomComponents[i].updateTranslation(t);
+	}
+}
+
+void AlphaNumeric::translateModelTop(mat4 t)
+{
+	modelMatrix = t * modelMatrix;
+
+	for (int i = 0; i < numberOfTopCubes; i++) {
+		topComponents[i].updateTranslation(t);
 	}
 }
 

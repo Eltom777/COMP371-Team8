@@ -22,10 +22,10 @@ void Melina::setup() {
 	sphere->translateModel(initialDisplacement);
 	sphere->translateModel(glm::translate(mat4(1.0f), vec3(0.0f, 0.13f, 0.0f)));
 
-	sphere->updateChild(&components[0]->topComponents[0]);
+	/*sphere->updateChild(&components[0]->topComponents[0]);
 	(*&components[0]->topComponents[0]).updateChild(&components[1]->topComponents[0]);
 	(*&components[0]->topComponents[0]).updateChild(&components[1]->topComponents[1]);
-	(*&components[0]->topComponents[0]).updateChild(&components[1]->topComponents[2]);
+	(*&components[0]->topComponents[0]).updateChild(&components[1]->topComponents[2]);*/
 }
 
 Melina::~Melina() {

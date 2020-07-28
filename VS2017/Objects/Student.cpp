@@ -20,6 +20,14 @@ void Student::translate(mat4 t) {
 	sphere->translateModel(t);
 }
 
+void Student::translateTop(mat4 t) {
+	modelMatrix = t * modelMatrix;
+	sphere->translateModel(t);
+	for (AlphaNumeric* component : components) {
+		component->translateModelTop(t);
+	}
+}
+
 void Student::scale(mat4 s) {
 
 	//Place back to origin
@@ -72,8 +80,6 @@ void Student::rotate(mat4 r) {
 void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
 	glDisable(GL_BLEND);
 	glBindVertexArray(cubeVAO);
-	/*components[0]->draw(modelMatrixLocation);
-	components[1]->draw(modelMatrixLocation);*/
 	components[0]->drawTop(modelMatrixLocation);
 	components[0]->drawBottom(modelMatrixLocation);
 	components[1]->drawTop(modelMatrixLocation);

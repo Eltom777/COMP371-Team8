@@ -159,6 +159,7 @@ void translateLeft(GLFWwindow* window) {
 			break;
 		case 2:
 			Model2->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			//Model2->translateTop(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
 			Model3->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
