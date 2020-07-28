@@ -19,7 +19,6 @@ public:
 
 	void create();
 
-
 protected:
 	AlphaNumeric* components[2] = { letter, number };
 	AlphaNumeric* letter;

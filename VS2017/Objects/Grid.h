@@ -37,7 +37,7 @@ public:
 	int getNumberOfColumns();
 	int createtextureGridVAO();
 	void drawGrid(Shader* shaderProgram, bool isTexture);
-	void drawAxis(Shader* shaderProgram);
+	void drawAxis(Shader shaderProgram);
 private:
 	static const vec3 axis[];
 	vec3 grid[SIZEOFARRAY];
@@ -46,7 +46,6 @@ private:
 	GLuint textureGridVAO;
 	GLuint textureId;
 	mat4 modelMatrix = mat4(1.0f);
-	static const vec3 axis[];
 	static const TexturedColoredVertex textureGrid[];
 	static const int indices[];
 };

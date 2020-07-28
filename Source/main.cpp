@@ -33,23 +33,26 @@
 
 using namespace std;
 
-// Which model we are currently looking at (0, 1, 2, 3, 4)
-// If -1, then we are not looking at any models
+// Which model we are currently looking at (0, 1, 2, 3, 4), if -1, then we are not looking at any models
 static int currentModel = -1;
+
+// Textures not enabled yet
+bool isTexture = false;
+
+// Forward declaration of camera and shader program
 Camera* camera_ptr;
 int width, height;
 Shader* shaderProgram;
-bool isTexture = false;
 
 // Sphere paths and vertices variables
 string spherePath = "../Assets/Models/sphere.obj";
 int sphereVertices;
 
-// random location range
+// Random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
 const float range = MAX_RAND - MIN_RAND;
 
-//Function interfaces for camera response to mouse input.
+//Function interfaces for camera response to mouse input
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -61,7 +64,6 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
-// Sphere* sphere = new Sphere();
 
 void initialize() {
 	glfwInit();
@@ -100,6 +102,12 @@ void setUpProjection(Shader shaderProgram, Camera* camera) {
 		0.01f, 100.0f);      // near and far (near > 0)
 
 	shaderProgram.setMat4("projectionMatrix", Projection);
+}
+
+void renderGridAxisCubeSphere(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
+	// Draw grid and axis
+	objGrid.drawAxis(shaderArray[0]);
+	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
 }
 
 void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
@@ -530,7 +538,10 @@ int main(int argc, char* argv[])
 	Grid objGrid;
 	Cube objCube;
 	Sphere objSphere;
+	objCube.setModelMatrix();
 	objGrid.setup();
+	
+	// CHECK
 	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
 	//Load Texture and VAO for Models
@@ -555,21 +566,17 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderPrograms[1], camera_ptr);
 
 		// Render grid and axis and cube
-		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
-
-		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
+		renderGridAxisCubeSphere(shaderProgram, shaderPrograms, objGrid);
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
+		// CHECK
 		// Draw AlphaNumeric models
-		Model1->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-		Model2->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-		Model3->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-		Model4->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-		Model5->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
-
-		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
-		//sphere->draw(worldMatrixLocation, sphereVertices);
+		Model1->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
+		Model2->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
+		Model3->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
+		Model4->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
+		Model5->draw(worldMatrixLocation, shaderProgram, isTexture, sphereVertices, VAO[0], VAO[3]);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
@@ -626,8 +633,6 @@ int main(int argc, char* argv[])
 
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
-
-		glBindVertexArray(0);
 	}
 
 	// Shutdown GLFW

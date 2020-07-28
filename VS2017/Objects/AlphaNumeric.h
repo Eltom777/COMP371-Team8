@@ -27,7 +27,9 @@ public:
 	//void draw(GLuint modelMatrixLocation);
 
 	void drawTop(Shader * shaderProgram);
-	void drawBottom(Shader * shaderProgram);
+	void drawBottom(Shader * shaderProgram);\
+
+	void create();
 
 	Cube* components;
 	Cube* topComponents;
@@ -36,7 +38,6 @@ public:
 	Cube* baseTop;
 	GLuint textureId;
 	GLuint cubeVAO;
-	void create();
 protected:
 	mat4 modelMatrix = mat4(1.0f);
 	mat4 translationMatrix = mat4(1.0f);

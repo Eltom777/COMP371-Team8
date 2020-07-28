@@ -226,8 +226,8 @@ void Grid::drawGrid(Shader* shaderProgram, bool isTexture) {
 	glBindVertexArray(0);
 }
 
-void Grid::drawAxis(Shader* shaderProgram) {
-	shaderProgram->use();
+void Grid::drawAxis(Shader shaderProgram) {
+	shaderProgram.use();
 
 	//bind VAO
 	glBindVertexArray(axisVAO);
