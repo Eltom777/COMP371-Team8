@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <Shader.h>
-#include "Objects.h"
+#include "Object.h"
 
 using namespace glm;
 

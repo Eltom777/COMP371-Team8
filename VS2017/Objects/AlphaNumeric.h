@@ -1,7 +1,7 @@
 #pragma once
 #include "Cube.h"
 #include "Shader.h"
-#include "Objects.h"
+#include "Object.h"
 
 class AlphaNumeric:Object
 {
