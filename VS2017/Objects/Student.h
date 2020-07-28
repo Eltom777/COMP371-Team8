@@ -8,6 +8,7 @@ public:
 	void updateModelMatrix();
 	mat4 getModelMatrix();
 	void translate(mat4 t);
+	void translateTop(mat4 t);
 	void scale(mat4 s);
 	//void rotate(mat4 r, GLuint modelMatrixLocation);
 	void rotate(mat4 r);

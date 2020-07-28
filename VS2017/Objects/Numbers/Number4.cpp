@@ -24,13 +24,14 @@ void Number4::setup() { // create number 4
 	bottomComponents[0].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, -0.03f, 0.0f))); // right edge bottom
 
 	bottomComponents[0].updateChild(&topComponents[0]); // base
-	updateBase(&bottomComponents[0]);
-
-	topComponents[0].updateChild(&topComponents[1]);
+	topComponents[0].updateChild(&topComponents[1]); // base top
 	topComponents[1].updateChild(&topComponents[2]);
 
+	updateBase(&bottomComponents[0]);
+	updateBaseTop(&topComponents[0]);
+
 	// set letter slightly above grid
-	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)), 0);
+	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);
 	
 	// bottomComponents[0].updateChild(NULL);
 

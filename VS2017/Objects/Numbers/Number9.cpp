@@ -33,24 +33,15 @@ void Number9::setup() { //create number 9
 	// Set children
 	bottomComponents[1].updateChild(&bottomComponents[0]); //base
 	bottomComponents[0].updateChild(&topComponents[0]);
-	updateBase(&bottomComponents[1]);
-	topComponents[0].updateChild(&topComponents[1]);
+	topComponents[0].updateChild(&topComponents[1]); //base top
 	topComponents[1].updateChild(&topComponents[2]);
+
+	updateBase(&bottomComponents[1]);
+	updateBaseTop(&topComponents[0]);
+
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, 0.0f)), 0);
-
-	bottomComponents[0].updateChild(NULL);
-	topComponents[0].updateChild(NULL);
-	topComponents[1].updateChild(NULL);
-
-	/*for (int i = 0; i < numberOfTopCubes; i++) {
-		topComponents[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, 0.0f)));
-	}*/
-
-	/*for (int i = 0; i < numberOfBotCubes; i++) {
-		bottomComponents[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.01f, 0.0f)));
-	}*/
 }
 
 Number9::~Number9() {

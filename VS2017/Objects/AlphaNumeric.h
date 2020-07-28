@@ -11,10 +11,14 @@ public:
 	mat4 getModelMatrix();
 	void updateBase(Cube * b);
 	Cube * getBase();
+	void updateBaseTop(Cube * b);
+	Cube * getBaseTop();
 	void traverse(mat4 mat, int transformation);
 	void traverse(mat4 mat, Cube* current, int transformation); // 0 - TRANSLATION | 1 - ROTATION | 2 - SCALING
 	void updateModelMatrix();
-	void translateModel(mat4 t); 
+	void translateModel(mat4 t);
+	void translateModelTop(mat4 t);
+
 	void scaleModel(mat4 s);
 	void rotateModel(mat4 r, GLuint modelMatrixLocation);
 	void traverse(mat4 mat);
@@ -33,6 +37,7 @@ public:
 	Cube* topComponents;
 	Cube* bottomComponents;
 	Cube* base;
+	Cube* baseTop;
 protected:
 	mat4 modelMatrix = mat4(1.0f);
 	mat4 translationMatrix = mat4(1.0f);

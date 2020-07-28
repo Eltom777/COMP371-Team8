@@ -33,9 +33,12 @@ void Number3::setup() { //create number3
 	bottomComponents[1].updateChild(&bottomComponents[0]); // base
 	bottomComponents[0].updateChild(&bottomComponents[2]);
 	bottomComponents[2].updateChild(&topComponents[2]);
-	updateBase(&bottomComponents[1]);
+	
 	topComponents[2].updateChild(&topComponents[0]); // base of the top
 	topComponents[0].updateChild(&topComponents[1]);
+
+	updateBase(&bottomComponents[1]);
+	updateBaseTop(&topComponents[2]);
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);

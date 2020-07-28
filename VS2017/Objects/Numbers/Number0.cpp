@@ -41,17 +41,16 @@ void Number0::setup() {
 	bottomComponents[0].updateChild(&bottomComponents[1]);
 	bottomComponents[1].updateChild(&bottomComponents[2]);
 	bottomComponents[2].updateChild(&topComponents[0]);
-	updateBase(&bottomComponents[0]);
+	
 	topComponents[0].updateChild(&topComponents[1]);
 	topComponents[1].updateChild(&topComponents[2]);
 	topComponents[2].updateChild(&topComponents[3]);
 
+	updateBase(&bottomComponents[0]);
+	updateBaseTop(&topComponents[0]);
+
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);
-
-	/*for (int i = 0; i < NUMOFCUBES; i++) {
-		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)));
-	}*/
 }
 
 Number0::~Number0() {
