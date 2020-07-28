@@ -24,12 +24,11 @@
 #include <Objects/Shader.h>
 #include <Objects/Grid.h> //rendered objects
 #include <Objects/Camera.h>
-#include <Objects/Thomas.h>
-#include <Objects/Melina.h>
-#include <Objects/Sharon.h>
-#include <Objects/Anissa.h>
-#include <Objects/Keven.h>
-#include <Sphere.h>
+#include <Objects/Students/Thomas.h>
+#include <Objects/Students/Melina.h>
+#include <Objects/Students/Sharon.h>
+#include <Objects/Students/Anissa.h>
+#include <Objects/Students/Keven.h>
 
 using namespace std;
 
@@ -318,7 +317,7 @@ void rotateRight(GLFWwindow* window) {
 Methods for scaling. Passing all models for switch statements.
 Scaling in increments of 0.005f.
 */
-void scaleUp(GLFWwindow* window, Thomas* Model1, Melina* Model2, Sharon* Model3, Anissa* Model4, Keven* Model5) {
+void scaleUp(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 	{
 		switch (currentModel)
