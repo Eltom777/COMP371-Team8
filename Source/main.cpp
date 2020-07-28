@@ -37,6 +37,11 @@ using namespace std;
 static int currentModel = -1;
 Camera* camera_ptr;
 int width, height;
+float angle = 0.0f;
+float lastFrameTime = glfwGetTime();
+float PI = 3.141593;
+float displacement = 0.0f;
+float previousDisplacement = 0.0f;
 
 // Sphere paths and vertices variables
 string spherePath = "../Assets/Models/sphere.obj";
@@ -46,6 +51,7 @@ int sphereVertices;
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void bobbleHeadAnimation(Student* Model);
 
 // Models
 Thomas* Model1 = new Thomas();
@@ -590,6 +596,8 @@ int main(int argc, char* argv[])
 		// Change camera view to model view 
 		cameraFocus(window, shaderProgram, camera_ptr);
 
+		bobbleHeadAnimation(Model2);
+
 		// End frame
 		glfwSwapBuffers(window);
 
@@ -626,4 +634,26 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void bobbleHeadAnimation(Student* Model) {
+	float dt = glfwGetTime() - lastFrameTime;
+	lastFrameTime += dt;
+	if (angle < (11/2 * PI)) {
+		displacement = (5.0f * exp(-0.25 * angle) * sin(angle)); // damping formula
+		Model->translate(glm::translate(mat4(1.0f), vec3( 0.02f*(displacement - previousDisplacement), 0.0f, 0.0f)));
+		previousDisplacement = displacement;
+		
+		//apply transformation to upperhalf
+		
+		angle = (angle + PI*dt);
+	}
+	else {
+		Model->translate(glm::translate(mat4(1.0f), vec3(-0.02 * previousDisplacement, 0.0f, 0.0f)));
+		angle = 0.0f;
+		displacement = 0.0f;
+		previousDisplacement = 0.0f;
+		//Model1-> set model to stop animation
+		//unblock model for movement
+	}
 }
