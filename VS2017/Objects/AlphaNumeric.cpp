@@ -10,11 +10,65 @@ AlphaNumeric::AlphaNumeric(int numOfCubes) {
 	components = new Cube[numberOfCubes];
 }
 
-void AlphaNumeric::translateModel(mat4 t)
+AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes) {
+	numberOfTopCubes = numOfTopCubes;
+	numberOfBotCubes = numOfBotCubes;
+	topComponents = new Cube[numberOfTopCubes];
+	bottomComponents = new Cube[numberOfBotCubes];
+	base = NULL;
+}
+
+void AlphaNumeric::updateBase(Cube* b)
 {
-	modelMatrix = t * modelMatrix;
-	for (int i = 0; i < numberOfCubes; i++) {
-		components[i].updateTranslation(t);
+	this->base = b;
+}
+
+Cube* AlphaNumeric::getBase()
+{
+	return this->base;
+}
+
+void AlphaNumeric::updateBaseTop(Cube * b)
+{
+	this->baseTop = b;
+}
+
+Cube * AlphaNumeric::getBaseTop()
+{
+	return this->baseTop;
+}
+
+void AlphaNumeric::traverse(mat4 mat, int transformation)
+{
+	traverse(mat, getBase(), transformation);
+}
+
+void AlphaNumeric::traverse(mat4 mat, Cube* current, int transformation)
+{
+	if (current == NULL)
+	{
+		std::cout << "returning";
+		return;
+	}
+
+	// do whatever you wanna do here before moving on to next child
+	if (transformation == 0)
+	{
+		current->updateTranslation(mat);
+	}
+	if (transformation == 1)
+	{
+		current->updateRotation(mat);
+	}
+	if (transformation == 2)
+	{
+		current->updateScale(mat);
+	}
+
+	// move to next child
+	if (current->getChild())
+	{
+		traverse(mat, current->getChild(), transformation);
 	}
 }
 
@@ -40,35 +94,57 @@ void AlphaNumeric::rotateModel(mat4 r, GLuint worldMatrixLocation)
 	mat4 tempworldMatrix = translate(mat4(1.0), translationComponent * -1.0f); //place back to origin
 	translateModel(tempworldMatrix);
 
-	modelMatrix = r * modelMatrix;
-	translateModel(r);
-
-	//TESTING
-	traverse(r);
+	//modelMatrix = r * modelMatrix;
+	//translateModel(r);
 
 	//Place back to original spot
 	tempworldMatrix = translate(mat4(1.0), translationComponent);
 	translateModel(tempworldMatrix);
 }
 
-void AlphaNumeric::traverse(mat4 mat)
+void AlphaNumeric::translateModel(mat4 t)
 {
-	traverse(mat, &components[0]); //always make 0 your first parent
+	modelMatrix = t * modelMatrix;
+	
+	for (int i = 0; i < numberOfTopCubes; i++) {
+		topComponents[i].updateTranslation(t);
+	}
+	for (int i = 0; i < numberOfBotCubes; i++) {
+		bottomComponents[i].updateTranslation(t);
+	}
 }
 
-void AlphaNumeric::traverse(mat4 mat, Cube* current)
+void AlphaNumeric::translateModelTop(mat4 t)
 {
-	if (current == NULL)
-	{
-		std::cout << "returning";
-		return;
+	modelMatrix = t * modelMatrix;
+
+	for (int i = 0; i < numberOfTopCubes; i++) {
+		topComponents[i].updateTranslation(t);
 	}
+}
 
-	// do whatever you wanna do here before moving on to next child
+void AlphaNumeric::updateModelMatrix() {
+	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
+}
 
-	if (current->getChild())
-	{
-		traverse(mat, current->getChild());
+//void AlphaNumeric::draw(GLuint modelMatrixLocation) {
+//	for (int i = 0; i < numberOfCubes; i++) {
+//		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+//		glDrawArrays(GL_TRIANGLES, 0, 36);
+//	}
+//}
+
+void AlphaNumeric::drawTop(GLuint modelMatrixLocation) {
+	for (int i = 0; i < numberOfTopCubes; i++) {
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &topComponents[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+}
+
+void AlphaNumeric::drawBottom(GLuint modelMatrixLocation) {
+	for (int i = 0; i < numberOfBotCubes; i++) {
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &bottomComponents[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }
 
@@ -84,5 +160,7 @@ void AlphaNumeric::randomLocation(float x, float z)
 }
 
 AlphaNumeric::~AlphaNumeric() {
-	delete[] components;
+	//delete[] components;
+	delete[] topComponents;
+	delete[] bottomComponents;
 }

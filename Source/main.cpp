@@ -7,7 +7,7 @@
 // - https://learnopengl.com/Getting-started/Hello-Window
 // - https://learnopengl.com/Getting-started/Hello-Triangle
 //
-// Modified by Team 8 for Assignment 1 due 12/07/2020.
+// Modified by Team 8 for Assignment 2 due 27/07/2020.
 //
 //
 
@@ -21,21 +21,28 @@
 
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
-#include <Objects/Shaders.h>
-#include <Objects/Grid.h> //rendered objects
-#include <Objects/Camera.h>
-#include <Objects/Thomas.h>
-#include <Objects/Melina.h>
-#include <Objects/Sharon.h>
-#include <Objects/Anissa.h>
-#include <Objects/Keven.h>
+
+#include <Shaders.h>
+#include <Grid.h> //rendered objects
+#include <Camera.h>
+#include <Thomas.h>
+#include <Melina.h>
+#include <Sharon.h>
+#include <Anissa.h>
+#include <Keven.h>
+#include <Sphere.h>
 
 using namespace std;
 
-// which model we are currently looking at (0, 1, 2, 3, 4)
-// if -1, then we are not looking at any models
+// Which model we are currently looking at (0, 1, 2, 3, 4)
+// If -1, then we are not looking at any models
 static int currentModel = -1;
 Camera* camera_ptr;
+int width, height;
+
+// Sphere paths and vertices variables
+string spherePath = "../Assets/Models/sphere.obj";
+int sphereVertices;
 
 // random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
@@ -53,6 +60,7 @@ Melina* Model2 = new Melina();
 Sharon* Model3 = new Sharon();
 Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
+// Sphere* sphere = new Sphere();
 
 void initialize() {
 	glfwInit();
@@ -72,13 +80,14 @@ void initialize() {
 /*
 Returns an array of VAOs for cubes, grids, and axes.
 */
-int* createCubeGridVAO(Cube objCube, Grid objGrid) {
+GLuint* createCubeGridSphereVAO(Cube objCube, Grid objGrid, Sphere objSphere) {
 	// create VAOs
-	int cubeVAO = objCube.createCubeVAO();
-	int gridVAO = objGrid.createGridVAO();
-	int axisVAO = objGrid.createAxisVAO();
+	GLuint cubeVAO = objCube.createCubeVAO();
+	GLuint gridVAO = objGrid.createGridVAO();
+	GLuint axisVAO = objGrid.createAxisVAO();
+	GLuint sphereVAO = objSphere.createSphereVAO(spherePath, sphereVertices);
 
-	int VAO[3] = { cubeVAO, gridVAO, axisVAO };
+	GLuint VAO[4] = { cubeVAO, gridVAO, axisVAO, sphereVAO };
 
 	return VAO;
 }
@@ -86,21 +95,22 @@ int* createCubeGridVAO(Cube objCube, Grid objGrid) {
 void setUpProjection(int shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
-		1024.0f / 768.0f,     // aspect ratio
+		(float)width / height,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
 	GLuint projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &Projection[0][0]);
 }
 
-void renderGridAxisCube(int shaderProgram, int* VAO, Grid objGrid) {
+void renderGridAxisCubeSphere(int shaderProgram, GLuint* VAO, Grid objGrid) {
 	// Draw grid and axis
 	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO[1]);
+	glBindVertexArray(VAO[1]); // grid
 	glDrawArrays(GL_LINES, 0, objGrid.gridToPrint); // 3 vertices, starting at index 0
-	glBindVertexArray(VAO[2]);
+	glBindVertexArray(VAO[2]); // axis
 	glDrawArrays(GL_LINES, 0, objGrid.axisToPrint);
-	glBindVertexArray(VAO[0]);
+	glBindVertexArray(VAO[0]); // cube
+	glBindVertexArray(VAO[3]); // sphere
 }
 
 /*
@@ -144,7 +154,7 @@ void selectModel(GLFWwindow* window) {
 
 /*
 Methods for translating models. Passing all models for the switch statements.
-Translations in increments of 0.005f
+Translations in increments of 0.005f.
 */
 void translateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
@@ -156,6 +166,7 @@ void translateLeft(GLFWwindow* window) {
 			break;
 		case 2:
 			Model2->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
+			//Model2->translateTop(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
 			Model3->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
@@ -254,25 +265,25 @@ void translateDown(GLFWwindow* window) {
 Methods for rotating models. Passing all models for the switch statements.
 Rotations in increments of 0.5f radians.
 */
-void rotateLeft(GLFWwindow* window, GLuint modelMatrixLocation) {
+void rotateLeft(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)), modelMatrixLocation);
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(-0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -280,25 +291,25 @@ void rotateLeft(GLFWwindow* window, GLuint modelMatrixLocation) {
 	}
 }
 
-void rotateRight(GLFWwindow* window, GLuint modelMatrixLocation) {
+void rotateRight(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS)
 	{
 		switch (currentModel)
 		{
 		case 1:
-			//Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model1->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 2:
-			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 1.0f, 0.0f)), modelMatrixLocation);
+			Model2->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 3:
-			//Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model3->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 4:
-			//Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model4->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		case 5:
-			//Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
+			Model5->rotate(glm::rotate(mat4(1.0f), glm::radians(0.5f), vec3(0.0f, 0.005f, 0.0f)));
 			break;
 		default:
 			break;
@@ -335,6 +346,7 @@ void scaleUp(GLFWwindow* window) {
 		}
 	}
 }
+
 void scaleDown(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 	{
@@ -480,7 +492,7 @@ int main(int argc, char* argv[])
 	initialize();
 
 	// Create Window and rendering context using GLFW, resolution is 1024x768
-	GLFWwindow* window = glfwCreateWindow(1024, 768, "Comp371 - Assignment 1 - Team 8", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1024, 768, "COMP371 - Assignment 2 - Team 8", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cerr << "Failed to create GLFW window" << std::endl;
@@ -514,7 +526,8 @@ int main(int argc, char* argv[])
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
 	Cube objCube;
-	int* VAO = createCubeGridVAO(objCube, objGrid);
+	Sphere objSphere;
+	GLuint* VAO = createCubeGridSphereVAO(objCube, objGrid, objSphere);
 
 
 
@@ -528,25 +541,25 @@ int main(int argc, char* argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Set up Perspective View
+		glfwGetWindowSize(window, &width, &height); // if window is resized, get new size to draw perspective view correctly
 		setUpProjection(shaderProgram, camera_ptr);
 
 		// Render grid and axis and cube
-		renderGridAxisCube(shaderProgram, VAO, objGrid);
+		renderGridAxisCubeSphere(shaderProgram, VAO, objGrid);
 
 		GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix"); //linking with shader
 
-		// Rotating Right (STILL NOT WORKING)
-		rotateRight(window, worldMatrixLocation);
-
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
-
 		// Draw AlphaNumeric models
-		Model1->draw(worldMatrixLocation);
-		Model2->draw(worldMatrixLocation);
-		Model3->draw(worldMatrixLocation);
-		Model4->draw(worldMatrixLocation);
-		Model5->draw(worldMatrixLocation);
+		Model1->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		Model2->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		Model3->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		Model4->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+		Model5->draw(worldMatrixLocation, sphereVertices, VAO[0], VAO[3]);
+
+		// an attempt to draw a sphere?? idk i think cuz it's connected to the shader it won't work;;
+		//sphere->draw(worldMatrixLocation, sphereVertices);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		glm::mat4 worldMatrix = mat4(1.0f);
@@ -580,20 +593,18 @@ int main(int argc, char* argv[])
 		translateDown(window);
 
 		// Rotating Left
-		//rotateLeft(window);
+		rotateLeft(window);
 
-
-
+		// Rotating Right
+		rotateRight(window);
+		
 		// Scale Up
 		scaleUp(window);
 
 		// Scale Down
 		scaleDown(window);
 
-		/*Change camera view to model view
-		** Currently, key needs to be held down because camera is set up in the while loop.
-		*/
-
+		// Change camera view to model view 
 		cameraFocus(window, shaderProgram, camera_ptr);
 
 		// End frame
@@ -604,6 +615,8 @@ int main(int argc, char* argv[])
 
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
+
+		glBindVertexArray(0);
 	}
 
 	// Shutdown GLFW
@@ -626,6 +639,7 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 	camera_ptr->mouseScrollHandler(window, xOffset, yOffset);
 }
 
+// Makes sure the window is correctly resized (continues drawing)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(-4, -4, width + 4, height + 4); // changed values: supposed to fix pitfall but doesnt seem to work

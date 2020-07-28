@@ -3,7 +3,6 @@
 // All sides of cube are 1.0f
 
 const glm::vec3 Cube::vertices[] = {
-
 	// Colored cube for testing :)
 	// front face
 	glm::vec3(-1.0f, -1.0f, -1.0f),
@@ -93,12 +92,13 @@ const glm::vec3 Cube::vertices[] = {
 
 Cube::Cube()
 {
+	modelMatrix = mat4(1.0f);
 	rotationMatrix = mat4(1.0f);
 	translationMatrix = mat4(1.0f);
 	scalingMatrix = mat4(1.0f);
 	//modelMatrix = glm::scale(mat4(1.0f), vec3(scalingFactor, scalingFactor, scalingFactor));
 
-	child = NULL;
+	cubeChild = NULL;
 	//sibling = NULL;
 }
 
@@ -144,12 +144,12 @@ void Cube::updateTranslation(mat4 t)
 
 void Cube::updateChild(Cube* c)
 {
-	this->child = c;
+	this->cubeChild = c;
 }
 
 Cube* Cube::getChild()
 {
-	return this->child;
+	return this->cubeChild;
 }
 
 int Cube::createCubeVAO() {
