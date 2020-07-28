@@ -22,7 +22,6 @@
 #include <glm/glm.hpp>  // GLM is an optimized math library with syntax to similar to OpenGL Shading Language
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <Shaders.h>
 #include <Grid.h> //rendered objects
 #include <Camera.h>
 #include <Thomas.h>
@@ -479,10 +478,6 @@ void setUpCamera(Camera* camera, int shaderProgram) {
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
-
-
-
-
 /*
 Main method.
 */
@@ -517,8 +512,7 @@ int main(int argc, char* argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Compile and link shaders here ...
-	Shaders shaders;
-	int shaderProgram = shaders.compileAndLinkShaders();
+
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);

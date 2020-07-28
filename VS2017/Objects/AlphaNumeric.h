@@ -3,7 +3,7 @@
 #include "Shader.h"
 #include "Objects.h"
 
-class AlphaNumeric
+class AlphaNumeric:Object
 {
 public:
 	AlphaNumeric(int numOfCubes);
@@ -12,8 +12,6 @@ public:
 	~AlphaNumeric();
 	mat4 getModelMatrix();
 	void draw(Shader * shaderProgram, const bool isTexture);
-	void drawTop(Shader * shaderProgram);
-	void drawBottom(Shader * shaderProgram);
 	void updateBase(Cube * b);
 	Cube * getBase();
 	void updateBaseTop(Cube * b);
@@ -28,9 +26,8 @@ public:
 	void randomLocation(float x, float z);
 	//void draw(GLuint modelMatrixLocation);
 
-	void drawTop(GLuint modelMatrixLocation);
-
-	void drawBottom(GLuint modelMatrixLocation);
+	void drawTop(Shader * shaderProgram);
+	void drawBottom(Shader * shaderProgram);
 
 	Cube* components;
 	Cube* topComponents;
