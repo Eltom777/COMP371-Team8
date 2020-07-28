@@ -91,13 +91,22 @@ void Student::randomLocation(float x, float z)
 	sphere->translateModel(t);
 }
 
-void Student::draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO) {
+void Student::create() {
+	components[0]->create();
+	components[1]->create();
+}
+
+void Student::draw(GLuint modelMatrixLocation, Shader* shaderProgram, const bool isTexture, int sphereVertices, int cubeVAO, int sphereVAO) {
 	glDisable(GL_BLEND);
 	glBindVertexArray(cubeVAO);
-	components[0]->drawTop(modelMatrixLocation);
+	/*components[0]->drawTop(modelMatrixLocation);
 	components[0]->drawBottom(modelMatrixLocation);
 	components[1]->drawTop(modelMatrixLocation);
-	components[1]->drawBottom(modelMatrixLocation);
+	components[1]->drawBottom(modelMatrixLocation);*/
+
+	components[0]->draw(shaderProgram, isTexture);
+	components[1]->draw(shaderProgram, isTexture);
+
 	// Enable blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
