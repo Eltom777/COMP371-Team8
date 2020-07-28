@@ -33,16 +33,10 @@ void LetterA::setup() { //create letter A
 	topComponents[2].updateChild(&topComponents[3]);
 
 	updateBase(&bottomComponents[1]);
-	//updateBaseTop(&topComponents[0]);
+	updateBaseTop(&topComponents[0]);
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)), 0);
-	
-	//bottomComponents[0].updateChild(NULL);
-	
-	//for (int i = 0; i < NUMOFCUBES; i++) {
-	//	components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.065f, 0.0f)));
-	//}
 }
 
 LetterA::~LetterA() {

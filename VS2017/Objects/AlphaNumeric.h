@@ -6,8 +6,6 @@
 class AlphaNumeric:Object
 {
 public:
-	AlphaNumeric(int numOfCubes);
-	//AlphaNumeric(int numOfTopCubes, int numOfBotCubes);
 	AlphaNumeric(int numOfBotCubes, int numOfTopCubes, bool isLetter);
 	~AlphaNumeric();
 	mat4 getModelMatrix();
@@ -27,7 +25,7 @@ public:
 	//void draw(GLuint modelMatrixLocation);
 
 	void drawTop(Shader * shaderProgram);
-	void drawBottom(Shader * shaderProgram);\
+	void drawBottom(Shader * shaderProgram);
 
 	void create();
 

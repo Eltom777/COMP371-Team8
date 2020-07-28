@@ -34,14 +34,10 @@ void LetterO::setup() { //create letter O
 	topComponents[1].updateChild(&topComponents[2]);
 
 	updateBase(&bottomComponents[0]);
-	//updateBaseTop(&topComponents[0]);
+	updateBaseTop(&topComponents[0]);
 
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.08f, 0.0f)), 0);
-
-	/*for(int i = 0; i < NUMOFCUBES; i++){
-		components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.08f, 0.0f)));
-	}*/
 }
 
 LetterO::~LetterO() {

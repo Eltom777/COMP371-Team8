@@ -3,7 +3,7 @@
 
 class Number9 : public AlphaNumeric
 {
-	static const int NUMOFCUBES = 5;
+	//static const int NUMOFCUBES = 5;
 	static const int NUMOFTOPCUBES = 3;
 	static const int NUMOFBOTCUBES = 2;
 

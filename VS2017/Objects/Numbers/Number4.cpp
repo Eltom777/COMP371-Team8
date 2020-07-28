@@ -30,12 +30,6 @@ void Number4::setup() { // create number 4
 	// set letter slightly above grid
 	traverse(glm::translate(mat4(1.0f), vec3(0.0f, 0.07f, 0.0f)), 0);
 	
-	// bottomComponents[0].updateChild(NULL);
-
-	//for (int i = 0; i < NUMOFCUBES; i++) {
-	//	components[i].updateTranslation(glm::translate(mat4(1.0f), vec3(0.0f, 0.06f, 0.0f)));
-	//}
-	
 }
 
 Number4::~Number4() {

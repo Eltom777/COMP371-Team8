@@ -7,26 +7,13 @@ mat4 AlphaNumeric::getModelMatrix() {
 	return modelMatrix;
 }
 
-AlphaNumeric::AlphaNumeric(int numOfCubes) {
-	numberOfCubes = numOfCubes;
-	components = new Cube[numberOfCubes];
-}
-
-//AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes) {
-//	numberOfTopCubes = numOfTopCubes;
-//	numberOfBotCubes = numOfBotCubes;
-//	topComponents = new Cube[numberOfTopCubes];
-//	bottomComponents = new Cube[numberOfBotCubes];
-//	base = NULL;
-//}
-
 AlphaNumeric::AlphaNumeric(int numOfBotCubes, int numOfTopCubes, bool isLetter) {
 	//numberOfCubes = numOfCubes;
 	//components = new Cube[numberOfCubes];
 	numberOfTopCubes = numOfTopCubes;
 	numberOfBotCubes = numOfBotCubes;
-	topComponents = new Cube[numberOfTopCubes];
-	bottomComponents = new Cube[numberOfBotCubes];
+	topComponents = new Cube[numberOfTopCubes + 2]; // +2 to allow space ??? I'm not sure why it does not work without it
+	bottomComponents = new Cube[numberOfBotCubes + 2];
 	base = NULL;
 	baseTop = NULL;
 	this->isLetter = isLetter;
