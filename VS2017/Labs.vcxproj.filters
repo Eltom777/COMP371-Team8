@@ -138,10 +138,13 @@
     <ClCompile Include="Objects\Students\Thomas.cpp">
       <Filter>Objects\Students</Filter>
     </ClCompile>
-    <ClCompile Include="Shaders\Shaders.cpp">
+    <ClCompile Include="Objects\Camera.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Camera.cpp">
+    <ClCompile Include="Objects.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,10 +212,13 @@
     <ClInclude Include="Objects\Students\Thomas.h">
       <Filter>Objects\Students</Filter>
     </ClInclude>
-    <ClInclude Include="Shaders\Shaders.h">
+    <ClInclude Include="Objects\Camera.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Camera.h">
+    <ClInclude Include="Objects.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

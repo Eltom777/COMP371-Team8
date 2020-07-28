@@ -61,7 +61,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;../VS2017;../VS2017/Shaders;../VS2017/Objects;../VS2017/Objects/Letters;../VS2017/Objects/Numbers;../VS2017/Objects/Students</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ThirdParty/glew-2.1.0/include;../ThirdParty/FreeImage-3170/Source;../ThirdParty/glfw-3.3/include;../ThirdParty/glm;../VS2017;../VS2017/Shaders;../VS2017/Objects;../VS2017/Objects/Letters;../VS2017/Objects/Numbers;../VS2017/Objects/Students;../VS2017/ThirdParty</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="Objects.cpp" />
     <ClCompile Include="Objects\Camera.cpp" />
     <ClCompile Include="Objects\Cube.cpp" />
     <ClCompile Include="Objects\Grid.cpp" />
@@ -139,11 +140,12 @@
     <ClCompile Include="Objects\Students\Melina.cpp" />
     <ClCompile Include="Objects\Students\Sharon.cpp" />
     <ClCompile Include="Objects\Students\Thomas.cpp" />
-    <ClCompile Include="Shaders\Shaders.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\OBJloader.h" />
     <ClInclude Include="..\Source\OBJloaderV2.h" />
+    <ClInclude Include="Objects.h" />
     <ClInclude Include="Objects\Camera.h" />
     <ClInclude Include="Objects\Cube.h" />
     <ClInclude Include="Objects\Grid.h" />
@@ -164,7 +166,7 @@
     <ClInclude Include="Objects\Students\Melina.h" />
     <ClInclude Include="Objects\Students\Sharon.h" />
     <ClInclude Include="Objects\Students\Thomas.h" />
-    <ClInclude Include="Shaders\Shaders.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

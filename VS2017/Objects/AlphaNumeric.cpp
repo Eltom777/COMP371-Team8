@@ -1,5 +1,7 @@
 #include "AlphaNumeric.h"
 #include <iostream>
+#include "Shader.h"
+#include "Objects.h"
 
 mat4 AlphaNumeric::getModelMatrix() {
 	return modelMatrix;
@@ -10,12 +12,30 @@ AlphaNumeric::AlphaNumeric(int numOfCubes) {
 	components = new Cube[numberOfCubes];
 }
 
-AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes) {
+//AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes) {
+//	numberOfTopCubes = numOfTopCubes;
+//	numberOfBotCubes = numOfBotCubes;
+//	topComponents = new Cube[numberOfTopCubes];
+//	bottomComponents = new Cube[numberOfBotCubes];
+//	base = NULL;
+//}
+
+AlphaNumeric::AlphaNumeric(int numOfTopCubes, int numOfBotCubes, int numOfCubes, bool isLetter) {
+	numberOfCubes = numOfCubes;
+	components = new Cube[numberOfCubes];
 	numberOfTopCubes = numOfTopCubes;
 	numberOfBotCubes = numOfBotCubes;
 	topComponents = new Cube[numberOfTopCubes];
 	bottomComponents = new Cube[numberOfBotCubes];
 	base = NULL;
+	baseTop = NULL;
+	this->isLetter = isLetter;
+	if (isLetter) {
+		filename = "../Assets/Textures/Wood.jpg";
+	}
+	else {
+		filename = "../Assets/Textures/Metal.jpg";
+	}
 }
 
 void AlphaNumeric::updateBase(Cube* b)
@@ -126,26 +146,46 @@ void AlphaNumeric::translateModelTop(mat4 t)
 void AlphaNumeric::updateModelMatrix() {
 	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
 }
+void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 
-//void AlphaNumeric::draw(GLuint modelMatrixLocation) {
-//	for (int i = 0; i < numberOfCubes; i++) {
-//		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &components[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
-//		glDrawArrays(GL_TRIANGLES, 0, 36);
-//	}
-//}
+	shaderProgram->use();
 
-void AlphaNumeric::drawTop(GLuint modelMatrixLocation) {
+	if (isTexture) {
+		if (isLetter) {
+			glActiveTexture(GL_TEXTURE1);
+		}
+		else {
+			glActiveTexture(GL_TEXTURE2);
+		}
+		//bind texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
+	}
+
+	//bind vao
+	glBindVertexArray(cubeVAO);
+
+	drawTop(shaderProgram);
+	drawBottom(shaderProgram);
+}
+void AlphaNumeric::drawTop(Shader* shaderProgram) {
 	for (int i = 0; i < numberOfTopCubes; i++) {
-		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &topComponents[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+		shaderProgram->setMat4("modelMatrix", topComponents[i].getModelMatrix());//setting modelmatrix of each cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }
 
-void AlphaNumeric::drawBottom(GLuint modelMatrixLocation) {
+void AlphaNumeric::drawBottom(Shader* shaderProgram) {
 	for (int i = 0; i < numberOfBotCubes; i++) {
-		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &bottomComponents[i].getModelMatrix()[0][0]); //setting modelmatrix of each cube
+		shaderProgram->setMat4("modelMatrix", bottomComponents[i].getModelMatrix());//setting modelmatrix of each cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
+}
+
+void AlphaNumeric::create() {
+	cubeVAO = components[0].createCubeVAO();
+	textureId = loadTexture(filename);
 }
 
 void AlphaNumeric::randomLocation(float x, float z)
