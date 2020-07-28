@@ -1,7 +1,7 @@
 #include "LetterL.h"
 #include <iostream>
 
-LetterL::LetterL() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES) {
+LetterL::LetterL() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES, true) {
 	numberOfTopCubes = NUMOFTOPCUBES;
 	numberOfBotCubes = NUMOFBOTCUBES;
 	setup();

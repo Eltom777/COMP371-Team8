@@ -1,6 +1,6 @@
 #include "LetterV.h"
 
-LetterV::LetterV() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES) {
+LetterV::LetterV() : AlphaNumeric(NUMOFTOPCUBES, NUMOFBOTCUBES, true) {
 	numberOfTopCubes = NUMOFTOPCUBES;
 	numberOfBotCubes = NUMOFBOTCUBES;
 	setup();
