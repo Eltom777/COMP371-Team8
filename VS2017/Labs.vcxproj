@@ -116,8 +116,6 @@
     <None Include="..\Assets\Shaders\Texture.vertexshader" />
     <None Include="..\Assets\Shaders\texturedFragmentShader.fragmentshader" />
     <None Include="..\Assets\Shaders\texturedVertexShader.vertexshader" />
-    <None Include="lightFragmentShader.fragmentshader" />
-    <None Include="lightVertexShader.vertexshader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp" />

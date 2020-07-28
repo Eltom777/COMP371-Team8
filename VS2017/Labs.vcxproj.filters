@@ -80,12 +80,6 @@
     <None Include="..\Assets\Shaders\texturedVertexShader.vertexshader">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="lightVertexShader.vertexshader">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="lightFragmentShader.fragmentshader">
-      <Filter>Shaders</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp">

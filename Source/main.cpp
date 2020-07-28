@@ -49,7 +49,7 @@ Keven* Model5 = new Keven();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 // Lighting
-glm::vec3 lightSourcePosition(12.0f, -6.0f,12.0f);
+glm::vec3 lightSourcePosition(0.0f, 1.5f,-3.0f);
 
 
 void initialize() {
@@ -494,6 +494,28 @@ int main(int argc, char* argv[])
 
 	setUpProjection(colorShader, camera_ptr);
 	setUpCamera(camera_ptr, colorShader);
+
+	// For shadows: 
+	// DepthMap FrameBufferObject
+	unsigned int depthMapFBO;
+	glGenFramebuffers(1, &depthMapFBO);
+	const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+	// DepthMap Texture
+	unsigned int depthMap;
+	glGenTextures(1, &depthMap);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+		SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// attach depth texture as FBO's depth buffer
+	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
