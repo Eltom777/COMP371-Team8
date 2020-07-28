@@ -90,9 +90,11 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 	
 	if (isTexture) {
 		if (isLetter) {
+			shaderProgram->setInt("textureType", 0);
 			glActiveTexture(GL_TEXTURE1);
 		}
 		else {
+			shaderProgram->setInt("textureType", 2);
 			glActiveTexture(GL_TEXTURE2);
 		}
 		//bind texture

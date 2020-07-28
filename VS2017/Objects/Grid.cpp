@@ -3,10 +3,10 @@
 
 const Grid::TexturedColoredVertex Grid::textureGrid[] = {
 	//Position												//color						//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, -1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, -1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 2.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 2.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, -1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, -1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 2.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 2.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, 1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 0.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
 };
 
 const int Grid::indices[]{
@@ -152,6 +152,15 @@ int Grid::createtextureGridVAO() {
 	);
 	glEnableVertexAttribArray(2);
 
+	glVertexAttribPointer(3,                            // attribute 2 matches aColor in Vertex Shader
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(Grid::TexturedColoredVertex),
+		(void*)(2 * sizeof(vec3) + sizeof(vec2))      // uv is offseted a vec2 (comes after position)
+	);
+	glEnableVertexAttribArray(3);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // VAO already stored the state we just defined, safe to unbind buffer
 	glBindVertexArray(0); // Unbind to not modify the VAO
 
@@ -200,6 +209,7 @@ void Grid::drawGrid(Shader* shaderProgram, bool isTexture) {
 	
 	if (isTexture) {
 		shaderProgram->use(); //glUseProgram()
+		shaderProgram->setInt("textureType", 1);
 
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);

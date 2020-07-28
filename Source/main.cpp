@@ -48,6 +48,9 @@ Anissa* Model4 = new Anissa();
 Keven* Model5 = new Keven();
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+// Lighting
+glm::vec3 lightSourcePosition(12.0f, -6.0f,12.0f);
+
 
 void initialize() {
 	glfwInit();
@@ -534,6 +537,14 @@ int main(int argc, char* argv[])
 		Model4->draw(shaderProgram, isTexture);
 		Model5->draw(shaderProgram, isTexture);
 
+		// Setting the lighting for either shader programsa
+		shaderProgram->setVec3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
+		shaderProgram->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderProgram->setVec3("lightPos", lightSourcePosition);
+		shaderProgram->setVec3("viewPos", camera_ptr->cameraPos);
+
+
+
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
 
@@ -575,7 +586,6 @@ int main(int argc, char* argv[])
 
 		// Change camera view to model view 
 		// ** Currently, key needs to be held down because camera is set up in the while loop.
-		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4,  Model5);
 		cameraFocus(window, shaderProgram, camera_ptr, Model1, Model2, Model3, Model4, Model5);
 
 		// End frame

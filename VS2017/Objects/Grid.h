@@ -17,12 +17,13 @@ class Grid : public Object {
 
 	const struct TexturedColoredVertex
 	{
-		TexturedColoredVertex(vec3 _position, vec3 _color, vec2 _uv)
-			: position(_position), color(_color), uv(_uv) {}
+		TexturedColoredVertex(vec3 _position, vec3 _color, vec2 _uv, vec3 _normal)
+			: position(_position), color(_color), uv(_uv), normal(_normal) {}
 
 		vec3 position;
 		vec3 color;
 		vec2 uv;
+		vec3 normal;
 	};
 private:
     static const vec3 axis[];

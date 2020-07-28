@@ -6,61 +6,61 @@ const Cube::TexturedColoredVertex Cube::vertices[] = {
 
 	// Colored cube for testing :)
 	// front face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 1.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
 	
 	// back face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 0.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 1.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.06666666666f, 0.61568627451f, 0.6431372549f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  0.0f, 1.0f)),
 
 
 	// left face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f), 	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f), 	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 0.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 1.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f), glm::vec3(-1.0f,  0.0f, 0.0f)),
 
 	// right face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f), 		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f), 	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 0.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(1.0f, 1.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),	glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 1.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.66274509803f, 0.98431372549f, 0.76470588235f),	glm::vec2(0.0f, 0.0f), glm::vec3(1.0f,  0.0f, 0.0f)),
 	
 
 	// bottom face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f), 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f), 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 0.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, -1.0f, 1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, 1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 1.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, -1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  -1.0f, 0.0f)),
 	
 
 	// top face
-	//Position												//color														//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f), 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 1.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f)),
+	//Position												//color														//Texture									// Normal Vector
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f), 	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 0.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 1.0f, 1.0f),		glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(1.0f, 1.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, 1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 1.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 1.0f, -1.0f),	glm::vec3(0.70980392156f, 0.58039215686f, 0.71372549019f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f,  1.0f, 0.0f)),
 };
 
 Cube::Cube()
@@ -164,6 +164,15 @@ int Cube::createCubeVAO() {
 		(void*)(2 * sizeof(vec3))      // uv is offseted a vec2 (comes after position)
 	);
 	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(3,                            // attribute 2 matches aColor in Vertex Shader
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(Cube::TexturedColoredVertex),
+		(void*)(2 * sizeof(vec3) + sizeof(vec2))      // uv is offseted a vec2 (comes after position)
+	);
+	glEnableVertexAttribArray(3);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // VAO already stored the state we just defined, safe to unbind buffer
 	glBindVertexArray(0); // Unbind to not modify the VAO
