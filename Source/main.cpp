@@ -44,6 +44,7 @@ bool isLighting = true;
 Camera* camera_ptr;
 int width, height;
 Shader* shaderProgram;
+Shader* shadowShader;
 
 // Lighting
 glm::vec3 lightSourcePosition(0.0f, 1.5f, -3.0f);
@@ -95,7 +96,7 @@ void setUpProjection(Shader* shaderProgram, Camera* camera) {
 
 void renderGridAxis(Shader* shaderProgram, Grid objGrid) {
 	// Draw grid and axis
-	//objGrid.drawAxis(shaderProgram);
+	objGrid.drawAxis(shaderProgram);
 	objGrid.drawGrid(shaderProgram, isTexture, isLighting); // 3 vertices, starting at index 0
 }
 
@@ -495,6 +496,7 @@ int main(int argc, char* argv[])
 
 	// Compile and link shaders here ...
 	shaderProgram = new Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader");
+	shadowShader = new Shader("../Assets/Shaders/shadow_vertex.glsl", "../Assets/Shaders/shadow_fragment.glsl");
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);
