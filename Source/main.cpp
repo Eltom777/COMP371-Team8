@@ -541,11 +541,11 @@ int main(int argc, char* argv[])
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
 		// Draw AlphaNumeric models
-		/*Model1->draw(shaderProgram, isTexture);
+		Model1->draw(shaderProgram, isTexture);
 		Model2->draw(shaderProgram, isTexture);
 		Model3->draw(shaderProgram, isTexture);
 		Model4->draw(shaderProgram, isTexture);
-		Model5->draw(shaderProgram, isTexture);*/
+		Model5->draw(shaderProgram, isTexture);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
