@@ -9,6 +9,8 @@ uniform vec3 lightPos;
 uniform mat4 worldMatrix;
 uniform mat4 viewMatrix = mat4(1.0);  // default value for view matrix (identity)
 uniform mat4 projectionMatrix = mat4(1.0);
+// uniform for shadow rendering
+uniform mat4 light_proj_view_matrix;
         
 out vec3 FragPos;
 out vec3 Normal;
@@ -22,7 +24,9 @@ void main()
    mat4 modelViewProjection = projectionMatrix * viewMatrix * worldMatrix;
 
    // Lighting Component
-   FragPos = vec3(worldMatrix * vec4(aPos, 1.0));
+   // FragPos = vec3(worldMatrix * vec4(aPos, 1.0)); // IF we want to get fancy with it, uncomment this
+    FragPos = vec3(0.0f, 0.0f, 0.0f);
+
        Normal = mat3(transpose(inverse(worldMatrix ))) * aNormal; // World space technique, kept for debugging purposes
    // Normal = mat3(transpose(inverse(viewMatrix * worldMatrix))) * aNormal;  // view-space
    // LightPos = vec3(viewMatrix * vec4(lightPos, 1.0)); // view-space

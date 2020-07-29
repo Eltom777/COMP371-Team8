@@ -47,7 +47,10 @@ Shader* shaderProgram;
 Shader* shadowShader;
 
 // Lighting
-glm::vec3 lightSourcePosition(0.0f, 1.5f, -3.0f);
+//glm::vec3 lightSourcePosition(0.0f, 1.5f, -3.0f); //   IF we want to get fancy with it, uncomment this
+glm::vec3 lightSourcePosition(0.0f, 3.0f, -1.0f);
+glm::vec3 lightFocus(0.0f, 0.0f, 0.0f);
+
 glm::vec3 ambient(0.3f);
 glm::vec3 diffuse(1.0f);
 glm::vec3 specular(1.0f);
@@ -498,6 +501,49 @@ int main(int argc, char* argv[])
 	shaderProgram = new Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader");
 	shadowShader = new Shader("../Assets/Shaders/shadow_vertex.glsl", "../Assets/Shaders/shadow_fragment.glsl");
 
+	// Setup texture and framebuffer for creating shadow map
+
+	  // Dimensions of the shadow texture, which should cover the viewport window
+	  // size and shouldn't be oversized and waste resources
+	  const unsigned int DEPTH_MAP_TEXTURE_SIZE = 1024;
+
+	// Variable storing index to texture used for shadow mapping
+	GLuint depth_map_texture;
+	// Get the texture
+	glGenTextures(1, &depth_map_texture);
+	// Bind the texture so the next glTex calls affect it
+	glBindTexture(GL_TEXTURE_2D, depth_map_texture);
+	// Create the texture and specify it's attributes, including widthn height,
+	// components (only depth is stored, no color information)
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, DEPTH_MAP_TEXTURE_SIZE,
+				DEPTH_MAP_TEXTURE_SIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	// Set texture sampler parameters.
+	// The two calls below tell the texture sampler inside the shader how to
+	// upsample and downsample the texture. Here we choose the nearest filtering
+	// option, which means we just use the value of the closest pixel to the
+	// chosen image coordinate.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	// The two calls below tell the texture sampler inside the shader how it
+	// should deal with texture coordinates outside of the [0, 1] range. Here we
+	// decide to just tile the image.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// todo UNCOMMENT WHEN READY TO RENDER SHADOWS
+	//// Variable storing index to framebuffer used for shadow mapping
+	//GLuint depth_map_fbo;  // fbo: framebuffer object
+	//// Get the framebuffer
+	//glGenFramebuffers(1, &depth_map_fbo);
+	//// Bind the framebuffer so the next glFramebuffer calls affect it
+	//glBindFramebuffer(GL_FRAMEBUFFER, depth_map_fbo);
+	//// Attach the depth map texture to the depth map framebuffer
+	//// glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
+	//// depth_map_texture, 0);
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+	//						depth_map_texture, 0);
+	//glDrawBuffer(GL_NONE);  // disable rendering colors, only write depth values
+
 	// Create Camera Object
 	camera_ptr = new Camera(window);
 
@@ -519,10 +565,12 @@ int main(int argc, char* argv[])
 
 	//Setup lighting
 	shaderProgram->setVec3("lightPos", lightSourcePosition);
-	//shaderProgram->setVec3("light.ambient", ambient);
-	//shaderProgram->setVec3("light.diffuse", diffuse);
-	//shaderProgram->setVec3("light.specular", specular);
 
+	// Other OpenGL states to set once
+  	// Enable Backface culling
+  	//glEnable(GL_DEPTH_TEST);
+  	//glEnable(GL_CULL_FACE);
+	  
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -537,10 +585,28 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderProgram, camera_ptr);
 		//setUpProjection(shaderPrograms[1], camera_ptr);
 
+		// Light parameters for shadow rendering
+		vec3 lightDirection = normalize(lightFocus - lightSourcePosition);
+
 		// Render grid and axis
 		renderGridAxis(shaderProgram, objGrid);
 
-		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
+		float lightNearPlane = 0.01f;
+		float lightFarPlane = 100.0f;
+
+		mat4 lightProjMatrix = //frustum(-1.0f, 1.0f, -1.0f, 1.0f, lightNearPlane, lightFarPlane);
+			perspective(50.0f, (float)DEPTH_MAP_TEXTURE_SIZE / (float)DEPTH_MAP_TEXTURE_SIZE, lightNearPlane, lightFarPlane);
+		mat4 lightViewMatrix = lookAt(lightSourcePosition, lightFocus, vec3(0, 1, 0));
+		mat4 lightSpaceMatrix = lightProjMatrix * lightViewMatrix;
+
+		// 
+		SetUniformMat4(shaderScene, "light_proj_view_matrix", lightProjMatrix * lightViewMatrix);
+		SetUniform1Value(shaderScene, "light_near_plane", lightNearPlane);
+		SetUniform1Value(shaderScene, "light_far_plane", lightFarPlane);
+		SetUniformVec3(shaderScene, "light_position", lightSourcePosition);
+		SetUniformVec3(shaderScene, "light_direction", lightDirection);
+
+
 
 		// Draw AlphaNumeric models
 		Model1->draw(shaderProgram, isTexture);
@@ -663,6 +729,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
+		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 		// Get random x and z values
 		float randomX = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;
 		float randomZ = range * ((((float)rand()) / (float)RAND_MAX)) + MIN_RAND;

@@ -77,6 +77,12 @@
     <None Include="..\Assets\Shaders\texturedVertexShader.vertexshader">
       <Filter>Shaders\Programs</Filter>
     </None>
+    <None Include="..\Assets\Shaders\shadow_fragment.glsl">
+      <Filter>Shaders\Programs</Filter>
+    </None>
+    <None Include="..\Assets\Shaders\shadow_vertex.glsl">
+      <Filter>Shaders\Programs</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp">

@@ -130,6 +130,8 @@ void AlphaNumeric::translateModelTop(mat4 t)
 	}
 }
 
+//void AlphaNumeric::
+
 void AlphaNumeric::updateModelMatrix() {
 	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
 }
