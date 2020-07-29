@@ -1,80 +1,79 @@
 #version 330 core
-//
-// Based on:
-//  https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping
-//  https://learnopengl.com/Lighting/Basic-Lighting
-//  https://github.com/ChrisViral/COMP-371/blob/master/COMP-371/Shaders/lightFragment.frag
-//Material
-struct Material
-{
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-    float shininess;
-};
-
-//Light
-struct Light
-{
-    vec3 position;
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-};
 
 in vec3 vertexColor;
 in vec2 vertexUV;
-in vec3 vertexNormal;
-in vec4 lightSpacePosition;
-in vec3 fragPosition;
 
-//Textures
-uniform sampler2D textureSampler;
+// Lighting input
+// 0 = wood, 1 = cement, 2 = metal
+flat in int textureType;
+in vec3 Normal;
+in vec3 FragPos;
+// in vec3 LightPos; // view-space
 
-//Lighting
-uniform Material material;
-uniform Light light;
+
+uniform vec3 lightPos;
 uniform vec3 viewPos;
+uniform vec3 lightColor;
+uniform vec3 objectColor;
 
-//Flags
-uniform bool isTexture;
-uniform bool isLighting;
+uniform sampler2D textureSampler;
         
 out vec4 FragColor;
-
 void main()
 {
-  vec3 fragmentColour;
-  vec4 f;
+    float materialShininess;
+    vec3 materialAmbient;
+    vec3 materialDiffuse;
+    vec3 materialSpecular;
 
-  if(isTexture){
-    fragmentColour = texture( textureSampler, vertexUV).rgb;
-  }
-  else{
-    fragmentColour = vec3(vertexColor.r, vertexColor.g, vertexColor.b);
-  }
+    // Selecting the correct material component
+    switch (textureType)
+    {
+        case 0:
+            materialAmbient = vec3(0.1f, 0.1f, 0.1f);
+            materialDiffuse = vec3(0.2f, 0.2f, 0.2f);
+            materialSpecular = vec3(0.5f, 0.5f, 0.5f);
+            materialShininess = 8.0f;
+            break;
+        case 1:
+            materialAmbient = vec3(0.15f, 0.15f, 0.15f);
+            materialDiffuse = vec3(0.18f, 0.17f, 0.22f);
+            materialSpecular = vec3(0.3f, 0.3f, 0.3f);
+            materialShininess = 32.0f;;
+            break;
+        case 2:
+            materialAmbient = vec3(0.25f, 0.25f, 0.25f);
+            materialDiffuse = vec3(0.4f, 0.4f, 0.4f);
+            materialSpecular = vec3(0.7f, 0.7f, 0.7f);
+            materialShininess = 128.0f;;
+            break;
+        default:
+            break;
+    }
 
-  if(isLighting) { //Phong Model
+    vec4 textureColor = texture( textureSampler, vertexUV );
 
-    //Ambient light
-    vec3 ambient = light.ambient * material.ambient;
+    // ambient
+	float ambientStrength = 4.0;
+	vec3 ambient = ambientStrength * (materialAmbient * lightColor);
 
-    //Diffuse
-    //vec3 n = normalize(vertexColor);
-    //vec3 diff = fragPosition - light.position;
-    //vec3 lightDir = normalize(-diff);
-    //vec3 diffuse = max(dot(n, lightDir), 0.0) * light.diffuse * material.diffuse;
-    
-    //Specular
-    //vec3 viewDir = viewPos - fragPosition;
-    //vec3 specular = pow(max(dot(normalize(viewDir), reflect(-lightDir, n)), 0.0), material.shininess) * light.specular * material.specular;
-  
-    f = vec4( ambient * fragmentColour, 1.0f); // include shadows * later & (ambient + ((diffuse + specular)))
-  
-  }
-  else{
-    f =  vec4(fragmentColour, 1.0f);
-  }
- 
-    FragColor = f;
+    // diffuse
+	vec3 norm = normalize(Normal);
+	// vec3 lightDir = normalize(LightPos - FragPos); // view-space
+    vec3 lightDir = normalize(lightPos - FragPos); // world space
+	float diff = max(dot(norm, lightDir), 0.0);
+	vec3 diffuse = diff * lightColor * materialDiffuse;
+
+    // specular
+	float specularStrength = 10.0;
+    vec3 viewDir = normalize(viewPos - FragPos); // World space
+	// vec3 viewDir = normalize(FragPos); // view-space
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), materialShininess);
+	vec3 specular = specularStrength * (materialSpecular * spec * lightColor);
+
+    vec4 tempResult = vec4((ambient + diffuse + specular), 1.0);
+    vec4 result = tempResult * textureColor;
+
+    FragColor =  result;
 };
