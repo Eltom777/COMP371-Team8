@@ -549,6 +549,10 @@ int main(int argc, char* argv[])
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
+		shaderProgram->setVec3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
+		shaderProgram->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderProgram->setVec3("lightPos", lightSourcePosition);
+		shaderProgram->setVec3("viewPos", camera_ptr->cameraPos);
 
 		// Model Render Mode
 		renderMode(window);
