@@ -2,10 +2,19 @@
 in vec3 vertexColor;
 in vec2 vertexUV;
 uniform sampler2D textureSampler;
+uniform bool isTexture;
         
 out vec4 FragColor;
+
 void main()
 {
-  vec4 textureColor = texture( textureSampler, vertexUV );
-  FragColor =  textureColor;
+  vec4 fragmentColour;
+  if(isTexture){
+    fragmentColour = texture( textureSampler, vertexUV );
+  }
+  else{
+    fragmentColour = vec4(vertexColor.r, vertexColor.g, vertexColor.b, 1.0f);
+  }
+  
+  FragColor =  fragmentColour;
 };
