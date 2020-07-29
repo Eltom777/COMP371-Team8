@@ -136,7 +136,14 @@ void AlphaNumeric::updateModelMatrix() {
 void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 
 	shaderProgram->use();
-
+	
+	if (isLetter) {
+		shaderProgram->setInt("textureType", 0);
+	}
+	else {
+		shaderProgram->setInt("textureType", 2);
+	}
+	
 	if (isTexture) {
 		
 		shaderProgram->setBool("isTexture", isTexture);

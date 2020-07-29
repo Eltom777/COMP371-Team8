@@ -15,14 +15,21 @@ class Grid : public Object {
 
 	const char* filename = "../Assets/Textures/brick.jpg";
 
+	//Lighting properties
+	const vec3 ambient = vec3(0.05f, 0.15f, 0.05f);	 //	 vec3(0.05f, 0.15f, 0.05f)
+	const vec3 diffuse = vec3(0.4f, 0.5f, 0.4f);	 //	 vec3(0.4f, 0.5f, 0.4f);	
+	const vec3 specular = vec3(0.05f, 0.7f, 0.05f);	 //	 vec3(0.05f, 0.7f, 0.05f)
+	const float shininess = 13.0f;
+
 	const struct TexturedColoredVertex
 	{
-		TexturedColoredVertex(vec3 _position, vec3 _color, vec2 _uv)
-			: position(_position), color(_color), uv(_uv) {}
+		TexturedColoredVertex(vec3 _position, vec3 _color, vec2 _uv, vec3 _normal)
+			: position(_position), color(_color), uv(_uv), normal(_normal) {}
 
 		vec3 position;
 		vec3 color;
 		vec2 uv;
+		vec3 normal;
 	};
 
 public:
@@ -36,7 +43,7 @@ public:
 	int createGridVAO();
 	int getNumberOfColumns();
 	int createtextureGridVAO();
-	void drawGrid(Shader* shaderProgram, bool isTexture);
+	void drawGrid(Shader* shaderProgram, bool isTexture, bool isLighting);
 	void drawAxis(Shader* shaderProgram);
 private:
 	static const vec3 axis[];

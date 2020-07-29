@@ -2,11 +2,11 @@
 
 
 const Grid::TexturedColoredVertex Grid::textureGrid[] = {
-	//Position												//color						//Texture
-	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, -1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 0.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, -1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 2.0f)),
-	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 2.0f)),
-	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 0.0f)),
+	//Position												//color						//Texture			   //Normal
+	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, -1.0f),	glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, -1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(0.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+	TexturedColoredVertex(glm::vec3(-1.0f, 0.0f, 1.0f),		glm::vec3(0.0f, 1.0f,0.0f),	glm::vec2(2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
 };
 
 const int Grid::indices[]{
@@ -153,6 +153,15 @@ int Grid::createtextureGridVAO() {
 	);
 	glEnableVertexAttribArray(2);
 
+	glVertexAttribPointer(3,                            // attribute 3 matches Normal in Vertex Shader
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		sizeof(Grid::TexturedColoredVertex),
+		(void*)(2 * sizeof(vec3) + sizeof(vec2))      // Normal is offseted by 2 vec3 and a vec2 (comes after position)
+	);
+	glEnableVertexAttribArray(3);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // VAO already stored the state we just defined, safe to unbind buffer
 	glBindVertexArray(0); // Unbind to not modify the VAO
 
@@ -194,11 +203,14 @@ int Grid::createAxisVAO() {
 	return vao;
 }
 
-void Grid::drawGrid(Shader* shaderProgram, bool isTexture) {
-
+void Grid::drawGrid(Shader* shaderProgram, bool isTexture, bool isLighting) {
+	
+	shaderProgram->use(); //glUseProgram()
+	//shaderProgram->setBool("isLighting", isLighting);
+	
 	if (isTexture) {
-		shaderProgram->use(); //glUseProgram()
 		shaderProgram->setBool("isTexture", isTexture);
+		shaderProgram->setInt("textureType", 1);
 
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);
@@ -212,8 +224,6 @@ void Grid::drawGrid(Shader* shaderProgram, bool isTexture) {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
 	else {
-		shaderProgram->use();
-
 		//bind VAO
 		glBindVertexArray(gridVAO);
 
