@@ -206,17 +206,11 @@ int Grid::createAxisVAO() {
 void Grid::drawGrid(Shader* shaderProgram, bool isTexture, bool isLighting) {
 	
 	shaderProgram->use(); //glUseProgram()
-	shaderProgram->setBool("isLighting", isLighting);
-	
-	if (isLighting) {
-		shaderProgram->setVec3("material.ambient", ambient);
-		shaderProgram->setVec3("material.diffuse", diffuse);
-		shaderProgram->setVec3("material.specular", specular);
-		shaderProgram->setFloat("material.shininess", shininess);
-	}
+	//shaderProgram->setBool("isLighting", isLighting);
 	
 	if (isTexture) {
 		shaderProgram->setBool("isTexture", isTexture);
+		shaderProgram->setInt("textureType", 1);
 
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);
