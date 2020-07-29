@@ -70,6 +70,7 @@ Cube* Sphere::getChild()
 
 void Sphere::draw(Shader* shaderProgram) {
 	shaderProgram->use();
+	shaderProgram->setBool("isTexture", false);
 	// Enable blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);

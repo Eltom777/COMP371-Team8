@@ -37,7 +37,7 @@ public:
 	int getNumberOfColumns();
 	int createtextureGridVAO();
 	void drawGrid(Shader* shaderProgram, bool isTexture);
-	void drawAxis(Shader shaderProgram);
+	void drawAxis(Shader* shaderProgram);
 private:
 	static const vec3 axis[];
 	vec3 grid[SIZEOFARRAY];

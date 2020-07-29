@@ -138,6 +138,9 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 	shaderProgram->use();
 
 	if (isTexture) {
+		
+		shaderProgram->setBool("isTexture", isTexture);
+
 		if (isLetter) {
 			glActiveTexture(GL_TEXTURE1);
 		}
