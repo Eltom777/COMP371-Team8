@@ -28,6 +28,7 @@
 	Points:       P
 	Lines:        L
 	Triangles:    T
+	Textures:	  X
 
 * CAMERA:
 	
