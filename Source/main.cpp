@@ -38,11 +38,19 @@ static int currentModel = -1;
 
 // Textures not enabled yet
 bool isTexture = false;
+bool isLighting = true;
 
 // Forward declaration of camera and shader program
 Camera* camera_ptr;
 int width, height;
 Shader* shaderProgram;
+
+// Lighting
+glm::vec3 lightSourcePosition(0.0f, 1.5f, -3.0f);
+glm::vec3 ambient(0.3f);
+glm::vec3 diffuse(1.0f);
+glm::vec3 specular(1.0f);
+
 
 // Random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
@@ -88,7 +96,7 @@ void setUpProjection(Shader* shaderProgram, Camera* camera) {
 void renderGridAxis(Shader* shaderProgram, Grid objGrid) {
 	// Draw grid and axis
 	objGrid.drawAxis(shaderProgram);
-	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
+	objGrid.drawGrid(shaderProgram, isTexture, isLighting); // 3 vertices, starting at index 0
 }
 
 /*
@@ -507,6 +515,12 @@ int main(int argc, char* argv[])
 	Model4->create();
 	Model5->create();
 
+	//Setup lighting
+	shaderProgram->setVec3("light.position", lightSourcePosition);
+	shaderProgram->setVec3("light.ambient", ambient);
+	shaderProgram->setVec3("light.diffuse", diffuse);
+	shaderProgram->setVec3("light.specular", specular);
+
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -541,6 +555,9 @@ int main(int argc, char* argv[])
 
 		// Camera frame timing
 		camera_ptr->handleFrameData();
+
+		//refresh specular
+		shaderProgram->setVec3("viewPos", camera_ptr->cameraPos);
 
 		// Set up Camera
 		if (currentModel == -1) {
@@ -625,6 +642,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 		else {
 			isTexture = true;
+		}
+	}
+
+	if (key == GLFW_KEY_B && action == GLFW_PRESS)
+	{
+		if (isLighting) {
+			isLighting = false;
+		}
+		else {
+			isLighting = true;
 		}
 	}
 
