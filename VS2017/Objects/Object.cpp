@@ -1,6 +1,6 @@
 #include "Object.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <../Source/stb_image.h>
 
 GLuint Object::loadTexture(const char* filename) {
 	// Step1 Create and bind textures

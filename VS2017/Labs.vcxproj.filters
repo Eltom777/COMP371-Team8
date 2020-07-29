@@ -236,5 +236,8 @@
     <ClInclude Include="Objects\Shader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\stb_image.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
