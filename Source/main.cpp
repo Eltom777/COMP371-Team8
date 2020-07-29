@@ -76,18 +76,18 @@ void initialize() {
 #endif
 }
 
-void setUpProjection(Shader shaderProgram, Camera* camera) {
+void setUpProjection(Shader* shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
 		1024.0f / 768.0f,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
-	shaderProgram.setMat4("projectionMatrix", Projection);
+	shaderProgram->setMat4("projectionMatrix", Projection);
 }
 
-void renderGridAxis(Shader* shaderProgram, const Shader shaderArray[], Grid objGrid) {
+void renderGridAxis(Shader* shaderProgram, Grid objGrid) {
 	// Draw grid and axis
-	objGrid.drawAxis(shaderArray[0]);
+	objGrid.drawAxis(shaderProgram);
 	objGrid.drawGrid(shaderProgram, isTexture); // 3 vertices, starting at index 0
 }
 
@@ -444,12 +444,12 @@ void cameraFocus(GLFWwindow* window, Shader* shaderProgram, Camera* camera) {
 	}
 }
 
-void setUpCamera(Camera* camera, Shader shaderProgram) {
+void setUpCamera(Camera* camera, Shader* shaderProgram) {
 	glm::mat4 viewMatrix = glm::lookAt(camera->cameraPos, // position
 		camera->cameraDirection, // front -- camera.cameraPos + camera.cameraFront
 		camera->cameraUp);  // up
 
-	shaderProgram.setMat4("viewMatrix", viewMatrix);
+	shaderProgram->setMat4("viewMatrix", viewMatrix);
 }
 
 /*
@@ -486,23 +486,13 @@ int main(int argc, char* argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Compile and link shaders here ...
-	// Array of Shader Programs : 0 = color shader , 1 = texture shader
-	Shader shaderPrograms[] = {
-								Shader("../Assets/Shaders/colorVertexShader.vertexshader", "../Assets/Shaders/colorFragmentShader.Fragmentshader"),
-								Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader")
-	};
-	shaderProgram = shaderPrograms;
+	shaderProgram = new Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader");
 
-	
 	// Create Camera Object
 	camera_ptr = new Camera(window);
 
 	// Set View and Projection matrices on both shaders
-	setUpProjection(shaderPrograms[0], camera_ptr);
-	setUpCamera(camera_ptr, shaderPrograms[0]);
-
-	setUpProjection(shaderPrograms[1], camera_ptr);
-	setUpCamera(camera_ptr, shaderPrograms[1]);
+	setUpProjection(shaderProgram, camera_ptr);
 
 	// Define and upload geometry to the GPU here ...
 	Grid objGrid;
@@ -528,11 +518,11 @@ int main(int argc, char* argv[])
 
 		// Set up Perspective View
 		glfwGetWindowSize(window, &width, &height); // if window is resized, get new size to draw perspective view correctly
-		setUpProjection(shaderPrograms[0], camera_ptr);
-		setUpProjection(shaderPrograms[1], camera_ptr);
+		setUpProjection(shaderProgram, camera_ptr);
+		//setUpProjection(shaderPrograms[1], camera_ptr);
 
 		// Render grid and axis
-		renderGridAxis(shaderProgram, shaderPrograms, objGrid);
+		renderGridAxis(shaderProgram, objGrid);
 
 		// randomizer code from https://stackoverflow.com/questions/5289613/generate-random-float-between-two-floats/5289624
 
@@ -554,8 +544,8 @@ int main(int argc, char* argv[])
 
 		// Set up Camera
 		if (currentModel == -1) {
-			setUpCamera(camera_ptr, shaderPrograms[0]);
-			setUpCamera(camera_ptr, shaderPrograms[1]);
+			setUpCamera(camera_ptr, shaderProgram);
+			//setUpCamera(camera_ptr, shaderPrograms[1]);
 		}
 
 		// Choose which model to do transformation
@@ -632,11 +622,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		if (isTexture) {
 			isTexture = false;
-			shaderProgram--;
 		}
 		else {
 			isTexture = true;
-			shaderProgram++;
 		}
 	}
 
@@ -648,7 +636,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 		// Make sure it doesn't go past the grid
 		mat4 m;
-		/*switch (currentModel)
+		switch (currentModel)
 		{
 		case 1:
 			m = Model1->getModelMatrix();
@@ -665,7 +653,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		case 5:
 			m = Model5->getModelMatrix();
 			break;
-		}*/
+		}
 
 		float currentX = m[3][0];
 		float currentZ = m[3][2];
@@ -676,26 +664,26 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		if (currentZ + randomZ < -1.0f) { randomZ = randomZ += 0.5f; }
 		else if (currentZ + randomZ > 1.0f) { randomZ = randomZ - 0.5f; }
 
-		//// Move to "random" location
-		//// Currently relative of previous position (fix if time)
-		//switch (currentModel)
-		//{
-		//case 1:
-		//	Model1->randomLocation(randomX, randomZ);
-		//	break;
-		//case 2:
-		//	Model2->randomLocation(randomX, randomZ);
-		//	break;
-		//case 3:
-		//	Model3->randomLocation(randomX, randomZ);
-		//	break;
-		//case 4:
-		//	Model4->randomLocation(randomX, randomZ);
-		//	break;
-		//case 5:
-		//	Model5->randomLocation(randomX, randomZ);
-		//	break;
-		//}
+		// Move to "random" location
+		// Currently relative of previous position (fix if time)
+		switch (currentModel)
+		{
+		case 1:
+			Model1->randomLocation(randomX, randomZ);
+			break;
+		case 2:
+			Model2->randomLocation(randomX, randomZ);
+			break;
+		case 3:
+			Model3->randomLocation(randomX, randomZ);
+			break;
+		case 4:
+			Model4->randomLocation(randomX, randomZ);
+			break;
+		case 5:
+			Model5->randomLocation(randomX, randomZ);
+			break;
+		}
 
 		currentModel = -1; // set view back to origin to see new location
 	}
