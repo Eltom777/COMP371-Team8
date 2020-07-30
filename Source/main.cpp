@@ -48,7 +48,7 @@ Shader* shaderProgram;
 Shader* shadowShader;
 
 // Lighting
-glm::vec3 lightSourcePosition(0.0f, 1.5f, -3.0f);
+glm::vec3 lightSourcePosition(0.0f, 3.0f, -1.0f);
 glm::vec3 ambient(0.3f);
 glm::vec3 diffuse(1.0f);
 glm::vec3 specular(1.0f);
