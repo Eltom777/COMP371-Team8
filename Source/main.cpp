@@ -153,8 +153,10 @@ Methods for translating models. Passing all models for the switch statements.
 Translations in increments of 0.005f.
 */
 void translateLeft(GLFWwindow* window) {
+	
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
+		glfwSetTime(0.0);
 		switch (currentModel)
 		{
 		case 1:
@@ -181,6 +183,7 @@ void translateLeft(GLFWwindow* window) {
 void translateRight(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
+		glfwSetTime(0.0);
 		switch (currentModel)
 		{
 		case 1:
@@ -207,6 +210,7 @@ void translateRight(GLFWwindow* window) {
 void translateUp(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
+		glfwSetTime(0.0);
 		switch (currentModel)
 		{
 		case 1:
@@ -233,6 +237,7 @@ void translateUp(GLFWwindow* window) {
 void translateDown(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
+		glfwSetTime(0.0);\
 		switch (currentModel)
 		{
 		case 1:
@@ -623,14 +628,24 @@ int main(int argc, char* argv[])
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
 
-		//bobbleHeadAnimation(Model2);
-
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		switch (currentModel)
 		{
-			glfwSetTime(0.0);
+		case 1: 
+			bobbleHeadAnimation(Model1);
+			break;
+		case 2:
+			bobbleHeadAnimation(Model2);
+			break;
+		case 3:
+			bobbleHeadAnimation(Model3);
+			break;
+		case 4:
+			bobbleHeadAnimation(Model4);
+			break;
+		case 5:
+			bobbleHeadAnimation(Model5);
+			break;
 		}
-
-		bobbleHeadAnimation(Model2);
 	}
 	
 	// Shutdown GLFW
@@ -657,7 +672,6 @@ void bobbleHeadAnimation(Student* Model) {
 			displacement = 0.0f;
 			previousDisplacement = 0.0f;
 			//Model1-> set model to stop animation
-
 		}
 	}
 }
