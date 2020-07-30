@@ -30,6 +30,7 @@
 #include <Anissa.h>
 #include <Keven.h>
 #include <Sphere.h>
+#include <Shadow.h>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ static int currentModel = -1;
 
 // Textures not enabled yet
 bool isTexture = false;
-bool isLighting = true;
+bool isShadow = true;
 
 // Forward declaration of camera and shader program
 Camera* camera_ptr;
@@ -100,7 +101,7 @@ void setUpProjection(Shader* shaderProgram, Camera* camera) {
 void renderGridAxis(Shader* shaderProgram, Grid objGrid) {
 	// Draw grid and axis
 	objGrid.drawAxis(shaderProgram);
-	objGrid.drawGrid(shaderProgram, isTexture, isLighting); // 3 vertices, starting at index 0
+	objGrid.drawGrid(shaderProgram, isTexture, isShadow); // 3 vertices, starting at index 0
 }
 
 /*
@@ -501,48 +502,48 @@ int main(int argc, char* argv[])
 	shaderProgram = new Shader("../Assets/Shaders/texturedVertexShader.vertexshader", "../Assets/Shaders/texturedFragmentShader.Fragmentshader");
 	shadowShader = new Shader("../Assets/Shaders/shadow_vertex.glsl", "../Assets/Shaders/shadow_fragment.glsl");
 
-	// Setup texture and framebuffer for creating shadow map
+	//// Setup texture and framebuffer for creating shadow map
 
-	  // Dimensions of the shadow texture, which should cover the viewport window
-	  // size and shouldn't be oversized and waste resources
-	  const unsigned int DEPTH_MAP_TEXTURE_SIZE = 1024;
+	//  // Dimensions of the shadow texture, which should cover the viewport window
+	//  // size and shouldn't be oversized and waste resources
+	//  const unsigned int DEPTH_MAP_TEXTURE_SIZE = 1024;
 
-	// Variable storing index to texture used for shadow mapping
-	GLuint depth_map_texture;
-	// Get the texture
-	glGenTextures(1, &depth_map_texture);
-	// Bind the texture so the next glTex calls affect it
-	glBindTexture(GL_TEXTURE_2D, depth_map_texture);
-	// Create the texture and specify it's attributes, including widthn height,
-	// components (only depth is stored, no color information)
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, DEPTH_MAP_TEXTURE_SIZE,
-				DEPTH_MAP_TEXTURE_SIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	// Set texture sampler parameters.
-	// The two calls below tell the texture sampler inside the shader how to
-	// upsample and downsample the texture. Here we choose the nearest filtering
-	// option, which means we just use the value of the closest pixel to the
-	// chosen image coordinate.
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	// The two calls below tell the texture sampler inside the shader how it
-	// should deal with texture coordinates outside of the [0, 1] range. Here we
-	// decide to just tile the image.
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//// Variable storing index to texture used for shadow mapping
+	//GLuint depth_map_texture;
+	//// Get the texture
+	//glGenTextures(1, &depth_map_texture);
+	//// Bind the texture so the next glTex calls affect it
+	//glBindTexture(GL_TEXTURE_2D, depth_map_texture);
+	//// Create the texture and specify it's attributes, including widthn height,
+	//// components (only depth is stored, no color information)
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, DEPTH_MAP_TEXTURE_SIZE,
+	//			DEPTH_MAP_TEXTURE_SIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	//// Set texture sampler parameters.
+	//// The two calls below tell the texture sampler inside the shader how to
+	//// upsample and downsample the texture. Here we choose the nearest filtering
+	//// option, which means we just use the value of the closest pixel to the
+	//// chosen image coordinate.
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//// The two calls below tell the texture sampler inside the shader how it
+	//// should deal with texture coordinates outside of the [0, 1] range. Here we
+	//// decide to just tile the image.
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	// todo UNCOMMENT WHEN READY TO RENDER SHADOWS
-	//// Variable storing index to framebuffer used for shadow mapping
-	//GLuint depth_map_fbo;  // fbo: framebuffer object
-	//// Get the framebuffer
-	//glGenFramebuffers(1, &depth_map_fbo);
-	//// Bind the framebuffer so the next glFramebuffer calls affect it
-	//glBindFramebuffer(GL_FRAMEBUFFER, depth_map_fbo);
-	//// Attach the depth map texture to the depth map framebuffer
-	//// glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
-	//// depth_map_texture, 0);
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
-	//						depth_map_texture, 0);
-	//glDrawBuffer(GL_NONE);  // disable rendering colors, only write depth values
+	//// todo UNCOMMENT WHEN READY TO RENDER SHADOWS
+	////// Variable storing index to framebuffer used for shadow mapping
+	////GLuint depth_map_fbo;  // fbo: framebuffer object
+	////// Get the framebuffer
+	////glGenFramebuffers(1, &depth_map_fbo);
+	////// Bind the framebuffer so the next glFramebuffer calls affect it
+	////glBindFramebuffer(GL_FRAMEBUFFER, depth_map_fbo);
+	////// Attach the depth map texture to the depth map framebuffer
+	////// glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
+	////// depth_map_texture, 0);
+	////glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
+	////						depth_map_texture, 0);
+	////glDrawBuffer(GL_NONE);  // disable rendering colors, only write depth values
 
 	// Create Camera Object
 	camera_ptr = new Camera(window);
@@ -556,21 +557,26 @@ int main(int argc, char* argv[])
 	objCube.setModelMatrix();
 	objGrid.setup();
 
+	//setup light & shadow obj
+	Light* light = new Light();
+	Shadow* shadow = new Shadow();
+	std::cout << shadow->getIsSet() << std::endl;
+
 	//Load Texture and VAO for Models
 	Model1->create();
-	Model2->create();
-	Model3->create();
-	Model4->create();
-	Model5->create();
+	//Model2->create();
+	//Model3->create();
+	//Model4->create();
+	//Model5->create();
 
 	//Setup lighting
-	shaderProgram->setVec3("lightPos", lightSourcePosition);
+	shaderProgram->setVec3("lightPos", light->lightSourcePosition);
 
 	// Other OpenGL states to set once
   	// Enable Backface culling
-  	//glEnable(GL_DEPTH_TEST);
-  	//glEnable(GL_CULL_FACE);
-	  
+  	glEnable(GL_DEPTH_TEST);
+  	glEnable(GL_CULL_FACE);
+  	
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -585,41 +591,53 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderProgram, camera_ptr);
 		//setUpProjection(shaderPrograms[1], camera_ptr);
 
-		// Light parameters for shadow rendering
-		vec3 lightDirection = normalize(lightFocus - lightSourcePosition);
+		shadow->setupLight(shaderProgram, shadowShader);
+
+		//if (shadow)
+		//{
+		//	//1- pass/ render shadow map;
+		//	//
+		//	//{
+		//	//	// Use proper shader
+		//	//	shadowShader->use();
+		//	//	// Use proper image output size
+		//	//	glViewport(0, 0, DEPTH_MAP_TEXTURE_SIZE, DEPTH_MAP_TEXTURE_SIZE);
+		//	//	// Bind depth map texture as output framebuffer
+		//	//	glBindFramebuffer(GL_FRAMEBUFFER, depth_map_fbo);
+		//	//	// Clear depth data on the framebuffer
+		//	//	glClear(GL_DEPTH_BUFFER_BIT);
+		//	//	// Bind geometry
+		//	//	glBindVertexArray(activeVAO);
+		//	//	// Draw geometry
+		//	//	//glDrawElements(GL_TRIANGLES, activeVertices, GL_UNSIGNED_INT, 0);
+		//	//	glDrawArrays(GL_TRIANGLES, 0, activeVertices);
+		//	//	// Unbind geometry
+		//	//	glBindVertexArray(0);
+		//	//}
+		//}
+		//else
+		//{
+		//	
+		//}
+
+		
 
 		// Render grid and axis
 		renderGridAxis(shaderProgram, objGrid);
 
-		float lightNearPlane = 0.01f;
-		float lightFarPlane = 100.0f;
-
-		mat4 lightProjMatrix = //frustum(-1.0f, 1.0f, -1.0f, 1.0f, lightNearPlane, lightFarPlane);
-			perspective(50.0f, (float)DEPTH_MAP_TEXTURE_SIZE / (float)DEPTH_MAP_TEXTURE_SIZE, lightNearPlane, lightFarPlane);
-		mat4 lightViewMatrix = lookAt(lightSourcePosition, lightFocus, vec3(0, 1, 0));
-		mat4 lightSpaceMatrix = lightProjMatrix * lightViewMatrix;
-
-		// 
-		SetUniformMat4(shaderScene, "light_proj_view_matrix", lightProjMatrix * lightViewMatrix);
-		SetUniform1Value(shaderScene, "light_near_plane", lightNearPlane);
-		SetUniform1Value(shaderScene, "light_far_plane", lightFarPlane);
-		SetUniformVec3(shaderScene, "light_position", lightSourcePosition);
-		SetUniformVec3(shaderScene, "light_direction", lightDirection);
-
-
 
 		// Draw AlphaNumeric models
-		Model1->draw(shaderProgram, isTexture);
-		Model2->draw(shaderProgram, isTexture);
-		Model3->draw(shaderProgram, isTexture);
-		Model4->draw(shaderProgram, isTexture);
-		Model5->draw(shaderProgram, isTexture);
+		Model1->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		//Model2->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		//Model3->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		//Model4->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		//Model5->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
-		shaderProgram->setVec3("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
-		shaderProgram->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-		shaderProgram->setVec3("lightPos", lightSourcePosition);
+		shaderProgram->setVec3("objectColor", light->objectColor); //glm::vec3(1.0f, 0.5f, 0.31f));
+		shaderProgram->setVec3("lightColor", light->lightColor); //glm::vec3(1.0f, 1.0f, 1.0f)
+		shaderProgram->setVec3("lightPos", light->lightSourcePosition);
 		shaderProgram->setVec3("viewPos", camera_ptr->cameraPos);
 
 		// Model Render Mode
@@ -717,15 +735,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		}
 	}
 
-	if (key == GLFW_KEY_B && action == GLFW_PRESS)
-	{
-		if (isLighting) {
-			isLighting = false;
-		}
-		else {
-			isLighting = true;
-		}
-	}
+	//if (key == GLFW_KEY_B && action == GLFW_PRESS)
+	//{
+	//	if (isLighting) {
+	//		isLighting = false;
+	//	}
+	//	else {
+	//		isLighting = true;
+	//	}
+	//}
 
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{

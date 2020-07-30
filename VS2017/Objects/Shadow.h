@@ -5,14 +5,19 @@
 #include "Shader.h"
 class Shadow
 {
-	const unsigned int DEPTH_MAP_TEXTURE_SIZE = 1024;
+	
 private:
 	bool isSet = false;
 public:
 	Light light;
+	GLuint depth_map_fbo;
+	GLuint depth_map_texture;
 	Shadow();
 	void setupBuffer();
-	void setupLight(Shader* shaderProgram);
+	void setupLight(Shader* shaderProgram, Shader* shadowShader);
 	~Shadow();
+	bool getIsSet(){ return isSet;}
+
+	const unsigned int DEPTH_MAP_TEXTURE_SIZE = 1024;
 };
 

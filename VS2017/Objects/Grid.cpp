@@ -213,7 +213,7 @@ void Grid::drawGrid(Shader* shaderProgram, bool isTexture, bool isLighting) {
 		shaderProgram->setInt("textureType", 1);
 
 		//bind texture
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
 

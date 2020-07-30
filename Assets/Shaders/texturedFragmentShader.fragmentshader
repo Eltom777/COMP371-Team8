@@ -1,7 +1,10 @@
 #version 330 core
 
+const float PI = 3.1415926535897932384626433832795;
+
 in vec3 vertexColor;
 in vec2 vertexUV;
+in vec4 fragment_position_light_space;
 
 // Lighting input
 // 0 = wood, 1 = cement, 2 = metal
@@ -10,13 +13,54 @@ in vec3 Normal;
 in vec3 FragPos;
 // in vec3 LightPos; // view-space
 
+//Flags
 uniform bool isTexture;
+uniform bool isShadow;
+
+//Light
 uniform vec3 lightPos;
 uniform vec3 viewPos;
 uniform vec3 lightColor;
 uniform vec3 objectColor;
+uniform vec3 lightDirection;
 
+//shadow
+//uniform float light_cutoff_outer;
+//uniform float light_cutoff_inner;
+//uniform float light_near_plane;
+//uniform float light_far_plane;
+
+//Texture
 uniform sampler2D textureSampler;
+uniform sampler2D shadow_map;
+
+//functions for shadow
+float shadow_scalar() {
+    // this function returns 1.0 when the surface receives light, and 0.0 when it is in a shadow
+    // perform perspective divide
+    vec3 ndc = fragment_position_light_space.xyz / fragment_position_light_space.w;
+    // transform to [0,1] range
+    ndc = ndc * 0.5 + 0.5;
+    // get closest depth value from light's perspective (using [0,1] range fragment_position_light_space as coords)
+    float closest_depth = texture(shadow_map, ndc.xy).r;
+    // get depth of current fragment from light's perspective
+    float current_depth = ndc.z;
+    // check whether current frag pos is in shadow
+    float bias = 0.05;  // bias applied in depth map: see shadow_vertex.glsl
+    return ((current_depth - bias) < closest_depth) ? 1.0 : 0.0;
+}
+
+// float spotlight_scalar() {
+//    float theta = dot(normalize(fragment_position - lightPos), light_direction);
+//    
+//    if(theta > light_cutoff_inner) {
+//        return 1.0;
+//    } else if(theta > light_cutoff_outer) {
+//        return (1.0 - cos(PI * (theta - light_cutoff_outer) / (light_cutoff_inner - light_cutoff_outer))) / 2.0;
+//    } else {
+//        return 0.0;
+//    }
+// }
         
 out vec4 FragColor;
 void main()
@@ -45,7 +89,7 @@ void main()
             materialAmbient = vec3(0.25f, 0.25f, 0.25f);
             materialDiffuse = vec3(0.4f, 0.4f, 0.4f);
             materialSpecular = vec3(0.7f, 0.7f, 0.7f);
-            materialShininess = 128.0f;;
+            materialShininess = 128.0f;
             break;
         default:
             break;
@@ -58,6 +102,15 @@ void main()
     }
     else{
         textureColor = vec4(vertexColor.r, vertexColor.g, vertexColor.b, 1.0);
+    }
+
+    // Doublecheck: changed from vec3
+    float shadow;
+    if(isShadow){
+        shadow = shadow_scalar(); // * spotlight_scalar();
+    }
+    else{
+        shadow = 1.0f;
     }
 
     // vec4 textureColor = texture( textureSampler, vertexUV );
@@ -80,6 +133,9 @@ void main()
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), materialShininess);
 	vec3 specular = specularStrength * (materialSpecular * spec * lightColor);
+
+        // vec4 tempResult = vec4((ambient + (shadow * (diffuse + specular))), 1.0);
+
 
     vec4 tempResult = vec4((ambient + diffuse + specular), 1.0);
     vec4 result = tempResult * textureColor;

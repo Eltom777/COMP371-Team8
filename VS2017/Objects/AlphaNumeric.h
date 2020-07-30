@@ -2,6 +2,9 @@
 #include "Cube.h"
 #include "Shader.h"
 #include "Object.h"
+#include "Shadow.h"
+#include <GLFW/glfw3.h>
+
 
 class AlphaNumeric:Object
 {
@@ -9,7 +12,7 @@ public:
 	AlphaNumeric(int numOfBotCubes, int numOfTopCubes, bool isLetter);
 	~AlphaNumeric();
 	mat4 getModelMatrix();
-	void draw(Shader * shaderProgram, const bool isTexture);
+	void draw(Shader * shaderProgram, Shader* shaderShadow, const bool isTexture, const bool isShadow, Shadow* shadowPtr, GLFWwindow* window);
 	void updateBase(Cube * b);
 	Cube * getBase();
 	void updateBaseTop(Cube * b);

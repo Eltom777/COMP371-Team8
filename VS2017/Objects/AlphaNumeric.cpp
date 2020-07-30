@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Shader.h"
 #include "Object.h"
+#include <GLFW/glfw3.h>
 
 mat4 AlphaNumeric::getModelMatrix() {
 	return modelMatrix;
@@ -135,9 +136,10 @@ void AlphaNumeric::translateModelTop(mat4 t)
 void AlphaNumeric::updateModelMatrix() {
 	modelMatrix = translationMatrix * scalingMatrix * rotationMatrix * modelMatrix;
 }
-void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
+void AlphaNumeric::draw(Shader* shaderProgram, Shader* shadowShader, const bool isTexture, const bool isShadow, Shadow* shadowPtr, GLFWwindow* window) {
 
 	shaderProgram->use();
+	shaderProgram->setBool("isShadow", true);
 	
 	if (isLetter) {
 		shaderProgram->setInt("textureType", 0);
@@ -151,15 +153,64 @@ void AlphaNumeric::draw(Shader* shaderProgram, const bool isTexture) {
 		shaderProgram->setBool("isTexture", isTexture);
 
 		if (isLetter) {
-			glActiveTexture(GL_TEXTURE1);
+			glActiveTexture(GL_TEXTURE2);
 		}
 		else {
-			glActiveTexture(GL_TEXTURE2);
+			glActiveTexture(GL_TEXTURE3);
 		}
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		//glUniform1i(shaderProgram->getLocation("textureSampler"), 0);
+	}
+
+	if(isShadow){
+	//// Render shadow in 2 passes: 1- Render depth map, 2- Render scene
+    //// 1- Render shadow map:
+    //// a- use program for shadows
+    //// b- resize window coordinates to fix depth map output size
+    //// c- bind depth map framebuffer to output the depth values
+    //{
+    // Use proper shader
+     //glUseProgram(shadowshader);
+		shadowShader->use();		
+      // Use proper image output size
+      glViewport(0, 0, shadowPtr->DEPTH_MAP_TEXTURE_SIZE, shadowPtr->DEPTH_MAP_TEXTURE_SIZE);
+     // Bind depth map texture as output framebuffer
+      glBindFramebuffer(GL_FRAMEBUFFER, shadowPtr->depth_map_fbo);
+      // Clear depth data on the framebuffer
+      glClear(GL_DEPTH_BUFFER_BIT);
+      // Bind geometry
+      glBindVertexArray(cubeVAO);
+      // Draw geometry
+      //glDrawElements(GL_TRIANGLES, activeVertices, GL_UNSIGNED_INT, 0);
+      glDrawArrays(GL_TRIANGLES, 0, 36);
+      // Unbind geometry
+      glBindVertexArray(0);
+    //}
+
+    //// 2- Render scene: a- bind the default framebuffer and b- just render like
+    //// what we do normally
+    //{
+    //  // Use proper shader
+    	shaderProgram->use();
+    //  // Use proper image output size
+    //  // Side note: we get the size from the framebuffer instead of using WIDTH
+    //  // and HEIGHT because of a bug with highDPI displays
+    	int width, height;
+    	glfwGetFramebufferSize(window, &width, &height);
+    	glViewport(0, 0, width, height);
+    	// Bind screen as output framebuffer
+    	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    //  // Clear color and depth data on framebuffer
+    	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //  // Bind depth map texture: not needed, by default it is active
+    	 glActiveTexture(GL_TEXTURE0);
+    //  // Bind geometry
+    //  
+    //}
+    ///**/
 	}
 
 	// Disable blending

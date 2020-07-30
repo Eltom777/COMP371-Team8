@@ -17,21 +17,26 @@ out vec3 Normal;
 // out vec3 LightPos; // view-space
 out vec3 vertexColor;
 out vec2 vertexUV;
+out vec4 fragment_position_light_space;
         
 void main()
 {
+   //Color & Texture
    vertexColor = aColor;
+   vertexUV = aUV;
+
+   //MVP matrix
    mat4 modelViewProjection = projectionMatrix * viewMatrix * worldMatrix;
 
    // Lighting Component
    // FragPos = vec3(worldMatrix * vec4(aPos, 1.0)); // IF we want to get fancy with it, uncomment this
-    FragPos = vec3(0.0f, 0.0f, 0.0f);
+   FragPos = vec3(0.0f, 0.0f, 0.0f);
 
-       Normal = mat3(transpose(inverse(worldMatrix ))) * aNormal; // World space technique, kept for debugging purposes
+   Normal = mat3(transpose(inverse(worldMatrix ))) * aNormal; // World space technique, kept for debugging purposes
    // Normal = mat3(transpose(inverse(viewMatrix * worldMatrix))) * aNormal;  // view-space
    // LightPos = vec3(viewMatrix * vec4(lightPos, 1.0)); // view-space
 
+   fragment_position_light_space = light_proj_view_matrix * vec4(FragPos, 1.0);
 
    gl_Position = modelViewProjection * vec4(aPos.x, aPos.y, aPos.z, 1.0);
-   vertexUV = aUV;
 };

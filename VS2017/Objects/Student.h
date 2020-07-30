@@ -1,6 +1,8 @@
 #pragma once
 #include "AlphaNumeric.h"
 #include "Sphere.h"
+#include "Shadow.h"
+
 
 class Student
 {
@@ -13,7 +15,7 @@ public:
 	//void rotate(mat4 r, GLuint modelMatrixLocation);
 	void rotate(mat4 r);
 	//void draw(GLuint modelMatrixLocation, int sphereVertices, int cubeVAO, int sphereVAO);
-	void draw(Shader* shaderProgram, const bool isTexture);
+	void draw(Shader* shaderProgram, Shader* shaderShadow, const bool isTexture, const bool isShadow, Shadow* shadowPtr, GLFWwindow* window);
 
 	void randomLocation(float x, float z);
 

@@ -138,6 +138,7 @@
     <ClCompile Include="Objects\Numbers\Number9.cpp" />
     <ClCompile Include="Objects\Object.cpp" />
     <ClCompile Include="Objects\Shader.cpp" />
+    <ClCompile Include="Objects\Shadow.cpp" />
     <ClCompile Include="Objects\Sphere.cpp" />
     <ClCompile Include="Objects\Student.cpp" />
     <ClCompile Include="Objects\Students\Anissa.cpp" />
@@ -158,12 +159,14 @@
     <ClInclude Include="Objects\Letters\LetterL.h" />
     <ClInclude Include="Objects\Letters\LetterO.h" />
     <ClInclude Include="Objects\Letters\LetterV.h" />
+    <ClInclude Include="Objects\Light.h" />
     <ClInclude Include="Objects\Numbers\Number0.h" />
     <ClInclude Include="Objects\Numbers\Number3.h" />
     <ClInclude Include="Objects\Numbers\Number4.h" />
     <ClInclude Include="Objects\Numbers\Number9.h" />
     <ClInclude Include="Objects\Object.h" />
     <ClInclude Include="Objects\Shader.h" />
+    <ClInclude Include="Objects\Shadow.h" />
     <ClInclude Include="Objects\Sphere.h" />
     <ClInclude Include="Objects\Student.h" />
     <ClInclude Include="Objects\Students\Anissa.h" />

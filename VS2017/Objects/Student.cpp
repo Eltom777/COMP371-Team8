@@ -97,9 +97,9 @@ void Student::create() {
 	sphere->create();
 }
 
-void Student::draw(Shader* shaderProgram, const bool isTexture) {
-	components[0]->draw(shaderProgram, isTexture);
-	components[1]->draw(shaderProgram, isTexture);
+void Student::draw(Shader* shaderProgram, Shader* shaderShadow, const bool isTexture, const bool isShadow, Shadow* shadowPtr, GLFWwindow* window) {
+	components[0]->draw(shaderProgram, shaderShadow, isTexture, isShadow, shadowPtr, window);
+	components[1]->draw(shaderProgram, shaderShadow, isTexture, isShadow, shadowPtr, window);
 
 	sphere->draw(shaderProgram);
 }
