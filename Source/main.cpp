@@ -42,7 +42,8 @@ bool isLighting = true;
 
 // Forward declaration of camera and shader program
 Camera* camera_ptr;
-int width, height;
+int width = 1024;
+int height = 768;
 Shader* shaderProgram;
 Shader* shadowShader;
 
@@ -52,10 +53,18 @@ glm::vec3 ambient(0.3f);
 glm::vec3 diffuse(1.0f);
 glm::vec3 specular(1.0f);
 
-
 // Random location range
 const float MIN_RAND = -0.5f, MAX_RAND = 0.5f;
 const float range = MAX_RAND - MIN_RAND;
+
+// Bobble Animation
+void bobbleHeadAnimation(Student* Model);
+float angle = 0.0f;
+float lastFrameTime = glfwGetTime();
+float PI = 3.141593;
+float displacement = 0.0f;
+float previousDisplacement = 0.0f;
+float dt;
 
 //Function interfaces for camera response to mouse input
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -88,7 +97,7 @@ void initialize() {
 void setUpProjection(Shader* shaderProgram, Camera* camera) {
 	// Set up Perspective View
 	glm::mat4 Projection = glm::perspective(glm::radians(camera->fov),  // field of view in degrees
-		1024.0f / 768.0f,     // aspect ratio
+		(float) width/height,     // aspect ratio
 		0.01f, 100.0f);      // near and far (near > 0)
 
 	shaderProgram->setMat4("projectionMatrix", Projection);
@@ -153,7 +162,6 @@ void translateLeft(GLFWwindow* window) {
 			break;
 		case 2:
 			Model2->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
-			//Model2->translateTop(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
 			break;
 		case 3:
 			Model3->translate(glm::translate(mat4(1.0f), vec3(-0.005f, 0.0f, 0.0f)));
@@ -461,6 +469,8 @@ void setUpCamera(Camera* camera, Shader* shaderProgram) {
 	shaderProgram->setMat4("viewMatrix", viewMatrix);
 }
 
+double seconds = 0.0;
+float t = 0.0f;
 /*
 Main method.
 */
@@ -575,6 +585,7 @@ int main(int argc, char* argv[])
 		selectModel(window);
 
 		// Transformations of Models
+		//bobbleHeadAnimation(Model2);
 
 		// Translating left
 		translateLeft(window);
@@ -611,13 +622,46 @@ int main(int argc, char* argv[])
 
 		// Handle inputs
 		camera_ptr->handleKeyboardInputs();
-	}
 
+		//bobbleHeadAnimation(Model2);
+
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			glfwSetTime(0.0);
+		}
+
+		bobbleHeadAnimation(Model2);
+	}
+	
 	// Shutdown GLFW
 	glfwTerminate();
 
 	return 0;
 }
+
+void bobbleHeadAnimation(Student* Model) {
+	float dt = glfwGetTime();
+	//lastFrameTime += dt;
+	if (dt < 5.0)
+	{
+		if (angle < (11 / 2 * PI)) {
+			displacement = (5.0f * exp(-0.25 * angle) * sin(angle)); // damping formula
+			Model->translateTop(glm::translate(mat4(1.0f), vec3(0.02f * (displacement - previousDisplacement), 0.0f, 0.0f)));
+			previousDisplacement = displacement;
+
+			angle = (angle + PI * dt);
+		}
+		else {
+			Model->translateTop(glm::translate(mat4(1.0f), vec3(-0.02f * previousDisplacement, 0.0f, 0.0f)));
+			angle = 0.0f;
+			displacement = 0.0f;
+			previousDisplacement = 0.0f;
+			//Model1-> set model to stop animation
+
+		}
+	}
+}
+
 
 /*
 Adaptors based on the interfaces at the top.
@@ -636,7 +680,7 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 // Makes sure the window is correctly resized (continues drawing)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	glViewport(-4, -4, width + 4, height + 4); // changed values: supposed to fix pitfall but doesnt seem to work
+	glViewport(0, 0, width, height); // changed values: supposed to fix pitfall but doesnt seem to work
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
