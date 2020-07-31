@@ -560,14 +560,14 @@ int main(int argc, char* argv[])
 	//setup light & shadow obj
 	Light* light = new Light();
 	Shadow* shadow = new Shadow();
-	std::cout << shadow->getIsSet() << std::endl;
+	//std::cout << shadow->getIsSet() << std::endl;
 
 	//Load Texture and VAO for Models
 	Model1->create();
-	//Model2->create();
-	//Model3->create();
-	//Model4->create();
-	//Model5->create();
+	Model2->create();
+	Model3->create();
+	Model4->create();
+	Model5->create();
 
 	//Setup lighting
 	shaderProgram->setVec3("lightPos", light->lightSourcePosition);
@@ -575,7 +575,7 @@ int main(int argc, char* argv[])
 	// Other OpenGL states to set once
   	// Enable Backface culling
   	glEnable(GL_DEPTH_TEST);
-  	glEnable(GL_CULL_FACE);
+  	//glEnable(GL_CULL_FACE);
   	
 	// Entering Main Loop
 	while (!glfwWindowShouldClose(window))
@@ -583,7 +583,7 @@ int main(int argc, char* argv[])
 		// Enable z-buffer
 		glEnable(GL_DEPTH_TEST);
 
-		// Each frame, reset color of each pixel to glClearColor
+		//// Each frame, reset color of each pixel to glClearColor
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Set up Perspective View
@@ -591,7 +591,7 @@ int main(int argc, char* argv[])
 		setUpProjection(shaderProgram, camera_ptr);
 		//setUpProjection(shaderPrograms[1], camera_ptr);
 
-		shadow->setupLight(shaderProgram, shadowShader);
+		//shadow->setupLight(shaderProgram, shadowShader);
 
 		//if (shadow)
 		//{
@@ -627,11 +627,16 @@ int main(int argc, char* argv[])
 
 
 		// Draw AlphaNumeric models
+		shadow->setupLight(shaderProgram, shadowShader, Model1);
 		Model1->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
-		//Model2->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
-		//Model3->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
-		//Model4->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
-		//Model5->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		/*shadow->setupLight(shaderProgram, shadowShader, Model2);
+		Model2->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		shadow->setupLight(shaderProgram, shadowShader, Model3);
+		Model3->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		shadow->setupLight(shaderProgram, shadowShader, Model4);
+		Model4->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);
+		shadow->setupLight(shaderProgram, shadowShader, Model5);
+		Model5->draw(shaderProgram, shadowShader, isTexture, isShadow, shadow, window);*/
 
 		// Important: setting worldmatrix back to normal so other stuff doesn't get scaled down
 		shaderProgram->setMat4("worldMatrix", mat4(1.0f));
