@@ -165,13 +165,34 @@ void AlphaNumeric::draw(Shader* shaderProgram, Shader* shadowShader, const bool 
 	}
 
 	if(isShadow){
+		//// 2- Render scene: a- bind the default framebuffer and b- just render like
+		//// what we do normally
+		//{
+		//  // Use proper shader
+		shaderProgram->use();
+		//  // Use proper image output size
+		//  // Side note: we get the size from the framebuffer instead of using WIDTH
+		//  // and HEIGHT because of a bug with highDPI displays
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		glViewport(0, 0, width, height);
+		// Bind screen as output framebuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//  // Clear color and depth data on framebuffer
+		glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+		//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//  // Bind depth map texture: not needed, by default it is active
+		//glActiveTexture(GL_TEXTURE0);
+		//  // Bind geometry
+		//  
+		//}
 	//// Render shadow in 2 passes: 1- Render depth map, 2- Render scene
     //// 1- Render shadow map:
     //// a- use program for shadows
     //// b- resize window coordinates to fix depth map output size
     //// c- bind depth map framebuffer to output the depth values
     //{
-    // Use proper shader
+     // Use proper shader
      //glUseProgram(shadowshader);
 		shadowShader->use();		
       // Use proper image output size
@@ -187,29 +208,9 @@ void AlphaNumeric::draw(Shader* shaderProgram, Shader* shadowShader, const bool 
       glDrawArrays(GL_TRIANGLES, 0, 36);
       // Unbind geometry
       glBindVertexArray(0);
-    //}
+  //  //}
 
-    //// 2- Render scene: a- bind the default framebuffer and b- just render like
-    //// what we do normally
-    //{
-    //  // Use proper shader
-    	shaderProgram->use();
-    //  // Use proper image output size
-    //  // Side note: we get the size from the framebuffer instead of using WIDTH
-    //  // and HEIGHT because of a bug with highDPI displays
-    	int width, height;
-    	glfwGetFramebufferSize(window, &width, &height);
-    	glViewport(0, 0, width, height);
-    	// Bind screen as output framebuffer
-    	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    //  // Clear color and depth data on framebuffer
-    	glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
-    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //  // Bind depth map texture: not needed, by default it is active
-    	 glActiveTexture(GL_TEXTURE0);
-    //  // Bind geometry
-    //  
-    //}
+    
     ///**/
 	}
 
