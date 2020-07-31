@@ -3,7 +3,7 @@
 
 Shadow::Shadow()
 {
-	setupBuffer();
+	//setupBuffer();
 }
 
 void Shadow::setupBuffer()
@@ -55,7 +55,7 @@ void Shadow::setupBuffer()
 		isSet = true;
 }
 
-void Shadow::setupLight(Shader* shaderProgram, Shader* shadowShader)
+void Shadow::setupLight(Shader* shaderProgram, Shader* shadowShader, Student* model)
 {
 	// Light parameters for shadow rendering
 	vec3 lightDirection = normalize(light.lightFocus - light.lightSourcePosition);
@@ -73,7 +73,7 @@ void Shadow::setupLight(Shader* shaderProgram, Shader* shadowShader)
 	shaderProgram->setVec3("light_position", light.lightSourcePosition);
 	shaderProgram->setVec3("light_direction", lightDirection);
 																		 //model matrix (TODO maybe ?)
-	shadowShader->setMat4("transform_in_light_space", lightSpaceMatrix * translate(mat4(1.0), light.lightSourcePosition));
+	shadowShader->setMat4("transform_in_light_space", lightSpaceMatrix * model->getModelMatrix());
 }
 
 

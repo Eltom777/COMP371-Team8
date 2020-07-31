@@ -1,8 +1,6 @@
 #pragma once
-#include <GL\glew.h>
-#include <glm\gtc\matrix_transform.hpp>
 #include "Light.h"
-#include "Shader.h"
+#include "Student.h"
 class Shadow
 {
 	
@@ -14,7 +12,7 @@ public:
 	GLuint depth_map_texture;
 	Shadow();
 	void setupBuffer();
-	void setupLight(Shader* shaderProgram, Shader* shadowShader);
+	void setupLight(Shader* shaderProgram, Shader* shadowShader, Student* model);
 	~Shadow();
 	bool getIsSet(){ return isSet;}
 
